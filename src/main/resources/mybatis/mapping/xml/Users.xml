@@ -4,29 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.UsersDao">
     <!--<resultMap id="UserMap" type="Users">-->
-        <!--<id property="id" column="id"/>-->
-        <!--<result property="userName" column="userName"/>-->
-        <!--<result property="pwd" column="pwd"/>-->
-        <!--<result property="pwd2" column="pwd2"/>-->
-        <!--<result property="name" column="name"/>-->
-        <!--<result property="papersType" column="papersType"/>-->
-        <!--<result property="papersNo" column="papersNo"/>-->
-        <!--<result property="telephoneNumber" column="telephoneNumber"/>-->
-        <!--<result property="email" column="email"/>-->
-        <!--<result property="postalcode" column="postalcode"/>-->
-        <!--<result property="referee" column="referee"/>-->
-        <!--<result property="nations" column="nations"/>-->
-        <!--<result property="openBank" column="openBank"/>-->
-        <!--<result property="openUserName" column="openUserName"/>-->
-        <!--<result property="openNo" column="openNo"/>-->
-        <!--<result property="papersImgZ" column="papersImgZ"/>-->
-        <!--<result property="papersImgF" column="papersImgF"/>-->
-        <!--<result property="bankCard" column="bankCard"/>-->
-        <!--<result property="createTime" column="createTime"/>-->
-        <!--<result property="modifyTime" column="modifyTime"/>-->
-        <!--<result property="state" column="state"/>-->
-        <!--<result property="roleId" column="roleId"/>-->
-        <!--<result property="remainder" column="remainder"/>-->
+    <!--<id property="id" column="id"/>-->
+    <!--<result property="userName" column="userName"/>-->
+    <!--<result property="pwd" column="pwd"/>-->
+    <!--<result property="pwd2" column="pwd2"/>-->
+    <!--<result property="name" column="name"/>-->
+    <!--<result property="papersType" column="papersType"/>-->
+    <!--<result property="papersNo" column="papersNo"/>-->
+    <!--<result property="telephoneNumber" column="telephoneNumber"/>-->
+    <!--<result property="email" column="email"/>-->
+    <!--<result property="postalcode" column="postalcode"/>-->
+    <!--<result property="referee" column="referee"/>-->
+    <!--<result property="nations" column="nations"/>-->
+    <!--<result property="openBank" column="openBank"/>-->
+    <!--<result property="openUserName" column="openUserName"/>-->
+    <!--<result property="openNo" column="openNo"/>-->
+    <!--<result property="papersImgZ" column="papersImgZ"/>-->
+    <!--<result property="papersImgF" column="papersImgF"/>-->
+    <!--<result property="bankCard" column="bankCard"/>-->
+    <!--<result property="createTime" column="createTime"/>-->
+    <!--<result property="modifyTime" column="modifyTime"/>-->
+    <!--<result property="state" column="state"/>-->
+    <!--<result property="roleId" column="roleId"/>-->
+    <!--<result property="remainder" column="remainder"/>-->
 
 
     <!--</resultMap>-->
@@ -78,12 +78,12 @@
             </if>
         </where>
     </sql>
-  <!--分页查询SQL-->
+    <!--分页查询SQL-->
     <select id="getlist" resultMap="UsersMap">
-      SELECT  * FROM users  JOIN role ON role.id=users.roleId JOIN bank ON role.no=users.openNo
-      <include refid="queryUser"/>
+        SELECT  * FROM users  JOIN role ON role.id=users.roleId JOIN bank ON role.no=users.openNo
+        <include refid="queryUser"/>
         ORDER BY createTime DESC
-      LIMIT #{pagerNo},#{pagerSize}
+        LIMIT #{pagerNo},#{pagerSize}
     </select>
     <!--查询所有行-->
     <select id="count" resultType="_int">
@@ -98,7 +98,7 @@
     <insert id="add">
         insert into users (id,userName,pwd) VALUES (DEFAULT,#{userName},#{pwd})
     </insert>
-    <!--的查询sql-->
+    <!--id查询sql-->
     <select id="getUsersId" resultMap="UsersMap">
         SELECT * FROM users
         <include refid="queryUser"/>
@@ -123,10 +123,15 @@
         </trim>
     </update>
     <update id="modifyPwd">
-           UPDATE  users set  pwd=#{pwd}
+        UPDATE  users set  pwd=#{pwd}
     </update>
     <!--修改支付密码sql-->
     <update id="modifyPwd2">
-           UPDATE  users set  pwd2=#{pwd2}
+        UPDATE  users set  pwd2=#{pwd2}
     </update>
+
+    <!--名字查询sql-->
+    <select id="getUserName" resultMap="UsersMap">
+        SELECT  * FROM users where userName=#{userName}
+    </select>
 </mapper>

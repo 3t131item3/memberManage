@@ -48,5 +48,10 @@ public class UsersBizImpl implements UsersBiz {
         return 0;
     }
 
+    public boolean queryUserName(String userName) {
+        Users userName1 = usersDao.getUserName(userName);
+        return userName1!=null;
+    }
+
 
 }
