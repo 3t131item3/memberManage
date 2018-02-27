@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.UsersDao">
+    <!--<resultMap id="UserMap" type="Users">-->
+        <!--<id property="id" column="id"/>-->
+        <!--<result property="userName" column="userName"/>-->
+        <!--<result property="pwd" column="pwd"/>-->
+        <!--<result property="pwd2" column="pwd2"/>-->
+        <!--<result property="name" column="name"/>-->
+        <!--<result property="papersType" column="papersType"/>-->
+        <!--<result property="papersNo" column="papersNo"/>-->
+        <!--<result property="telephoneNumber" column="telephoneNumber"/>-->
+        <!--<result property="email" column="email"/>-->
+        <!--<result property="postalcode" column="postalcode"/>-->
+        <!--<result property="referee" column="referee"/>-->
+        <!--<result property="nations" column="nations"/>-->
+        <!--<result property="openBank" column="openBank"/>-->
+        <!--<result property="openUserName" column="openUserName"/>-->
+        <!--<result property="openNo" column="openNo"/>-->
+        <!--<result property="papersImgZ" column="papersImgZ"/>-->
+        <!--<result property="papersImgF" column="papersImgF"/>-->
+        <!--<result property="bankCard" column="bankCard"/>-->
+        <!--<result property="createTime" column="createTime"/>-->
+        <!--<result property="modifyTime" column="modifyTime"/>-->
+        <!--<result property="state" column="state"/>-->
+        <!--<result property="roleId" column="roleId"/>-->
+        <!--<result property="remainder" column="remainder"/>-->
+
+
+    <!--</resultMap>-->
+
+    <resultMap id="UsersMap" type="Users">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="pwd" column="pwd"/>
+        <result property="pwd2" column="pwd2"/>
+        <result property="name" column="name"/>
+        <result property="papersType" column="papersType"/>
+        <result property="papersNo" column="papersNo"/>
+        <result property="telephoneNumber" column="telephoneNumber"/>
+        <result property="email" column="email"/>
+        <result property="postalcode" column="postalcode"/>
+        <result property="referee" column="referee"/>
+        <result property="nations" column="nations"/>
+        <result property="openBank" column="openBank"/>
+        <result property="openUserName" column="openUserName"/>
+        <result property="papersImgZ" column="papersImgZ"/>
+        <result property="papersImgF" column="papersImgF"/>
+        <result property="bankCard" column="bankCard"/>
+        <result property="createTime" column="createTime"/>
+        <result property="modifyTime" column="modifyTime"/>
+        <result property="state" column="state"/>
+        <result property="remainder" column="remainder"/>
+        <association property="bank" javaType="Bank">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="no" column="no"/>
+            <result property="remainder" column="remainder"/>
+            <result property="openUser" column="openUser"/>
+        </association>
+        <association property="role" javaType="Role">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="no" column="no"/>
+            <result property="stats" column="stats"/>
+        </association>
+    </resultMap>
+
+    <sql id="queryUser">
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like concat('%',#{userName},'%')
+            </if>
+            <if test="id>0">
+                and id=#{id}
+            </if>
+        </where>
+    </sql>
+  <!--分页查询SQL-->
+    <select id="getlist" resultMap="UsersMap">
+      SELECT  * FROM users  JOIN role ON role.id=users.roleId JOIN bank ON role.no=users.openNo
+      <include refid="queryUser"/>
+        ORDER BY createTime DESC
+      LIMIT #{pagerNo},#{pagerSize}
+    </select>
+    <!--查询所有行-->
+    <select id="count" resultType="_int">
+        SELECT  * FROM users
+        <include refid="queryUser"/>
+    </select>
+    <!--登录sql-->
+    <select id="queryUser" resultMap="UsersMap">
+        SELECT  * FROM users where userName=#{userName} and pwd=#{password}
+      </select>
+    <!--添加sql-->
+    <insert id="add">
+        insert into users (id,userName,pwd) VALUES (DEFAULT,#{userName},#{pwd})
+    </insert>
+    <!--的查询sql-->
+    <select id="getUsersId" resultMap="UsersMap">
+        SELECT * FROM users
+        <include refid="queryUser"/>
+    </select>
+    <!--修改users sql-->
+    <update id="modify">
+        UPDATE  users
+        <trim prefix="set" prefixOverrides="," suffix="where id=#{id}">
+            <if test="papersType!=null and papersType!=' '">papersType=#{papersType},</if>
+            <if test="papersNo!=null and papersNo!=' '">papersNo=#{papersNo},</if>
+            <if test="telephoneNumber!=null and telephoneNumber!=' '">telephoneNumber=#{telephoneNumber},</if>
+            <if test="nations!=null and nations!=' '">nations=#{nations},</if>
+            <if test="email!=null and email!=' '">email=#{email},</if>
+            <if test="address!=null and address!=' '">address=#{address},</if>
+            <if test="postalcode!=null and postalcode!=' '">postalcode=#{postalcode},</if>
+            <if test="openBank!=null and openBank!=' '">openBank=#{openBank},</if>
+            <if test="openNo!=null and openNo!=' '">openNo=#{openNo},</if>
+            <if test="openUserName!=null and openUserName!=' '">openUserName=#{openUserName},</if>
+            <if test="referee!=null and referee!=' '">referee=#{referee},</if>
+            <if test="papersImgZ!=null and papersImgZ!=' '">papersImgZ=#{papersImgZ},</if>
+            <if test="papersImgF!=null and papersImgF!=' '">papersImgF=#{papersImgF},</if>
+        </trim>
+    </update>
+    <update id="modifyPwd">
+           UPDATE  users set  pwd=#{pwd}
+    </update>
+    <!--修改支付密码sql-->
+    <update id="modifyPwd2">
+           UPDATE  users set  pwd2=#{pwd2}
+    </update>
+</mapper>
