@@ -33,6 +33,7 @@
     <mvc:resources mapping="/css/**" location="/WEB-INF/static/css/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/static/js/"/>
     <mvc:resources mapping="/images/**" location="/WEB-INF/static/images/"/>
+    <mvc:resources mapping="/img/**" location="/WEB-INF/static/img/"/>
     <mvc:resources mapping="/datas/**" location="/WEB-INF/static/datas/"/>
     <mvc:resources mapping="/plugins/**" location="/WEB-INF/static/plugins/"/>
      <!--多视图解析器-->

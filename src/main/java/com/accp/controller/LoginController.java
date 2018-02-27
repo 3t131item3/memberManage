@@ -19,7 +19,6 @@ public class LoginController {
         if(users!=null){
             return "/index";
         }
-
         return "/login";
     }
 }

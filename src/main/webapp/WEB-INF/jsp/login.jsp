@@ -11,6 +11,30 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/jquery.slider.css" />
+    <style>
+        <%--滑块的容器--%>
+        .demo2{
+            /*display: none;!*隐藏滑块*!*/
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content:center;
+            align-items: center;
+            z-index: 2;
+        }
+        #slider2{
+            top: 50%;
+            left:39%;
+            z-index: 3;
+            position: absolute;
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="beg-login-bg">
@@ -24,13 +48,13 @@
                 <label class="beg-login-icon">
                     <i celass="layui-icon">&#xe612;</i>
                 </label>
-                <input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入用户名" class="layui-input" value="xxpay">
+                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入用户名" class="layui-input" value="xxpay" required>
             </div>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" value="xxpay">
+                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" value="xxpay" required>
             </div>
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
@@ -44,28 +68,74 @@
                 </div>
                 <div class="beg-clear"></div>
             </div>
+            <input id="submit" type="submit" style="display: none" value="提交"/>
         </form>
     </div>
     <footer>
         <%--<a href="/page/index">dddddd</a>--%>
         <p>没有账号？<a href="/register" style="color: #ffffff;text-decoration: underline ">注册一个</a></p>
     </footer>
+
+    <%--滑块验证--%>
+    <div class="demo2">
+        <!--<div class="btns">-->
+        <!--<button id="reset2">还原</button>-->
+        <!--</div>-->
+    </div>
+
+    <div id="slider2" class="slider"></div>
 </div>
+<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="/js/jquery.slider.min.js"></script>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
 <script>
+    var username="";
+    var password="";
+
     layui.use(['layer', 'form'], function() {
         var layer = layui.layer,
             $ = layui.jquery,
             form = layui.form();
 
         form.on('submit(login)',function(data){
-            var userName=data.field.userName;
-            var password=data.field.password;
-            location.href='login.do?userName='+userName+'&password='+password+'';
+            username=$("#username").val()
+            password=$("#password").val()
+            if(username==""||username==null||password==""||password==null){
+                $("#submit").trigger("click")
+                return false
+            }
+            $("#slider2").css("display","block")
+            $(".demo2").css("display","flex")
+//            var userName=data.field.userName;
+//            var password=data.field.password;
+//            location.href='login.do?userName='+userName+'&password='+password+'';
             return false;
         });
     });
 </script>
+
+<%--滑块验证--%>
+<script>
+    $("#slider2").slider({
+        callback: function(result) {
+           if(result==true){
+               location.href='login.do?userName='+username+'&password='+password+'';
+           }
+        }
+    });
+    $("#reset2").click(function() {
+        $("#slider2").slider("restore");
+    });
+</script>
+<script>
+    $(function(){
+        $(".demo2").on("click",function(){
+           $(this).css("display","none")
+            $("#slider2").css("display","none")
+        })
+    })
+</script>
+
 </body>
 
 </html>
