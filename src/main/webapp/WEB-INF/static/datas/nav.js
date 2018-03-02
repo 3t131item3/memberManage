@@ -5,7 +5,7 @@ var navs = [{
 	"children": [{
 		"title": "商户信息",
 		"icon": "&#xe641;",
-		"href": "/mch_info/list.html"
+		"href": "/usermanagement"
 	}, {
 		"title": "支付渠道",
 		"icon": "&#xe63c;",

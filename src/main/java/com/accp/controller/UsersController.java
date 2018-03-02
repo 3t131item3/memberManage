@@ -32,15 +32,15 @@ public class UsersController {
     @ResponseBody
     private Object updatepwd(@PathVariable String oldpassword, HttpServletRequest req) {
         Errors errors = new Errors();
-        if (oldpassword != null&& oldpassword!="") {
-            if(usersBiz.queryUserName(oldpassword)){
-                errors.setResult("false");
-            }else {
-                errors.setResult("true");
-            }
-        } else {
-            errors.setResult("error");
-        }
+//        if (oldpassword != null&& oldpassword!="") {
+//            if(usersBiz.queryUserName(oldpassword)){
+//                errors.setResult("false");
+//            }else {
+//                errors.setResult("true");
+//            }
+//        } else {
+//            errors.setResult("error");
+//        }
         return errors;
     }
 

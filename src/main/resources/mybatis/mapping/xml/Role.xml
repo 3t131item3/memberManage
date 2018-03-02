@@ -5,10 +5,10 @@
 <mapper namespace="com.accp.dao.RoleDao">
     <resultMap id="mapRole" type="Role">
         <id column="id" property="id"/>
-        <id column="no" property="no"/>
-        <id column="name" property="name"/>
-        <id column="stats" property="stats"/>
-        <id column="modifyTime" property="modifyTime"/>
+        <result column="no" property="no"/>
+        <result column="name" property="name"/>
+        <result column="stats" property="stats"/>
+        <result column="modifyTime" property="modifyTime"/>
     </resultMap>
 
     <!--分页查询-->
@@ -37,7 +37,8 @@
         INSERT  into role (id,no,name,stats)VALUES (DELETE,#{no},#{name},#{stats})
     </insert>
     <!--查询分页总行数-->
-    <select id="count">
+    <select id="count" resultType="_int">
         SELECT  count(1) FROM role
     </select>
+
 </mapper>

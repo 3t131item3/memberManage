@@ -3,8 +3,61 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.CommodityDao">
-    <select id="getList">
+    <resultMap id="mapCommodity" type="Commodity">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="commodityNo" property="commodityNo"/>
+        <result column="price" property="price"/>
+        <result column="discountPrice" property="discountPrice"/>
+        <result column="stock" property="stock"/>
+        <result column="unit" property="unit"/>
+        <result column="state" property="state"/>
+        <result column="spec" property="spec"/>
+        <result column="illustrate" property="illustrate"/>
+        <result column="modifyTime" property="modifyTime"/>
+    </resultMap>
+    <sql id="queryCommodity">
+        <if test="name!=null and name!=''">
+            and name like concat('%',#{name},'%')
+        </if>
+    </sql>
+    <!--分页查询-->
+    <select id="getList" resultMap="mapCommodity">
         SELECT  * FROM  commodity
+        <include refid="queryCommodity"/>
+        ORDER BY modifyTime DESC
+        LIMIT #{pagerNo},#{pagerSize}
     </select>
+    <!--查询总行数-->
+    <select id="count" resultType="_int">
+        SELECT  count(1) FROM  commodity
+        <include refid="queryCommodity"/>
+    </select>
+    <!--id查询-->
+    <select id="getCommodityId" resultMap="mapCommodity">
+        SELECT  *  FROM  commodity where id=#{id}
 
+    </select>
+    <!--添加-->
+    <insert id="add">
+        INSERT  INTO commodity  (id,name,commodityNo,price,discountPrice,stock,unit,state,spec,illustrate)VALUES
+        (DELETE，#{name},#{commodityNo},#{price},#{discountPrice},#{stock},#{state},#{spec},#{illustrate})
+    </insert>
+    <!--修改-->
+    <update id="modify">
+        UPDATE  Commodity
+        <trim prefix="set" prefixOverrides="," suffix="where id=#{id}">
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="price!=null and price!=''">price=#{price},</if>
+            <if test="discountPrice!=null and discountPrice!=''">discountPrice=#{discountPrice},</if>
+            <if test="stock!=null and stock!=''">stock=#{stock},</if>
+            <if test="state!=null state name!=''">state=#{state},</if>
+            <if test="spec!=null and spec!=''">name=#{spec},</if>
+            <if test="illustrate!=null and illustrate!=''">illustrate=#{illustrate},</if>
+        </trim>
+    </update>
+    <!--id删除-->
+    <delete id="remove">
+        DELETE  FROm commodity where id=#{id}
+    </delete>
 </mapper>

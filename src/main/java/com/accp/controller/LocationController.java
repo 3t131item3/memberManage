@@ -21,4 +21,8 @@ public class LocationController {
     public String index(){
         return "/index";
     }
+    @RequestMapping("/usermanagement")
+    public String usermanagement(){
+        return "/usermanagement";
+    }
 }
