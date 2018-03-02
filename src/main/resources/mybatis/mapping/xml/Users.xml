@@ -87,7 +87,7 @@
     </select>
     <!--查询所有行-->
     <select id="count" resultType="_int">
-        SELECT  * FROM users
+        SELECT  count(1) FROM users
         <include refid="queryUser"/>
     </select>
     <!--登录sql-->
@@ -134,4 +134,8 @@
     <select id="getUserName" resultMap="UsersMap">
         SELECT  * FROM users where userName=#{userName}
     </select>
+    <!--删除-->
+    <delete id="remove">
+        DELETE  from users wherw id=#{id}
+    </delete>
 </mapper>

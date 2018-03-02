@@ -3,8 +3,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.RoleDao">
-    <select id="getList">
-        SELECT  * FROM  role
-    </select>
+    <resultMap id="mapRole" type="Role">
+        <id column="id" property="id"/>
+        <id column="no" property="no"/>
+        <id column="name" property="name"/>
+        <id column="stats" property="stats"/>
+        <id column="modifyTime" property="modifyTime"/>
+    </resultMap>
 
+    <!--分页查询-->
+    <select id="getList" resultMap="mapRole">
+        SELECT  * FROM  role   LIMIT #{pagerNo},#{pagerSize}
+    </select>
+    <!--id查询-->
+    <select id="getRoleId" resultMap="mapRole">
+        SELECT * FROM role wherw id=#{id}
+    </select>
+    <!--修改-->
+    <update id="modify">
+      UPDATE  role
+        <trim prefix="set" prefixOverrides="," suffix="where id=#{id}">
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="stats!=null and stats!='stats'">stats=#{stats},</if>
+            <if test="modifyTime!=null and modifyTime!='stats'">modifyTime=#{modifyTime},</if>
+        </trim>
+    </update>
+    <!--删除-->
+    <delete id="remove">
+        DELETE  FROM role where id=#{id}
+    </delete>
+    <!--新增-->
+    <insert id="add">
+        INSERT  into role (id,no,name,stats)VALUES (DELETE,#{no},#{name},#{stats})
+    </insert>
+    <!--查询分页总行数-->
+    <select id="count">
+        SELECT  count(1) FROM role
+    </select>
 </mapper>

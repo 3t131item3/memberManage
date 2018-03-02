@@ -1,10 +1,13 @@
 package com.accp.entity;
 
+import java.util.Date;
+
 public class Role {
    private int id ;/*id*/
     private String  no;/*编号*/
     private String name;/*名称*/
     private int  stats ;/*状态：1启用,0禁用*/
+    private Date modifyTime;
 
     public Role() {
     }
@@ -39,5 +42,13 @@ public class Role {
 
     public void setStats(int stats) {
         this.stats = stats;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

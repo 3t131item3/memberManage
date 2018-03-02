@@ -24,6 +24,7 @@ public interface UsersDao {
     int modifyPwd2(@Param("pwd2") String pwd2);
     //名字查询
     Users getUserName(@Param("userName") String userName);
-
+    //删除
+    int remove(@Param("id")int id);
 }
 
