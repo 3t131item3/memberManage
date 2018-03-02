@@ -45,6 +45,7 @@
     <div class="beg-login-main">
         <p style = "color：red; font-size：18px">${msg}</p>
         <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" >
+            <p style="color: red;font-size: 18px">${msg}</p>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i celass="layui-icon">&#xe612;</i>
