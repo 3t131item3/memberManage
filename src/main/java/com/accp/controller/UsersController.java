@@ -43,6 +43,15 @@ public class UsersController {
 //        }
         return errors;
     }
-
-
+//判断二级密码是否正确
+    @ResponseBody
+    @RequestMapping("/pwdeq")
+    private String pwd2eq(HttpServletRequest request){
+        Users user = (Users) request.getSession().getAttribute("user");
+        if(user.getPwd2().equals(request.getParameter("pwd2"))){
+            return "{\"result\":\"true\"}";
+        }else {
+            return "{\"result\":\"false\"}";
+        }
+    }
 }

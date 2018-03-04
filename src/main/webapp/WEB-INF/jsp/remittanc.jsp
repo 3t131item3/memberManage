@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
 
+    <style>
+        .back {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .pwdtwo {
+            display: none;
+            position: absolute;
+            z-index: 2;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            background: #fff;
+            border: 1px solid #CCCCCC;
+            box-shadow: darkgrey 10px 10px 30px 5px;
+        }
+    </style>
 </head>
 <body>
 
@@ -57,6 +82,25 @@
                 <button type="reset" class="layui-btn layui-btn-primary" onclick="values()">重置</button>
             </div>
         </div>
+
+        <div class="pwdtwo">
+            <span style="cursor: pointer;color: #CCCCCC;position: absolute;top: 0;right: 5px" onclick="hide()">x</span>
+            <br/>
+            <hr/>
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width: 630px; height: 20px;margin: 50px 0 10px 15%;">
+                    <input type="text" id="pwd2"  placeholder="请输入支付密码" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin: 0 0 0 30px;">
+                <div class="layui-input-block">
+                    <button type="button" id="btn" class="layui-btn">立即提交</button>
+                    <%--隐藏用于提交--%>
+                    <button id="subbutton" class="layui-btn" lay-submit="" style="display: none" lay-filter="demo">立即提交</button>
+                </div>
+            </div>
+        </div>
+        <div class="back"></div>
     </form>
 </div>
 
@@ -76,34 +120,41 @@
         date = date.getFullYear() + "-" + (date.getMonth() > 10 ? date.getMonth() : '0' + date.getMonth()) + "-" + (date.getMonth() > 10 ? date.getDate() : '0' + date.getDate())
         $("#date").val(date)
 //        鼠标失去焦点获取余额
-        $("#price").on("blur",function() {
+        $("#price").on("blur", function () {
             price()
         })
 
+        $("#btn").on("click",function(){
+            pwd2()
+        })
+
     })
-//    判断余额是否足够
-    function price(){
-        if($("#price").val()!=null && $("#price").val()!='' && $("#price").val()>0){
+
+    //    判断余额是否足够
+    function price() {
+        if ($("#price").val() != null && $("#price").val() != '' && $("#price").val() > 0) {
             $.ajax({
-                type:"post",
-                data:{price:$("#price").val()},
-                dataType:"json",
-                url:"/queryPrice",
-                success:function(data){
-                    if(data.result=="false"){
+                type: "post",
+                data: {price: $("#price").val()},
+                dataType: "json",
+                url: "/queryPrice",
+                success: function (data) {
+                    if (data.result == "false") {
                         $("#price").val("")
                         $(".noprice").text("余额不足")
-                        $(".noprice").css("color","red");
+                        $(".noprice").css("color", "red");
                         return false
-                    }else{
+                    } else {
                         $(".noprice").text("(CNY)")
-                        $(".noprice").css("color","#000");
+                        $(".noprice").css("color", "#000");
                         return true
                     }
                 }
             })
         }
     }
+
+    //    重新赋值订单号和日期
     function values() {
         setTimeout(function () {
             $("#date").val(date)
@@ -111,8 +162,41 @@
         }, 1)
 
     }
+
+    //    判断二级密码是否正确
+    function pwd2() {
+        if($("#pwd2").val()==null || $("#pwd2").val()==''){
+            $("#subbutton").trigger("click")
+        }else{
+        $.ajax({
+            type: "post",
+            data: {pwd2: $("#pwd2").val()},
+            dataType: "json",
+            url: "/Users/pwdeq",
+//            beforeSend: function () {
+//
+//            },
+            success: function (data) {
+                if (data.result == "false") {
+                    alert("支付密码错误")
+                } else {
+                    $("#subbutton").trigger("click")
+                }
+            },
+            error:function (data) {
+            }
+        })
+    }
+    }
+    function hide() {
+        $(".pwdtwo").css("display", "none")
+        $("#pwd2").val("")
+        $(".back").css("display", "none")
+        $("#pwd2").removeAttr("lay-verify")
+    }
 </script>
 <script>
+
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form(),
             layer = layui.layer,
@@ -127,18 +211,26 @@
                 if (value <= 0) {
                     return '汇款金额必须大于0';
                 }
-            },
-            text: function (value) {
+            }
+           , pwd: function (value) {
                 if (value == "" || value == null) {
-                    return "订单号不能为空"
+                    return "请输入支付密码"
                 }
             }
         });
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-//             return price()
+            $(".pwdtwo").css("display", "block")
+            $(".back").css("display", "block")
+            $("#pwd2").attr("lay-verify", "pwd")
+            return false
         });
+
+        form.on('submit(demo)', function (data) {
+
+        });
+
     });
 </script>
 </body>
