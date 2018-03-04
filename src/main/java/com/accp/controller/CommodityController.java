@@ -25,7 +25,7 @@ public class CommodityController {
         Map<String, Object> map=new HashMap<String, Object>();
         map.put("rel",true);
         map.put("msg","获取成功");
-        map.put("list",list.getDate());
+        map.put("list",list.getData());
         map.put("count",57);
         return  map;
     }

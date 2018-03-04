@@ -3,8 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.RootDao">
+    <!--3表联查-->
+    <resultMap id="rmm" type="Root">
+        <id property="id" column="id"/>
+        <result property="manageItemId" column="manageItemId"/>
+        <result property="roleId" column="roleId"/>
+        <collection property="manageItems" ofType="ManageItem">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="manageId" column="manageId"/>
+            <result property="title" column="title"/>
+            <result property="icon" column="icon"/>
+            <result property="href" column="href"/>
+            <association property="manage" javaType="Manage">
+                <id column="id" property="id"/>
+                <result property="name" column="name"/>
+            </association>
+        </collection>
+    </resultMap>
+
     <select id="getlist">
         SELECT  * FROM  root
     </select>
+
+    <select id="roots" resultMap="rmm">
+        SELECT * FROM root r JOIN manageitem mi ON r.manageItemId=mi.id JOIN manage m ON mi.manageId=m.id
+        <where>
+            r.roleId=#{role.id}
+        </where>
+    </select>
+
 
 </mapper>

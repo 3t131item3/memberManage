@@ -18,7 +18,7 @@ public class CommodityBizImpl implements CommodityBiz {
         pager.setPagerNo(pagerNo);
         pager.setTotalCount(commodityDao.count(name));
         pager.setTotalPageCount((pager.getTotalCount()+pagerSize-1)/pagerSize);
-        pager.setDate(commodityDao.getList(name,(pagerNo-1)*pagerSize,pagerSize));
+        pager.setData(commodityDao.getList(name,(pagerNo-1)*pagerSize,pagerSize));
         return pager;
     }
 

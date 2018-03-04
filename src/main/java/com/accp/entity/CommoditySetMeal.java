@@ -5,8 +5,8 @@ public class CommoditySetMeal {
     private String name;/*套餐名称*/
     private String no;/*套餐编号*/
     private String type;/*套餐类型*/
-    private Double price;/*零售价*/
-    private Double discountPrice;/*优惠价*/
+    private double price;/*零售价*/
+    private double discountPrice;/*优惠价*/
     private int state;/*状态:1上架,0下架*/
     private String illustrate;/*说明*/
 
@@ -45,19 +45,19 @@ public class CommoditySetMeal {
         this.type = type;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Double getDiscountPrice() {
+    public double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Double discountPrice) {
+    public void setDiscountPrice(double discountPrice) {
         this.discountPrice = discountPrice;
     }
 

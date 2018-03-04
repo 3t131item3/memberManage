@@ -1,24 +1,27 @@
 package com.accp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Commodity {
     private int id;/*id*/
     private String name;/*商品名称*/
     private String commodityNo;/*商品编号*/
-    private float price;/*市场价*/
-    private float discountPrice;/*优惠价*/
+    private double price;/*市场价*/
+    private double discountPrice;/*优惠价*/
     private int stock;/*库存*/
     private String unit;/*单位*/
     private int state;/*0下架,1上架*/
     private String spec;/*规格*/
     private String illustrate;/*说明*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date modifyTime;/*修改时间*/
 
     public Commodity() {
     }
 
-    public Commodity(int id, String name, String commodityNo, float price, float discountPrice, int stock, String unit, int state, String spec, String illustrate, Date modifyTime) {
+    public Commodity(int id, String name, String commodityNo, double price, double discountPrice, int stock, String unit, int state, String spec, String illustrate, Date modifyTime) {
         this.id = id;
         this.name = name;
         this.commodityNo = commodityNo;
@@ -56,19 +59,19 @@ public class Commodity {
         this.commodityNo = commodityNo;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getDiscountPrice() {
+    public double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(float discountPrice) {
+    public void setDiscountPrice(double discountPrice) {
         this.discountPrice = discountPrice;
     }
 

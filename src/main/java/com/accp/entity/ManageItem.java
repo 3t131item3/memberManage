@@ -8,7 +8,7 @@ public class ManageItem {
     private String title;/*鼠标悬浮显示的标题*/
     private String icon;/*小图标*/
     private String href;/*要跳转的路径*/
-
+    private Manage manage;/*管理类对象*/
     public ManageItem() {
     }
 
@@ -67,5 +67,13 @@ public class ManageItem {
 
     public void setHref(String href) {
         this.href = href;
+    }
+
+    public Manage getManage() {
+        return manage;
+    }
+
+    public void setManage(Manage manage) {
+        this.manage = manage;
     }
 }

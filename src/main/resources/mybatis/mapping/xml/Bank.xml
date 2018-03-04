@@ -3,7 +3,60 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.BankDao">
-    <select id="getList">
-        SELECT  * FROM  bank
+    <select id="bank" resultType="Bank">
+       SELECT * FROM bank
+       <where>
+           <if test="id>0">
+               id=#{id}
+           </if>
+           <if test="name!=null and name!=''">
+              AND name=#{name}
+           </if>
+           <if test="no!=null and no!=''">
+              AND no=#{no}
+           </if>
+           <if test="pwd!=null and pwd!=''">
+              AND pwd=#{pwd}
+           </if>
+           <if test="remainder>0">
+              AND remainder=#{remainder}
+           </if>
+           <if test="openUser!=null and openUser!=''">
+              AND openUser=#{openUser}
+           </if>
+           <if test="telphon!=null and telphon!=''">
+              AND telphon=#{telphon}
+           </if>
+           <if test="papersNo!=null and papersNo!=''">
+              AND papersNo=#{papersNo}
+           </if>
+       </where>
     </select>
+    <update id="modify">
+        UPDATE bank
+        <set>
+        <if test="name!=null and name!=''">
+           name=#{name},
+        </if>
+        <if test="no!=null and no!=''">
+             no=#{no},
+        </if>
+        <if test="pwd!=null and pwd!=''">
+             pwd=#{pwd},
+        </if>
+        <if test="remainder>0">
+             remainder=#{remainder},
+        </if>
+        <if test="openUser!=null and openUser!=''">
+             openUser=#{openUser},
+        </if>
+        <if test="telphon!=null and telphon!=''">
+             telphon=#{telphon},
+        </if>
+        <if test="papersNo!=null and papersNo!=''">
+             papersNo=#{papersNo}
+        </if>
+        </set>
+        WHERE id=#{id}
+    </update>
 </mapper>

@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>XXPAY - 运营管理</title>
+	<title>会员商城</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,7 +24,7 @@
 		<div class="layui-main">
 			<div class="admin-login-box">
 				<a class="logo" style="left: 0;" href="http://mgr.xxpay.org">
-					<span style="font-size: 22px;">XxPay运营平台</span>
+					<span style="font-size: 22px;">会员商城</span>
 				</a>
 
 				<div class="admin-side-toggle">

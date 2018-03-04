@@ -1,32 +1,49 @@
 package com.accp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Users {
-   private int id ;/*用户编号*/
-    private String userName ;/*用户名*/
-    private String  pwd ;/*密码*/
-    private String  pwd2 ;/*支付密码*/
-    private  String  name ;/*真实姓名*/
-    private  String papersType ;/*证件类型*/
-    private String papersNo ;/*证件号码*/
-    private String telephoneNumber ;/*联系电话*/
-    private String email ;/*电子邮件*/
-    private String   postalcode ;/*邮政编码*/
-    private String referee ;/*推荐人*/
-    private String nations ;/*收货国家*/
-    private  String openBank ;/*开户行*/
-    private  String openUserName;/*开户人*/
-    private  Bank bank;/*开户卡号*/
-    private  String papersImgZ ;/*证件照正面图片路径*/
+    private int id;/*用户编号*/
+    private String userName;/*用户名*/
+    private String pwd;/*密码*/
+    private String pwd2;/*支付密码*/
+    private String name;/*真实姓名*/
+    private String papersType;/*证件类型*/
+    private String papersNo;/*证件号码*/
+    private String telephoneNumber;/*联系电话*/
+    private String email;/*电子邮件*/
+    private String postalcode;/*邮政编码*/
+    private String referee;/*推荐人*/
+    private String nations;/*收货国家*/
+    private String openBank;/*开户行*/
+    private String openUserName;/*开户人*/
+    private String openNo;/*开户卡号*/
+    private String papersImgZ;/*证件照正面图片路径*/
     private String papersImgF;/*证件照反面图片路径*/
-    private String bankCard ;/*银行卡图片路径*/
-    private String address ;/*收货地址*/
-    private Date createTime ;/*创建时间*/
-    private Date modifyTime ;/*最后修改时间*/
-    private  int state ; /*0禁用,1启用*/
-    private Role role ;/*角色id*/
-    private float remainder;/*余额*/
+    private String bankCard;/*银行卡图片路径*/
+    private String address;/*收货地址*/
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;/*创建时间*/
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date modifyTime;/*最后修改时间*/
+
+    private int state; /*0禁用,1启用*/
+    private int roleId;/*角色id*/
+    private double remainder;/*余额*/
+    private Role role;
+    private Bank bank;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
 
     public int getId() {
@@ -35,7 +52,6 @@ public class Users {
 
     public Users() {
     }
-
 
 
     public void setId(int id) {
@@ -61,6 +77,7 @@ public class Users {
     public String getPapersType() {
         return papersType;
     }
+
     public void setPapersType(String papersType) {
         this.papersType = papersType;
     }
@@ -201,11 +218,11 @@ public class Users {
         this.role = role;
     }
 
-    public float getRemainder() {
+    public double getRemainder() {
         return remainder;
     }
 
-    public void setRemainder(float remainder) {
+    public void setRemainder(double remainder) {
         this.remainder = remainder;
     }
 
@@ -223,5 +240,13 @@ public class Users {
 
     public void setPwd2(String pwd2) {
         this.pwd2 = pwd2;
+    }
+
+    public String getOpenNo() {
+        return openNo;
+    }
+
+    public void setOpenNo(String openNo) {
+        this.openNo = openNo;
     }
 }

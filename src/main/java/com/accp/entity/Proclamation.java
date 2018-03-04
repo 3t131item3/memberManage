@@ -1,12 +1,16 @@
 package com.accp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Proclamation {
    private int  id ;
    private String   title ;/*标题*/
     private Date createTime ;/*创建时间*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date   beginTime;/*开始时间*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;/*结算时间*/
     private String content;/*内容*/
 

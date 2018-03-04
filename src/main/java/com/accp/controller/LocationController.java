@@ -25,4 +25,8 @@ public class LocationController {
     public String usermanagement(){
         return "/usermanagement";
     }
+    @RequestMapping("/remittanc")
+    public String remittanc(){
+        return "/remittanc";
+    }
 }

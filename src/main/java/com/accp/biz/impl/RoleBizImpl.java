@@ -18,7 +18,7 @@ public class RoleBizImpl implements RoleBiz {
         pager.setPagerNo(pagerNo);
         pager.setTotalCount(roleDao.count());
         pager.setTotalPageCount((pager.getTotalCount()+pagerSize-1)/pagerSize);
-        pager.setDate(roleDao.getList((pagerNo-1)*pagerSize,pagerSize));
+        pager.setData(roleDao.getList((pagerNo-1)*pagerSize,pagerSize));
         return pager;
     }
 

@@ -20,12 +20,12 @@ public class UsersBizImpl implements UsersBiz {
         pager.setPagerNo(pagerNo);
         pager.setTotalCount(usersDao.count(userName));
         pager.setTotalPageCount((pager.getTotalCount()+pagerSize-1)/pagerSize);
-        pager.setDate(usersDao.getlist(userName,(pagerNo-1)*pagerSize,pagerSize));
+        pager.setData(usersDao.getlist(userName,(pagerNo-1)*pagerSize,pagerSize));
         return pager;
     }
 
     public Users queryUser(String userName, String password) {
-        return usersDao.queryUser(userName,password);
+        return usersDao.login(userName,password);
     }
 
     public boolean addUsers(Users users) {
@@ -51,6 +51,9 @@ public class UsersBizImpl implements UsersBiz {
     public boolean queryUserName(String userName) {
         Users userName1 = usersDao.getUserName(userName);
         return userName1!=null;
+    }
+    public boolean modify(Users user){
+        return usersDao.modify(user)>0;
     }
 
 

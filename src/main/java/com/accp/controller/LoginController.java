@@ -15,9 +15,10 @@ public class LoginController {
     private UsersBiz usersBiz;
     @RequestMapping(value = "/login.do")
     public  String login(String userName, String password, HttpServletRequest request){
-        String s = MD5.MD5Encode(password);
+        String s = password;//MD5.MD5Encode(password);
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
+            request.getSession().setAttribute("user",users);
             return "/index";
         }
         request.setAttribute("msg","用户名或密码错误");

@@ -1,5 +1,7 @@
 package com.accp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Order
@@ -10,11 +12,12 @@ public class Order
     private String orderNo;/*订单号*/
     private String userName;/*会员名称*/
     private String consignee;/*收货人*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ordertime;/*交易日期*/
     private String type;/*交易类型*/
-    private Double price;/*交易金额*/
+    private double price;/*交易金额*/
 
-    public Order(int id, int userid, int commodityId, String orderNo, String userName, String consignee, Date ordertime, String type, Double price) {
+    public Order(int id, int userid, int commodityId, String orderNo, String userName, String consignee, Date ordertime, String type, double price) {
         this.id = id;
         this.userid = userid;
         this.commodityId = commodityId;
@@ -93,11 +96,11 @@ public class Order
         this.type = type;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

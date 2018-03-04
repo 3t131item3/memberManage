@@ -11,7 +11,7 @@ public interface UsersDao {
     //查询所有行
     int count(@Param("userName") String userName);
     //登录
-    Users queryUser(@Param("userName") String userName, @Param("password") String password);
+    Users login(@Param("userName") String userName, @Param("password") String password);
     //注册
     int add(Users user);
     //id查询

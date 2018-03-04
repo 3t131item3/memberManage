@@ -1,5 +1,7 @@
 package com.accp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Role {
@@ -7,6 +9,8 @@ public class Role {
     private String  no;/*编号*/
     private String name;/*名称*/
     private int  stats ;/*状态：1启用,0禁用*/
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date modifyTime;
 
     public Role() {

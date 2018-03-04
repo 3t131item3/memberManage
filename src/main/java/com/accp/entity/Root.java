@@ -1,11 +1,19 @@
 package com.accp.entity;
 
-public class Root  {
-  private int   id ;/*编号*/
-    private int  manageItemId;/*管理表项编号*/
-    private int  roleId ; /*角色编号*/
+import java.util.List;
 
-    public Root() {
+public class Root  {
+    private int id;/*编号*/
+    private int manageItemId;/*管理表项编号*/
+    private int roleId; /*角色编号*/
+    private List<ManageItem>manageItems;
+
+    public List<ManageItem> getManageItems() {
+        return manageItems;
+    }
+
+    public void setManageItems(List<ManageItem> manageItems) {
+        this.manageItems = manageItems;
     }
 
     public int getId() {

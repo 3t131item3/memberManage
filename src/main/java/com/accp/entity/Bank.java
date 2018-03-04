@@ -5,7 +5,7 @@ public class Bank {
     private String  name; /*银行名称*/
     private String  no ;/*银行卡号 唯一*/
     private String  pwd ;/*银行卡密码*/
-    private Double remainder;/*余额*/
+    private double remainder;/*余额*/
     private String  openUser;/*开户人*/
     private String  telphon;/*开户电话号码号码*/
     private String  papersNo;/*身份证*/
@@ -13,7 +13,7 @@ public class Bank {
     public Bank() {
     }
 
-    public Bank(int id, String name, String no, String pwd, Double remainder, String openUser, String telphon, String papersNo) {
+    public Bank(int id, String name, String no, String pwd, double remainder, String openUser, String telphon, String papersNo) {
         this.id = id;
         this.name = name;
         this.no = no;
@@ -56,11 +56,11 @@ public class Bank {
         this.pwd = pwd;
     }
 
-    public Double getRemainder() {
+    public double getRemainder() {
         return remainder;
     }
 
-    public void setRemainder(Double remainder) {
+    public void setRemainder(double remainder) {
         this.remainder = remainder;
     }
 

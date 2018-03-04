@@ -23,4 +23,5 @@ public interface UsersBiz {
     int updatePwd2(@Param("pwd2") String pwd2);
     //名字查询
     boolean queryUserName(@Param("userName") String userName);
+    boolean modify(Users users);
 }

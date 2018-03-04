@@ -364,19 +364,21 @@ CREATE TABLE bankTranRecords(
 	`type` VARCHAR(20) ,/*交易类型*/
 	/*新增*/
 	tranTime DATETIME ,/*交易时间*/
-	price DECIMAL(15,2)/*交易金额*/
+	price DECIMAL(15,2),/*交易金额*/
+	title VARCHAR (200),/*摘要*/
+	orderNo VARCHAR (20)/*订单号*/
 
 );
 /*数据插入~银行卡交易记录表*/
 INSERT INTO bankTranRecords
-VALUE(DEFAULT,'4000000525','网络消费',NOW(),1000.00),
-     (DEFAULT,'4000200425','网络消费',NOW(),20000.00),
-     (DEFAULT,'4000300525','网络消费',NOW(),20.00),
-     (DEFAULT,'4000300525','网络消费',NOW(),512.00),
-     (DEFAULT,'4000300525','网络消费',NOW(),124.00),
-     (DEFAULT,'4000900525','网络消费',NOW(),123.00),
-     (DEFAULT,'4000900525','网络消费',NOW(),456.00),
-     (DEFAULT,'4000400525','网络消费',NOW(),2454.00),
-     (DEFAULT,'4000900525','网络消费',NOW(),143.00),
-     (DEFAULT,'4000400525','网络消费',NOW(),2154.00),
-     (DEFAULT,'4000900525','网络消费',NOW(),498464.00);
+VALUE(DEFAULT,'4000000525','网络消费',NOW(),1000.00,NULL,NULL),
+     (DEFAULT,'4000200425','网络消费',NOW(),20000.00,NULL,NULL),
+     (DEFAULT,'4000300525','网络消费',NOW(),20.00,NULL,NULL),
+     (DEFAULT,'4000300525','网络消费',NOW(),512.00,NULL,NULL),
+     (DEFAULT,'4000300525','网络消费',NOW(),124.00,NULL,NULL),
+     (DEFAULT,'4000900525','网络消费',NOW(),123.00,NULL,NULL),
+     (DEFAULT,'4000900525','网络消费',NOW(),456.00,NULL,NULL),
+     (DEFAULT,'4000400525','网络消费',NOW(),2454.00,NULL,NULL),
+     (DEFAULT,'4000900525','网络消费',NOW(),143.00,NULL,NULL),
+     (DEFAULT,'4000400525','网络消费',NOW(),2154.00,NULL,NULL),
+     (DEFAULT,'4000900525','网络消费',NOW(),498464.00,NULL,NULL);

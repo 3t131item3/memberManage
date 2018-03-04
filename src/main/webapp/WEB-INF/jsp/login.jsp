@@ -43,20 +43,19 @@
         <h1>会员登录</h1>
     </header>
     <div class="beg-login-main">
-        <p style = "color：red; font-size：18px">${msg}</p>
         <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" >
             <p style="color: red;font-size: 18px">${msg}</p>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i celass="layui-icon">&#xe612;</i>
                 </label>
-                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入用户名" class="layui-input" value="xxpay" required>
+                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入用户名" class="layui-input" value="VIP1" required />
             </div>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" value="xxpay" required>
+                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" value="111111" required>
             </div>
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">

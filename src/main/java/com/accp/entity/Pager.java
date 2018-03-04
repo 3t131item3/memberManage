@@ -3,11 +3,15 @@ package com.accp.entity;
 import java.util.List;
 
 public class Pager<T> {
+    //   当前页数
     private  int  pagerNo;
+    //   每页行数
     private  int  pagerSize;
+    //    总行数
     private  int  totalCount;
+    //    总页数
     private  int  totalPageCount;
-    private List<T> date;
+    private List<T> data;
 
     public int getPagerNo() {
         return pagerNo;
@@ -41,11 +45,11 @@ public class Pager<T> {
         this.totalPageCount = totalPageCount;
     }
 
-    public List<T> getDate() {
-        return date;
+    public List<T> getData() {
+        return data;
     }
 
-    public void setDate(List<T> date) {
-        this.date = date;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 }
