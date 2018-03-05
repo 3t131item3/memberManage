@@ -84,7 +84,7 @@
         </div>
 
         <div class="pwdtwo">
-            <span style="cursor: pointer;color: #CCCCCC;position: absolute;top: 15px;right: 15px" onclick="hide()">X</span>
+            <span style="cursor: pointer;color: #CCCCCC;position: absolute;top: 0;right: 5px" onclick="hide()">X</span>
             <br/>
             <br/>
             <hr/>
@@ -157,13 +157,19 @@
                 url: "/queryPrice",
                 success: function (data) {
                     if (data.result == "false") {
-                        $("#price").val("")
+//                        $("#price").val("")
                         $(".noprice").text("余额不足")
                         $(".noprice").css("color", "red");
+
+                        hide()
                         return false
                     } else {
                         $(".noprice").text("(CNY)")
                         $(".noprice").css("color", "#000");
+
+                        $(".pwdtwo").css("display", "block")
+                        $(".back").css("display", "block")
+                        $("#pwd2").attr("lay-verify", "pwd")
                         return true
                     }
                 }
@@ -239,9 +245,7 @@
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            $(".pwdtwo").css("display", "block")
-            $(".back").css("display", "block")
-            $("#pwd2").attr("lay-verify", "pwd")
+            price()
             return false
         });
 
