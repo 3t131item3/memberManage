@@ -55,7 +55,7 @@ var navs = [{
 	}, {
 		"title": "基本账户",
 		"icon": "fa-check-square-o",
-		"href": "/trans_order/list.html"
+		"href": "/basicaccount"
 	}, {
 		"title": "内部转账",
 		"icon": "fa-check-square-o",

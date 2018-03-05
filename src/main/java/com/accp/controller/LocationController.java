@@ -29,4 +29,8 @@ public class LocationController {
     public String remittanc(){
         return "/remittanc";
     }
+    @RequestMapping("/basicaccount")
+    public String basicaccount(){
+        return "/basicaccount";
+    }
 }

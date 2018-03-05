@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="css/begtable.css" />
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="/css/begtable.css" />
 </head>
 <style>
     .a,.s{
@@ -38,19 +38,23 @@
         <button class="layui-btn layui-btn-radius">查询</button>
     </div>
 </div>
-<div style="width: 600px; height: 400px; border: 1px solid #009688;margin-left: 65px">
+<div style="width: 90%; height: 90%; border: 1px solid #009688;margin-left: 65px">
     <div class="beg-table-box">
         <div class="beg-table-body">
             <table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>姓名</th>
-                    <th>年龄</th>
-                    <th>是否可用</th>
-                    <th>创建时间</th>
+                    <th>日期</th>
+                    <th>时间</th>
+                    <th>摘要</th>
+                    <th>入账金额(元)</th>
+                    <th>出账金额(元)</th>
+                    <th>余额(元)</th>
                 </tr>
                 </thead>
+                <tbody>
+
+                </tbody>
 
             </table>
         </div>
@@ -58,7 +62,7 @@
     </div>
 </div>
 </div>
-<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/plugins/layui/layui.js"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function() {
         var form = layui.form(),
@@ -102,7 +106,8 @@
             laypage = layui.laypage;
 
         laypage({
-            cont: $('.beg-table-paged'),
+            cont: columns,
+//            cont: $('.beg-table-paged'),
             pages: 25 //总页数
             ,
             groups: 5 //连续显示分页数
