@@ -85,18 +85,18 @@ INSERT INTO users VALUES
 /*管理表*/
 CREATE TABLE manage(
 	id INT PRIMARY KEY AUTO_INCREMENT,/*编号*/
-	`name` VARCHAR(20)/*名称*/
-
+	`name` VARCHAR(20),/*名称*/
+	icon VARCHAR(20)/*小图标*/
 );
 
 /*数据插入~管理表*/
 INSERT INTO manage
-VALUES(DEFAULT,'系统管理'),
-      (DEFAULT,'会员管理'),
-      (DEFAULT,'电子银行'),
-      (DEFAULT,'购物管理'),
-      (DEFAULT,'信息查询'),
-      (DEFAULT,'资讯管理');
+VALUES(DEFAULT,'系统管理',NULL ),
+      (DEFAULT,'会员管理',NULL ),
+      (DEFAULT,'电子银行',NULL ),
+      (DEFAULT,'购物管理',NULL ),
+      (DEFAULT,'信息查询',NULL ),
+      (DEFAULT,'资讯管理',NULL );
 
 /*管理表项*/
 CREATE TABLE manageItem(

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -9,27 +8,28 @@
     <title>会员登录</title>
     <%--设置浏览器左上角的小图标--%>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="/css/login.css" />
-    <link rel="stylesheet" href="/css/jquery.slider.css" />
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/css/login.css"/>
+    <link rel="stylesheet" href="/css/jquery.slider.css"/>
     <style>
         <%--滑块的容器--%>
-        .demo2{
+        .demo2 {
             /*display: none;!*隐藏滑块*!*/
             position: absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background: rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             display: none;
-            justify-content:center;
+            justify-content: center;
             align-items: center;
             z-index: 2;
         }
-        #slider2{
+
+        #slider2 {
             top: 52%;
-            left:40%;
+            left: 40%;
             z-index: 3;
             position: absolute;
             display: none;
@@ -43,20 +43,25 @@
         <h1>会员登录</h1>
     </header>
     <div class="beg-login-main">
-        <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" >
+        <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken"
+                                                                             type="hidden"
+                                                                             value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81">
             <p style="color: red;font-size: 18px">${msg}</p>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i celass="layui-icon">&#xe612;</i>
                 </label>
-                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入用户名" class="layui-input" value="VIP1" required />
+                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off"
+                       placeholder="这里输入用户名" class="layui-input" value="VIP1" required/>
             </div>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" value="111111" required>
+                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
+                       placeholder="这里输入密码" class="layui-input" value="111111" required>
             </div>
+            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 38%;top: 38%">
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
@@ -90,23 +95,39 @@
 <script type="text/javascript" src="/js/jquery.slider.min.js"></script>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
 <script>
-    var username="";
-    var password="";
+    $(function () {
+        var passwordShow = false
+        $(".showpwd").on("click", function () {
+            if (passwordShow == true) {
+                passwordShow=false
+                $("#password").attr("type", "password")
+                $(this).attr("src","/images/password4.png")
+            } else {
+                passwordShow=true
+                $(this).attr("src","/images/password.png")
+                $("#password").attr("type", "text")
+            }
+        })
+    })
+</script>
+<script>
+    var username = "";
+    var password = "";
 
-    layui.use(['layer', 'form'], function() {
+    layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
             form = layui.form();
 
-        form.on('submit(login)',function(data){
-            username=$("#username").val()
-            password=$("#password").val()
-            if(username==""||username==null||password==""||password==null){
+        form.on('submit(login)', function (data) {
+            username = $("#username").val()
+            password = $("#password").val()
+            if (username == "" || username == null || password == "" || password == null) {
                 $("#submit").trigger("click")
                 return false
             }
-            $("#slider2").css("display","block")
-            $(".demo2").css("display","flex")
+            $("#slider2").css("display", "block")
+            $(".demo2").css("display", "flex")
 //            var userName=data.field.userName;
 //            var password=data.field.password;
 //            location.href='login.do?userName='+userName+'&password='+password+'';
@@ -118,21 +139,21 @@
 <%--滑块验证--%>
 <script>
     $("#slider2").slider({
-        callback: function(result) {
-           if(result==true){
-               location.href='login.do?userName='+username+'&password='+password+'';
-           }
+        callback: function (result) {
+            if (result == true) {
+                location.href = 'login.do?userName=' + username + '&password=' + password + '';
+            }
         }
     });
-    $("#reset2").click(function() {
+    $("#reset2").click(function () {
         $("#slider2").slider("restore");
     });
 </script>
 <script>
-    $(function(){
-        $(".demo2").on("click",function(){
-           $(this).css("display","none")
-            $("#slider2").css("display","none")
+    $(function () {
+        $(".demo2").on("click", function () {
+            $(this).css("display", "none")
+            $("#slider2").css("display", "none")
         })
     })
 </script>

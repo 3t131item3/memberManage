@@ -84,21 +84,26 @@
         </div>
 
         <div class="pwdtwo">
-            <span style="cursor: pointer;color: #CCCCCC;position: absolute;top: 0;right: 5px" onclick="hide()">x</span>
+            <span style="cursor: pointer;color: #CCCCCC;position: absolute;top: 15px;right: 15px" onclick="hide()">X</span>
+            <br/>
             <br/>
             <hr/>
-            <div class="layui-form-item">
-                <div class="layui-input-inline" style="width: 630px; height: 20px;margin: 50px 0 10px 15%;">
-                    <input type="text" id="pwd2"  placeholder="请输入支付密码" class="layui-input"/>
+
+                <div class="layui-form-item" style="display: flex;justify-content: center;margin: 15% 0 0 0">
+                    <div class="layui-input-inline" style="width: 630px; height: 20px;">
+                        <input type="password" id="pwd2" placeholder="请输入支付密码" class="layui-input"/>
+                    </div>
+                    <%--<div class="layui-input-inline" style="width: 630px; height: 20px;">--%>
+                        <%--<img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;">--%>
+                    <%--</div>--%>
+                    <div class="layui-input-block">
+                        <button type="button" id="btn" class="layui-btn">立即提交</button>
+                        <%--隐藏用于提交--%>
+                        <button id="subbutton" class="layui-btn" lay-submit="" style="display: none" lay-filter="demo">
+                            立即提交
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item" style="margin: 0 0 0 30px;">
-                <div class="layui-input-block">
-                    <button type="button" id="btn" class="layui-btn">立即提交</button>
-                    <%--隐藏用于提交--%>
-                    <button id="subbutton" class="layui-btn" lay-submit="" style="display: none" lay-filter="demo">立即提交</button>
-                </div>
-            </div>
         </div>
         <div class="back"></div>
     </form>
@@ -124,9 +129,21 @@
             price()
         })
 
-        $("#btn").on("click",function(){
+        $("#btn").on("click", function () {
             pwd2()
         })
+//        var passwordShow = false
+//        $(".showpwd").on("click", function () {
+//            if (passwordShow == true) {
+//                passwordShow=false
+//                $("#pwd2").attr("type", "password")
+//                $(this).attr("src","/images/password4.png")
+//            } else {
+//                passwordShow=true
+//                $(this).attr("src","/images/password.png")
+//                $("#pwd2").attr("type", "text")
+//            }
+//        })
 
     })
 
@@ -165,29 +182,30 @@
 
     //    判断二级密码是否正确
     function pwd2() {
-        if($("#pwd2").val()==null || $("#pwd2").val()==''){
+        if ($("#pwd2").val() == null || $("#pwd2").val() == '') {
             $("#subbutton").trigger("click")
-        }else{
-        $.ajax({
-            type: "post",
-            data: {pwd2: $("#pwd2").val()},
-            dataType: "json",
-            url: "/Users/pwdeq",
+        } else {
+            $.ajax({
+                type: "post",
+                data: {pwd2: $("#pwd2").val()},
+                dataType: "json",
+                url: "/Users/pwdeq",
 //            beforeSend: function () {
 //
 //            },
-            success: function (data) {
-                if (data.result == "false") {
-                    alert("支付密码错误")
-                } else {
-                    $("#subbutton").trigger("click")
+                success: function (data) {
+                    if (data.result == "false") {
+                        alert("支付密码错误")
+                    } else {
+                        $("#subbutton").trigger("click")
+                    }
+                },
+                error: function (data) {
                 }
-            },
-            error:function (data) {
-            }
-        })
+            })
+        }
     }
-    }
+
     function hide() {
         $(".pwdtwo").css("display", "none")
         $("#pwd2").val("")
@@ -212,7 +230,7 @@
                     return '汇款金额必须大于0';
                 }
             }
-           , pwd: function (value) {
+            , pwd: function (value) {
                 if (value == "" || value == null) {
                     return "请输入支付密码"
                 }
