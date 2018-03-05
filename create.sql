@@ -382,3 +382,28 @@ VALUE(DEFAULT,'4000000525','网络消费',NOW(),1000.00,NULL,NULL),
      (DEFAULT,'4000900525','网络消费',NOW(),143.00,NULL,NULL),
      (DEFAULT,'4000400525','网络消费',NOW(),2154.00,NULL,NULL),
      (DEFAULT,'4000900525','网络消费',NOW(),498464.00,NULL,NULL);
+
+CREATE TABLE tranRecords(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR (200),/*摘要*/
+  tranTime DATETIME,/*交易时间*/
+  price DECIMAL(15,2),/*交易金额*/
+  remainder DECIMAL(15,2),/*当前用户余额*/
+  userid INT ,/*用户编号*/
+  CONSTRAINT `FK_tranRecords_userid_users_id` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)/*commodityId引用到commodity表的id*/
+);
+INSERT INTO tranRecords VALUES(DEFAULT,'提现',NOW(),50,100,1),
+(DEFAULT,'提现',NOW(),50,100,1),
+(DEFAULT,'提现',NOW(),50,100,1),
+(DEFAULT,'提现',NOW(),50,100,2),
+(DEFAULT,'提现',NOW(),50,100,5),
+(DEFAULT,'提现',NOW(),50,100,2),
+(DEFAULT,'提现',NOW(),50,100,3),
+(DEFAULT,'提现',NOW(),50,100,4),
+(DEFAULT,'提现',NOW(),50,100,3),
+(DEFAULT,'提现',NOW(),50,100,5),
+(DEFAULT,'提现',NOW(),50,100,2),
+(DEFAULT,'提现',NOW(),50,100,4),
+(DEFAULT,'提现',NOW(),50,100,1),
+(DEFAULT,'提现',NOW(),50,100,1),
+(DEFAULT,'提现',NOW(),50,100,1);

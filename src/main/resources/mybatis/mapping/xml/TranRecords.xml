@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.TranRecordsDao"> 
+    <select id="querys" resultType="TranRecords">
+        SELECT * FROM TranRecords
+        <where>
+            <if test="id>0">
+                id=#{id}
+            </if>
+            <if test="title!=null and title!=''">
+                AND title=#{title}
+            </if>
+            <if test="tranTime!=null">
+                AND tranTime=#{tranTime}
+            </if>
+            <if test="price>0">
+                AND price=#{price}
+            </if>
+            <if test="remainder>0">
+                AND remainder=#{remainder}
+            </if>
+            <if test="userid>0">
+                AND userid=#{userid}
+            </if>
+        </where> 
+    </select>
+    <update id="modify" >
+        UPDATE TranRecords
+        <set>
+            <if test="title!=null and title!=''">
+                 title=#{title},
+            </if>
+            <if test="tranTime!=null">
+                 tranTime=#{tranTime},
+            </if>
+            <if test="price>0">
+                 price=#{price},
+            </if>
+            <if test="remainder>0">
+                 remainder=#{remainder},
+            </if>
+            <if test="userid>0">
+                 userid=#{userid}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <insert id="add">
+        INSERT INTO TranRecords VALUES(DEFAULT,#{title},#{tranTime},#{price},#{remainder},#{userid})
+    </insert>
+    <select id="query" resultType="TranRecords">
+        SELECT * FROM TranRecords
+        <where>
+            <if test="id>0">
+                id=#{id}
+            </if>
+            <if test="title!=null and title!=''">
+                AND title=#{title}
+            </if>
+            <if test="tranTime!=null">
+                AND tranTime=#{tranTime}
+            </if>
+            <if test="price>0">
+                AND price=#{price}
+            </if>
+            <if test="remainder>0">
+                AND remainder=#{remainder}
+            </if>
+            <if test="userid>0">
+                AND userid=#{userid}
+            </if>
+        </where>
+    </select>
+</mapper>

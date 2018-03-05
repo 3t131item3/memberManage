@@ -36,6 +36,7 @@
         <tx:attributes>
             <tx:method name="add*"/>
             <tx:method name="update*"/>
+            <tx:method name="modify*"/>
             <tx:method name="delete*"/>
             <tx:method name="query*" read-only="true" propagation="NOT_SUPPORTED"/>
         </tx:attributes>
