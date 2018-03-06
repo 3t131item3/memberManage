@@ -125,9 +125,9 @@
         date = date.getFullYear() + "-" + (date.getMonth() > 10 ? date.getMonth() : '0' + date.getMonth()) + "-" + (date.getMonth() > 10 ? date.getDate() : '0' + date.getDate())
         $("#date").val(date)
 //        鼠标失去焦点获取余额
-        $("#price").on("blur", function () {
-            price()
-        })
+//        $("#price").on("blur", function () {
+//            price()
+//        })
 
         $("#btn").on("click", function () {
             pwd2()
