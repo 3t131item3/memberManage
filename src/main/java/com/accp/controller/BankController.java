@@ -57,7 +57,7 @@ public class BankController {
         tranRecords.setPrice(bankTranRecords.getPrice());
         tranRecords.setUserid(user.getId());
         tranRecordsBiz.add(tranRecords);
-        return "/remittanc";
+        return "/basicaccount";
     }
     @RequestMapping("/queryPrice")
     @ResponseBody

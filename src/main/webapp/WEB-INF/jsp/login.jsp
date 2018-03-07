@@ -44,7 +44,7 @@
         <%--<marquee onmouseover="this.stop()" onmouseout="this.start()" behavior="" direction="right" style="font-size: 100px;cursor: pointer;">(눈_눈)</marquee>--%>
     </header>
     <div class="beg-login-main">
-        <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken"
+        <form action="/login.do" class="layui-form" method="post"><input name="__RequestVerificationToken"
                                                                              type="hidden"
                                                                              value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81">
             <p style="color: red;font-size: 18px">${msg}</p>
@@ -76,6 +76,12 @@
                 <div class="beg-clear"></div>
             </div>
             <input id="submit" type="submit" style="display: none" value="提交"/>
+        </form>
+        <form class="sub" method="post" action="/login.do">
+            <input type="hidden" class="userName" name="userName" />
+            <input type="hidden" class="password" name="password" />
+            <button class="layui-btn layui-btn-primary tologin" lay-submit lay-filter="login2" style="display: none">
+            </button>
         </form>
     </div>
     <footer>
@@ -136,6 +142,9 @@
 //            location.href='login.do?userName='+userName+'&password='+password+'';
             return false;
         });
+        form.on('submit(login2)', function (data) {
+            return true
+        });
     });
 </script>
 
@@ -144,7 +153,10 @@
     $("#slider2").slider({
         callback: function (result) {
             if (result == true) {
-                location.href = 'login.do?userName=' + username + '&password=' + password + '';
+//                location.href = 'login.do?userName=' + username + '&password=' + password + '';
+                $(".userName").val(username)
+                $(".password").val(password)
+                $(".tologin").trigger("click")
             }
         }
     });
