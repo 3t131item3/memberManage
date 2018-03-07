@@ -202,7 +202,7 @@ function lock($, layer) {
                         layer.close(lockIndex);
                         isShowLock = false;
                     } else {
-                        layer.msg(res.msg, { icon: 2, time: 1000 });
+                        layer.msg(res.rel, { icon: 2, time: 3000 });
                     }
                 }, 'json');
                 //isShowLock = false;

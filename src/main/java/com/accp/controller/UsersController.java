@@ -64,7 +64,7 @@ public class UsersController {
         if(usersBiz.queryUser(userName,password)!=null){
             return "{\"rel\":\"true\"}";
         }else {
-            return "{\"rel\":\"false\"}";
+            return "{\"rel\":\"密码错误！(ps:解锁密码为登录密码)\"}";
         }
     }
 }

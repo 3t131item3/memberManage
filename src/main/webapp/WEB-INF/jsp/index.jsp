@@ -115,7 +115,7 @@
 			</div>
 			<div class="admin-header-lock-name" id="lockUserName">${user.name}</div>
 			<input type="hidden" id="username" value="${user.userName}"/>
-			<input type="text" class="admin-header-lock-input" value="" placeholder="输入密码解锁.." name="lockPwd"
+			<input type="password" class="admin-header-lock-input" value="" placeholder="输入密码解锁.." name="lockPwd"
 				   id="lockPwd"/>
 			<button class="layui-btn layui-btn-small" id="unlock" onclick="unlock()">解锁</button>
 		</div>
