@@ -4,11 +4,20 @@ import java.util.Date;
 
 public class TranRecords {
     private int id;
+    private String tranType;/*交易类型*/
     private String title;/*摘要*/
     private Date tranTime;/*交易时间*/
     private double price;/*交易金额*/
     private double remainder;/*当前用户余额*/
     private int userid;/*用户编号*/
+
+    public String getTranType() {
+        return tranType;
+    }
+
+    public void setTranType(String tranType) {
+        this.tranType = tranType;
+    }
 
     public int getId() {
         return id;

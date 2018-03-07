@@ -51,7 +51,8 @@ public class BankController {
 //        添加交易记录
         TranRecords tranRecords=new TranRecords();
         tranRecords.setTranTime(new Date());
-        tranRecords.setTitle(user.getOpenBank()+"充值");
+        tranRecords.setTitle(bankTranRecords.getTitle());
+        tranRecords.setTranType("充值");
         tranRecords.setRemainder(user.getRemainder());
         tranRecords.setPrice(bankTranRecords.getPrice());
         tranRecords.setUserid(user.getId());

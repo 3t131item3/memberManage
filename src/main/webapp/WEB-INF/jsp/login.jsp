@@ -28,8 +28,8 @@
         }
 
         #slider2 {
-            top: 52%;
-            left: 40%;
+            top: 1.05rem;
+            left: 1.5rem;
             z-index: 3;
             position: absolute;
             display: none;

@@ -9,6 +9,9 @@
             <if test="id>0">
                 id=#{id}
             </if>
+            <if test="tranType!=null and tranType!=''">
+                AND tranType=#{tranType}
+            </if>
             <if test="title!=null and title!=''">
                 AND title=#{title}
             </if>
@@ -29,6 +32,9 @@
     <update id="modify">
         UPDATE TranRecords
         <set>
+            <if test="tranType!=null and tranType!=''">
+                tranType=#{tranType},
+            </if>
             <if test="title!=null and title!=''">
                 title=#{title},
             </if>
@@ -48,13 +54,16 @@
         WHERE id=#{id}
     </update>
     <insert id="add">
-        INSERT INTO TranRecords VALUES(DEFAULT,#{title},#{tranTime},#{price},#{remainder},#{userid})
+        INSERT INTO TranRecords VALUES(DEFAULT,#{tranType},#{title},#{tranTime},#{price},#{remainder},#{userid})
     </insert>
     <select id="query" resultType="TranRecords">
         SELECT * FROM TranRecords
         <where>
             <if test="id>0">
                 id=#{id}
+            </if>
+            <if test="tranType!=null and tranType!=''">
+                AND tranType=#{tranType}
             </if>
             <if test="title!=null and title!=''">
                 AND title=#{title}
@@ -78,6 +87,9 @@
         <where>
             <if test="TranRecords.id>0">
                 id=#{TranRecords.id}
+            </if>
+            <if test="TranRecords.tranType!=null and TranRecords.tranType!=''">
+                tranType=#{TranRecords.tranType},
             </if>
             <if test="TranRecords.title!=null and TranRecords.title!=''">
                 AND title=#{TranRecords.title}

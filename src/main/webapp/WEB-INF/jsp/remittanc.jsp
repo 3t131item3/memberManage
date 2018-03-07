@@ -45,7 +45,7 @@
         <div class="layui-form-item">
 
             <div class="layui-inline">
-                <label class="layui-form-label">汇款日期</label>
+                <label class="layui-form-label">充值日期</label>
                 <div class="layui-input-block" style="width: 630px">
                     <input readonly type="text" name="tranTime"
                            id="date" <%--lay-verify="date" placeholder="yyyy-mm-dd"--%> autocomplete="off"
@@ -55,7 +55,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">汇款金额</label>
+                <label class="layui-form-label">充值金额</label>
                 <div class="layui-input-inline" style="width: 630px;">
                     <input type="number" name="price" lay-verify="price" placeholder="￥" autocomplete="off" id="price"
                            class="layui-input">
