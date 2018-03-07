@@ -41,6 +41,7 @@
 <div class="beg-login-box">
     <header>
         <h1>会员登录</h1>
+        <%--<marquee onmouseover="this.stop()" onmouseout="this.start()" behavior="" direction="right" style="font-size: 100px;cursor: pointer;">(눈_눈)</marquee>--%>
     </header>
     <div class="beg-login-main">
         <form action="/manage/login" class="layui-form" method="post"><input name="__RequestVerificationToken"
@@ -61,7 +62,7 @@
                 <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
                        placeholder="这里输入密码" class="layui-input" value="111111" required>
             </div>
-            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 38rem;top: 19rem">
+            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 1.35rem;top: 0.76rem">
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
@@ -94,6 +95,8 @@
 <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="/js/jquery.slider.min.js"></script>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/fontSize.js"></script>
+<script type="text/javascript" src="/js/disablekey.js"></script>
 <script>
     $(function () {
         var passwordShow = false

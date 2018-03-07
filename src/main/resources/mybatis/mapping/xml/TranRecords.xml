@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.accp.dao.TranRecordsDao"> 
+<mapper namespace="com.accp.dao.TranRecordsDao">
     <select id="querys" resultType="TranRecords">
         SELECT * FROM TranRecords
         <where>
@@ -24,25 +24,25 @@
             <if test="userid>0">
                 AND userid=#{userid}
             </if>
-        </where> 
+        </where>
     </select>
-    <update id="modify" >
+    <update id="modify">
         UPDATE TranRecords
         <set>
             <if test="title!=null and title!=''">
-                 title=#{title},
+                title=#{title},
             </if>
             <if test="tranTime!=null">
-                 tranTime=#{tranTime},
+                tranTime=#{tranTime},
             </if>
             <if test="price>0">
-                 price=#{price},
+                price=#{price},
             </if>
             <if test="remainder>0">
-                 remainder=#{remainder},
+                remainder=#{remainder},
             </if>
             <if test="userid>0">
-                 userid=#{userid}
+                userid=#{userid}
             </if>
         </set>
         WHERE id=#{id}
@@ -73,4 +73,44 @@
             </if>
         </where>
     </select>
+    <select id="pageQuerys" resultType="TranRecords">
+        SELECT * FROM TranRecords
+        <where>
+            <if test="TranRecords.id>0">
+                id=#{TranRecords.id}
+            </if>
+            <if test="TranRecords.title!=null and TranRecords.title!=''">
+                AND title=#{TranRecords.title}
+            </if>
+            <if test="TranRecords.tranTime!=null">
+                AND tranTime=#{TranRecords.tranTime}
+            </if>
+            <if test="TranRecords.price>0">
+                AND price=#{TranRecords.price}
+            </if>
+            <if test="TranRecords.remainder>0">
+                AND remainder=#{TranRecords.remainder}
+            </if>
+            <if test="TranRecords.userid>0">
+                AND userid=#{TranRecords.userid}
+            </if>
+            <choose>
+                <when test="beginDate!=null and endDate!=null">
+                    AND tranTime BETWEEN #{beginDate} AND #{endDate}
+                </when>
+                <when test="beginDate!=null">
+                    AND tranTime >= #{beginDate}
+                </when>
+                <when test="endDate!=null">
+                    AND #{endDate} >= tranTime
+                </when>
+            </choose>
+        </where>
+        ORDER BY tranTime DESC
+        <if test="rowCount>0">
+            LIMIT #{currentPageNo},#{rowCount}
+        </if>
+    </select>
+
+
 </mapper>

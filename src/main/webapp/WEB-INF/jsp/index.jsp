@@ -47,7 +47,7 @@
 				<li class="layui-nav-item">
 					<a href="javascript:;" class="admin-header-user">
 						<img src="/images/0.jpg"/>
-						<span>jmdhappy</span>
+						<span>${user.name}</span>
 					</a>
 					<dl class="layui-nav-child">
 						<dd>
@@ -113,17 +113,20 @@
 			<div class="admin-header-lock-img">
 				<img src="/images/0.jpg"/>
 			</div>
-			<div class="admin-header-lock-name" id="lockUserName">beginner</div>
+			<div class="admin-header-lock-name" id="lockUserName">${user.name}</div>
+			<input type="hidden" id="username" value="${user.userName}"/>
 			<input type="text" class="admin-header-lock-input" value="" placeholder="输入密码解锁.." name="lockPwd"
 				   id="lockPwd"/>
-			<button class="layui-btn layui-btn-small" id="unlock">解锁</button>
+			<button class="layui-btn layui-btn-small" id="unlock" onclick="unlock()">解锁</button>
 		</div>
 	</script>
 	<!--锁屏模板 end -->
 
+	<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
 	<script type="text/javascript" src="/plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="/datas/nav.js"></script>
-	<script src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/index.js"></script>
+	<script type="text/javascript" src="/js/disablekey.js"></script>
 	<!--<script>-->
 	<!--layui.use('layer', function () {-->
 	<!--var $ = layui.jquery,-->

@@ -112,6 +112,7 @@
 
 <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/disablekey.js"></script>
 
 <script>
     var date = ""

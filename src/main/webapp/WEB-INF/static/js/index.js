@@ -176,9 +176,8 @@ function lock($, layer) {
             //绑定解锁按钮的点击事件
             layero.find('button#unlock').on('click', function () {
                 var $lockBox = $('div#lock-box');
-
-                var userName = $lockBox.find('input[name=username]').val();
-                var pwd = $lockBox.find('input[name=password]').val();
+                var userName = document.getElementById("username").value;
+                var pwd = document.getElementById("lockPwd").value;
                 if (pwd === '输入密码解锁..' || pwd.length === 0) {
                     layer.msg('请输入密码..', {
                         icon: 2,
@@ -196,9 +195,9 @@ function lock($, layer) {
             var unlock = function (un, pwd) {
                 console.log(un, pwd);
                 //这里可以使用ajax方法解锁
-                $.post('/Account/UnLock', { userName: un, password: pwd }, function (res) {
+                $.post('/Users/unlock', { userName: un, password: pwd }, function (res) {
                     //验证成功
-                    if (res.rel) {
+                    if (res.rel=="true") {
                         //关闭锁屏层
                         layer.close(lockIndex);
                         isShowLock = false;

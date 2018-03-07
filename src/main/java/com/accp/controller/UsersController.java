@@ -48,10 +48,23 @@ public class UsersController {
     @RequestMapping("/pwdeq")
     private String pwd2eq(HttpServletRequest request){
         Users user = (Users) request.getSession().getAttribute("user");
-        if(user.getPwd2().equals(request.getParameter("pwd2"))){
+//        String pwd2 = MD5.MD5Encode(request.getParameter("pwd2"));
+        String pwd2 = request.getParameter("pwd2");
+        if(user.getPwd2().equals(pwd2)){
             return "{\"result\":\"true\"}";
         }else {
             return "{\"result\":\"false\"}";
+        }
+    }
+    @ResponseBody
+    @RequestMapping("/unlock")
+    public String unlock(HttpServletRequest request){
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        if(usersBiz.queryUser(userName,password)!=null){
+            return "{\"rel\":\"true\"}";
+        }else {
+            return "{\"rel\":\"false\"}";
         }
     }
 }

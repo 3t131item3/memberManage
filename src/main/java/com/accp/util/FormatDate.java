@@ -14,7 +14,7 @@ public class FormatDate {
      */
     public static Date formatDate(String date){
         try {
-          return   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+          return   new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
