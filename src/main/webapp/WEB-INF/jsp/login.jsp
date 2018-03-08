@@ -28,7 +28,7 @@
         }
 
         #slider2 {
-            top: 1.05rem;
+            top: 0.95rem;
             left: 1.5rem;
             z-index: 3;
             position: absolute;
@@ -62,7 +62,7 @@
                 <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
                        placeholder="这里输入密码" class="layui-input" value="111111" required>
             </div>
-            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 1.35rem;top: 0.76rem">
+            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 1.4rem;top: 0.7rem">
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>

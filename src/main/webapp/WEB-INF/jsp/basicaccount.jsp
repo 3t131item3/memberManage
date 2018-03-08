@@ -54,7 +54,8 @@
                     <th>余额(元)</th>
                 </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                </tbody>
             </table>
         </div>
         <div class="beg-table-paged"></div>

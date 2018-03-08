@@ -42,7 +42,7 @@ public class TranRecordsController {
             endDate=calendar.getTime();
         }
 //        每页12行
-        int rowCount=12;
+        int rowCount=13;
 //        当前页数
         int thisPage=request.getParameter("thisPage")==null ? 1:Integer.parseInt(request.getParameter("thisPage"));
 
