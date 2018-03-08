@@ -26,13 +26,29 @@
             align-items: center;
             z-index: 2;
         }
-
         #slider2 {
             top: 0.95rem;
             left: 1.5rem;
             z-index: 3;
             position: absolute;
             display: none;
+        }
+        .showpwd{
+            cursor: pointer;
+            position: absolute;
+            right: 1.4rem;
+            top: 0.7rem
+        }
+        @media screen and (max-width: 1366px) and (max-height: 768px){
+            #slider2 {
+                top: 1.05rem;
+                left: 1.5rem;
+            }
+            .showpwd{
+                right: 1.3rem;
+                top: 0.755rem
+            }
+
         }
     </style>
 </head>
@@ -62,7 +78,7 @@
                 <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
                        placeholder="这里输入密码" class="layui-input" value="111111" required>
             </div>
-            <img  class="showpwd" src="/images/password4.png" alt="" width="50" style="cursor: pointer;position: absolute;right: 1.4rem;top: 0.7rem">
+            <img  class="showpwd" src="/images/password4.png" alt="" width="50" >
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
@@ -105,6 +121,7 @@
 <script type="text/javascript" src="/js/disablekey.js"></script>
 <script>
     $(function () {
+//        alert(screen.width+"/"+screen.height)
         var passwordShow = false
         $(".showpwd").on("click", function () {
             if (passwordShow == true) {
