@@ -42,11 +42,11 @@
         @media screen and (max-width: 1366px) and (max-height: 768px){
             #slider2 {
                 top: 1.05rem;
-                left: 1.5rem;
+                left: 1.45rem;
             }
             .showpwd{
                 right: 1.3rem;
-                top: 0.755rem
+                top: 0.75rem
             }
 
         }

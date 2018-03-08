@@ -6,6 +6,23 @@
 
     <select id="getList">
         SELECT * FROM  manageItem
+        <if test="id>0">
+            id=#{id}
+        </if>
+        <if test="name!=null and name!=''">
+            AND name=#{name}
+        </if>
+        <if test="manageId>0">
+            AND manageId=#{manageId}
+        </if>
+        <if test="title!=null and title!=''">
+            AND title=#{title}
+        </if>
+        <if test="icon!=null and icon!=''">
+            AND icon=#{icon}
+        </if>
+        <if test="href!=null and href!=''">
+            AND href=#{href}
+        </if>
     </select>
-
 </mapper>

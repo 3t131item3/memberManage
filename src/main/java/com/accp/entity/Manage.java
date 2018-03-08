@@ -5,9 +5,7 @@ import java.util.List;
 public class Manage {
     private int id ;/*编号*/
     private String name  ;/*名称*/
-//    private List<ManageItem>manageItems;/*管理表项集合*/
-    public Manage() {
-    }
+    private String icon;/*小图标*/
 
     public int getId() {
         return id;
@@ -25,11 +23,11 @@ public class Manage {
         this.name = name;
     }
 
-//    public List<ManageItem> getManageItems() {
-//        return manageItems;
-//    }
-//
-//    public void setManageItems(List<ManageItem> manageItems) {
-//        this.manageItems = manageItems;
-//    }
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

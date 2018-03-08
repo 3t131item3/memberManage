@@ -19,7 +19,7 @@ public class LoginController {
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
             request.getSession().setAttribute("user",users);
-            return "/index";
+            return "redirect:/index";
         }
         request.setAttribute("msg","用户名或密码错误");
         return "/login";

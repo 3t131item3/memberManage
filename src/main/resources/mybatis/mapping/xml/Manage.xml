@@ -3,4 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.ManageDao">
+    <select id="getManage" resultType="Manage">
+        select * from manage
+        <where>
+            <if test="id>0">
+                id=#{id}
+            </if>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="icon!=null and icon!=''">
+                and icon=#{icon}
+            </if>
+        </where>
+    </select>
 </mapper>

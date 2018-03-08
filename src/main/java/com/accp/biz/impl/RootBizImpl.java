@@ -17,8 +17,9 @@ public class RootBizImpl implements RootBiz {
      */
     @Resource
     private RootDao rootDao;
-    public List<Root> roots(Role role) {
 
-        return rootDao.roots(role);
+    public List<Root> roots(Root root) {
+
+        return rootDao.roots(root);
     }
 }

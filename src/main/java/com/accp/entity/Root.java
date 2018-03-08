@@ -6,14 +6,14 @@ public class Root  {
     private int id;/*编号*/
     private int manageItemId;/*管理表项编号*/
     private int roleId; /*角色编号*/
-    private List<ManageItem>manageItems;
+    private ManageItem manageItem;
 
-    public List<ManageItem> getManageItems() {
-        return manageItems;
+    public ManageItem getManageItem() {
+        return manageItem;
     }
 
-    public void setManageItems(List<ManageItem> manageItems) {
-        this.manageItems = manageItems;
+    public void setManageItem(ManageItem manageItem) {
+        this.manageItem = manageItem;
     }
 
     public int getId() {

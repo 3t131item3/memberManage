@@ -9,17 +9,6 @@ public class ManageItem {
     private String icon;/*小图标*/
     private String href;/*要跳转的路径*/
     private Manage manage;/*管理类对象*/
-    public ManageItem() {
-    }
-
-    public ManageItem(int id, String name, int manageId, String title, String icon, String href) {
-        this.id = id;
-        this.name = name;
-        this.manageId = manageId;
-        this.title = title;
-        this.icon = icon;
-        this.href = href;
-    }
 
     public int getId() {
         return id;

@@ -10,5 +10,5 @@ public interface RootBiz {
      * 3表联查
      * @return
      */
-    List<Root> roots(Role role);
+    List<Root> roots(Root root);
 }
