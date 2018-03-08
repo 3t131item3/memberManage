@@ -54,7 +54,7 @@
                     <th>余额(元)</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 </tbody>
             </table>
         </div>
@@ -101,6 +101,9 @@
     $(function () {
         ajaxQuery(1)
         $("#query").on("click",function () {
+            if($("#beginDate").val()>$("#endDate").val()){
+                return;
+            }
             $(".beginDate").val($("#beginDate").val())
             $(".endDate").val($("#endDate").val())
             ajaxQuery(1)
@@ -199,7 +202,7 @@ function laypages(rowCount,currPage){
             type:"post",
             success:function (data) {
 //                得到tbody标签元素
-                var tbody=$("tbody")
+                var tbody=$("#tbody")
 //                清空tbody的子节点
                 tbody.empty()
 //              判断是否有值
