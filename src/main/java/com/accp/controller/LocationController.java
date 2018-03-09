@@ -36,9 +36,13 @@ public class LocationController {
     public String basicaccount(){
         return "/basicaccount";
     }
+    @RequestMapping("/adduser")
+    public String adduser() {
+        return "newmember";
+    }
 
     @RequestMapping("/addRole")
-    public String addUsers() {
+    public String addRole() {
         return "addRole";
     }
 

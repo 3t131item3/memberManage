@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="layui-form-mid layui-word-aux" style="padding:0;">
-                    <button lay-filter="search" class="layui-btn" lay-submit><i class="fa fa-search" aria-hidden="true"></i> 查询</button>
+                    <button id="search" lay-filter="search" class="layui-btn" lay-submit><i class="fa fa-search" aria-hidden="true"></i> 查询</button>
                 </div>
             </div>
         </form>
@@ -81,11 +81,11 @@
         <td><input type="checkbox" {{# if (item.state!=0 ) { }}
                    checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" >
         </td>
-
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
             <a href="javascript:;" data-name="{{item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
             <a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+            <%--<a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">实名认证</a>--%>
         </td>
     </tr>
     {{# }); }}
@@ -96,7 +96,6 @@
     layui.config({
         base: 'js/'
     });
-
     layui.use(['paging', 'form'], function () {
         var $ = layui.jquery,
             paging = layui.paging(),
@@ -105,7 +104,6 @@
             form = layui.form();
 //                alert($("input[name='names']"))
 //            alert(document.getElementById("sss").value);
-
         paging.init({
             openWait: true,
             url: '/Users/list?v=' + new Date().getTime(), //地址
@@ -246,8 +244,8 @@
         });
 
         $('#search').on('click', function () {
+            $("#search").val
             parent.layer.alert('你点击了搜索按钮')
-//                alert("sss")
         });
 
         var addBoxIndex = -1;
@@ -255,12 +253,12 @@
             if (addBoxIndex !== -1)
                 return;
             //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-            $.get('/addUsers', null, function (form) {
+            $.get('/adduser', null, function (form) {
                 addBoxIndex = layer.open({
                     type:2,
-                    title: '修改表单',
+                    title: '表单',
 //                        content:form,
-                    content: "/addUsers",
+                    content: "/adduser",
                     btn: ['保存', '取消'],
                     shade: false,
                     offset: ['100px', '30%'],
@@ -292,7 +290,6 @@
                         var form = layui.form();
                         form.render();
                         form.on('submit(edit)',function (data) {
-                            alert(111);
                             console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
                             console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
                             console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
