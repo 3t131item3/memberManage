@@ -112,7 +112,7 @@ CREATE TABLE manageItem(
 
 /*数据插入~管理表项*/
 INSERT INTO manageItem
-VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,'/usermanagement'),
+VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,NULL),
       (DEFAULT,'角色管理',1,'角色管理',NULL,NULL),
       (DEFAULT,'权限管理',1,'权限管理',NULL,NULL),
       (DEFAULT,'商品管理',1,'商品管理',NULL,NULL),
@@ -123,8 +123,8 @@ VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,'/usermanagement'),
       (DEFAULT,'新会员管理',2,'新会员管理',NULL,NULL),
       (DEFAULT,'修改本人资料',2,'修改本人资料',NULL,NULL),
       (DEFAULT,'修改本人密码',2,'修改本人密码',NULL,NULL),
-      (DEFAULT,'汇款充值',3,'汇款充值',NULL,'/remittanc'),
-      (DEFAULT,'基本账户',3,'基本账户',NULL,'/basicaccount'),
+      (DEFAULT,'汇款充值',3,'汇款充值',NULL,NULL),
+      (DEFAULT,'基本账户',3,'基本账户',NULL,NULL),
       (DEFAULT,'消费账户',3,'消费账户',NULL,NULL),
       (DEFAULT,'内部转账',3,'内部转账',NULL,NULL),
       (DEFAULT,'申请提现',3,'申请提现',NULL,NULL),

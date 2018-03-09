@@ -3,6 +3,7 @@ $(function () {
     $.ajax({
         url:"queryRoots",
         data:{},
+        async:false,  //同步执行
         type:"post",
         dataType:"json",
         success:function (data) {

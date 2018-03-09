@@ -126,7 +126,7 @@
 	<script type="text/javascript" src="/plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="/datas/nav.js"></script>
 	<script type="text/javascript" src="/js/index.js"></script>
-	<script type="text/javascript" src="/js/disablekey.js"></script>
+	<%--<script type="text/javascript" src="/js/disablekey.js"></script>--%>
 	<!--<script>-->
 	<!--layui.use('layer', function () {-->
 	<!--var $ = layui.jquery,-->

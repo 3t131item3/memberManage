@@ -3,6 +3,8 @@ package com.accp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 专门用来跳转jsp页面的类
  */
@@ -14,7 +16,8 @@ public class LocationController {
         return "/register";
     }
     @RequestMapping("/login")
-    public String login(){
+    public String login(HttpServletRequest request){
+        request.getSession().invalidate();
         return "/login";
     }
     @RequestMapping("/index")
