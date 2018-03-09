@@ -81,7 +81,7 @@
                 and users.userName like concat('%',#{userName},'%')
             </if>
             <!--<if test="id>0">-->
-                <!--and users.id=#{id}-->
+<!--&#45;&#45;                 and users.id=#{id}-->
             <!--</if>-->
         </where>
     </sql>

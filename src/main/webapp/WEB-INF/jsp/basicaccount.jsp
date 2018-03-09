@@ -102,6 +102,10 @@
         ajaxQuery(1)
         $("#query").on("click",function () {
             if($("#beginDate").val()>$("#endDate").val()){
+                $("#endDate").click()
+                $("#beginDate").val("")
+                $("#endDate").val("")
+
                 return;
             }
             $(".beginDate").val($("#beginDate").val())

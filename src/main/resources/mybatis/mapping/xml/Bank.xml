@@ -9,8 +9,8 @@
            <if test="id>0">
                id=#{id}
            </if>
-           <if test="name!=null and name!=''">
-              AND name=#{name}
+           <if test="bankName!=null and bankName!=''">
+              AND bankName=#{bankName}
            </if>
            <if test="no!=null and no!=''">
               AND no=#{no}
@@ -35,8 +35,8 @@
     <update id="modify">
         UPDATE bank
         <set>
-        <if test="name!=null and name!=''">
-           name=#{name},
+        <if test="bankName!=null and bankName!=''">
+            bankName=#{bankName},
         </if>
         <if test="no!=null and no!=''">
              no=#{no},
