@@ -2,6 +2,8 @@ package com.accp.controller;
 
 import com.accp.biz.UsersBiz;
 import com.accp.entity.Errors;
+import com.accp.entity.Pager;
+import com.accp.entity.Role;
 import com.accp.entity.Users;
 import com.accp.util.MD5;
 import org.springframework.stereotype.Controller;
@@ -9,12 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/Users")
 public class UsersController {
     @Resource(name = "usersBiz")
     private UsersBiz usersBiz;
+
     public  String usersList(){
         return null;
     }
@@ -67,4 +73,42 @@ public class UsersController {
             return "{\"rel\":\"密码错误！(ps:解锁密码为登录密码)\"}";
         }
     }
+
+    @ResponseBody
+    @RequestMapping("/list")
+    private Map<String, Object> getList(HttpServletRequest request){
+        int pagerNo =1;
+        if(request.getParameter("pageIndex")!=null){
+            pagerNo=Integer.parseInt(request.getParameter("pageIndex"));
+        }
+        String userName=null;
+        if(request.getParameter("name")!=null && request.getParameter("name")!="" ){
+            userName= request.getParameter("name");
+        }
+        int   pageSize=3;
+        if(request.getParameter("pageSize")!=null){
+            pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        }
+        Pager<Users> usersPager = usersBiz.queryList(userName, pagerNo, pageSize);
+        Map<String, Object> map=new HashMap<String, Object>();
+        map.put("rel",true);
+        map.put("msg","获取成功");
+        map.put("list",usersPager.getData());
+        map.put("count",usersPager.getTotalCount());
+        return  map ;
+    }
+    //删除
+    @ResponseBody
+    @RequestMapping(value ="/delete/{id}",method = RequestMethod.GET)
+    private  Map<String, Object>  delete(@PathVariable int id){
+        Map<String, Object> map=new HashMap<String, Object>();
+        if(usersBiz.deleteUsers(id)){
+            map.put("msg","删除成功!");
+        }else {
+            map.put("msg","删除失败!");
+        }
+
+        return map;
+    }
+
 }

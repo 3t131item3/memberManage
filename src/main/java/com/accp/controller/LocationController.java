@@ -36,4 +36,27 @@ public class LocationController {
     public String basicaccount(){
         return "/basicaccount";
     }
+
+    @RequestMapping("/addRole")
+    public String addUsers() {
+        return "addRole";
+    }
+
+    @RequestMapping("/rolemanagement")
+    public String rolemanagement() {
+        return "/rolemanagement";
+    }
+
+    @RequestMapping("/commoditymanagement")
+    public String commoditymanagement() {
+        return "/commoditymanagement";
+    }
+    @RequestMapping("/sssList")
+    public String CommoditySetMealList() {
+        return "/CommoditySetMealList";
+    }
+    @RequestMapping("/authoritymanagement")
+    public String authoritymanagement() {
+        return "/authoritymanagement";
+    }
 }

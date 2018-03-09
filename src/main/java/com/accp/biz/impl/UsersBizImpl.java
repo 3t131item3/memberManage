@@ -56,5 +56,13 @@ public class UsersBizImpl implements UsersBiz {
         return usersDao.modify(user)>0;
     }
 
+    public boolean deleteUsers(int id) {
+        return usersDao.remove(id)>0;
+    }
+
+    public Users queryUsersroleId(int roleId) {
+        return usersDao.getUsersroleId(roleId);
+    }
+
 
 }

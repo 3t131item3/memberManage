@@ -45,14 +45,12 @@
             <table class="layui-table admin-table">
                 <thead>
                 <tr>
-                    <%--<th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>--%>
-                    <th>用户名</th>
-                    <th>角色</th>
-                    <th>最后修改时间</th>
-                    <th>联系电话</th>
-                    <th>电子邮件</th>
+                    <%--<th style="width: 30px;display: none"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>--%>
+                    <th>角色编号</th>
+                    <th>角色名称</th>
                     <th>状态(启用/禁用)</th>
                     <th>操作</th>
+                </tr>
 
                 </tr>
                 </thead>
@@ -71,21 +69,16 @@
 <script type="text/html" id="tpl">
     {{# layui.each(d.list, function(index, item){ }}
     <tr>
-        <input type="hidden" value={{d.count}} class="count"/>
         <%--<td><input type="checkbox" lay-skin="primary"></td>--%>
-        <td>{{item.userName}}</td>
-        <td>{{item.role.roleName}}</td>
-        <td>{{ item.modifyTime }}</td>
-        <td>{{ item.telephoneNumber }}</td>
-        <td>{{ item.email}}</td>
+        <input type="hidden" value={{d.count}} class="count"/>
+        <td>{{ item.no }}</td>
+        <td>{{ item.roleName }}</td>
         <td><input type="checkbox" {{# if (item.state!=0 ) { }}
-                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" >
-        </td>
-
+                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" ></td>
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-            <a href="javascript:;" data-name="{{item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-            <a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+            <a href="javascript:;" data-name="{{ item.id}}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+            <a href="javascript:;"  data-name="{{item.id}}"  data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
         </td>
     </tr>
     {{# }); }}
@@ -108,7 +101,7 @@
 
         paging.init({
             openWait: true,
-            url: '/Users/list?v=' + new Date().getTime(), //地址
+            url: '/role/list?v=' + new Date().getTime(), //地址
 //            url: 'datas/laytpl_laypage_data.json?v=' + new Date().getTime(), //地址
             elem: '#content', //内容容器
             params: { //发送到服务端的参数
@@ -118,7 +111,7 @@
             tempElem: '#tpl', //模块容器
             pageConfig: { //分页参数配置
                 elem: '#paged', //分页容器
-                pageSize:5,//分页大小
+                pageSize:1,//分页大小
                 pageIndex:1,
                 count:$(".count").val()
             },
@@ -149,13 +142,14 @@
                     var $that = $(this);
                     $that.children('td:last-child').children('a[data-opt=edit]').on('click', function () {
 //                            layer.msg($(this).data('name'));
-                        $.post('/addUsers', null, function (form) {
-//                                alert(form)
+                        var id=$(this).data('name')
+                        $.get('/role/updateRole/'+id, null, function (form) {
+                                alert(form)
                             addBoxIndex = layer.open({
                                 type:2,
                                 title: '修改表单',
-//                              content:form,
-                                content: "/addUsers",
+//                                    content:form,
+                                content: "/role/updateRole/"+id,
                                 btn: ['保存', '取消'],
                                 shade: false,
                                 offset: ['100px', '30%'],
@@ -166,8 +160,9 @@
                                 anim:1,
                                 yes: function (index) {
                                     //触发表单的提交事件
-//                                        $('form.layui-form').find('button[lay-filter=dusss]').click();
-                                    $('#ssss').click();
+//                                        $('form.layui-form').find('button[lay-filter=demo1]').click();
+                                    alert( $($('form.layui-form').find('input[name=title]')).val())
+                                    $('#demo1').click();
 
                                 },
                                 full: function (elem) {
@@ -186,27 +181,7 @@
                                     //弹出窗口成功后渲染表单
                                     var form = layui.form();
                                     form.render();
-                                    form.on('submit(dusss)',function (data) {
-                                        console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-                                        console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-                                        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-                                        //调用父窗口的layer对象
-                                        layerTips.open({
-                                            title: '这里面是表单的信息',
-                                            type: 1,
-                                            content: JSON.stringify(data.field),
-                                            area: ['500px', '300px'],
-                                            btn: ['关闭并刷新', '关闭'],
-                                            yes: function (index, layero) {
-                                                layerTips.msg('你点击了关闭并刷新');
-                                                layerTips.close(index);
-                                                location.reload(); //刷新
-                                            }
 
-                                        });
-                                        //这里可以写ajax方法提交表单
-                                        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-                                    });
                                     console.log(layero, index);
                                 },
                                 end: function () {
@@ -218,7 +193,7 @@
                     $that.children('td:last-child').children('a[data-opt=del]').on('click',function () {
                         var id=$(this).data('name');
                         layer.open({
-                            title: '在线调试'
+                            title: '角色删除'
                             ,content: '你确定要删除',
                             yes: function (index) {
 //                                    alert(id)
@@ -247,7 +222,6 @@
 
         $('#search').on('click', function () {
             parent.layer.alert('你点击了搜索按钮')
-//                alert("sss")
         });
 
         var addBoxIndex = -1;
@@ -255,12 +229,12 @@
             if (addBoxIndex !== -1)
                 return;
             //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-            $.get('/addUsers', null, function (form) {
+            $.get('/addRole', null, function (form) {
                 addBoxIndex = layer.open({
                     type:2,
-                    title: '修改表单',
+                    title: '表添加单',
 //                        content:form,
-                    content: "/addUsers",
+                    content: "/addRole",
                     btn: ['保存', '取消'],
                     shade: false,
                     offset: ['100px', '30%'],
@@ -291,28 +265,28 @@
                         //弹出窗口成功后渲染表单
                         var form = layui.form();
                         form.render();
-                        form.on('submit(edit)',function (data) {
-                            alert(111);
-                            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-                            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-                            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-                            //调用父窗口的layer对象
-                            layerTips.open({
-                                title: '这里面是表单的信息',
-                                type: 1,
-                                content: JSON.stringify(data.field),
-                                area: ['500px', '300px'],
-                                btn: ['关闭并刷新', '关闭'],
-                                yes: function (index, layero) {
-                                    layerTips.msg('你点击了关闭并刷新');
-                                    layerTips.close(index);
-                                    location.reload(); //刷新
-                                }
-
-                            });
-                            //这里可以写ajax方法提交表单
-                            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-                        });
+//                        form.on('submit(edit)',function (data) {
+//                            alert(111);
+//                            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+//                            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+//                            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+//                            //调用父窗口的layer对象
+//                            layerTips.open({
+//                                title: '这里面是表单的信息',
+//                                type: 1,
+//                                content: JSON.stringify(data.field),
+//                                area: ['500px', '300px'],
+//                                btn: ['关闭并刷新', '关闭'],
+//                                yes: function (index, layero) {
+//                                    layerTips.msg('你点击了关闭并刷新');
+//                                    layerTips.close(index);
+//                                    location.reload(); //刷新
+//                                }
+//
+//                            });
+//                            //这里可以写ajax方法提交表单
+//                            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+//                        });
                         //console.log(layero, index);
                     },
                     end: function () {
@@ -327,10 +301,18 @@
             var index = layer.tips('只想提示地精准些', that, {tips: [1, 'white']});
             $('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
         });
-        //删除
+
         function  sss(id) {
-            $.get("/Users/delete/"+id, null, function (form){
-//               alert(id)
+            $.get("/role/delete/"+id, null, function (form){
+                var  msg=null;
+                if(form.msg=="noNull"){
+                    msg='用户表有数据，请先删除用户表!'
+                }else  if(form.msg=="true"){
+                    msg='删除成功！'
+                }else if(form.msg=="fales"){
+                    msg='删除失败！'
+                }
+                alert(msg)
                 location.reload();
             })
         }

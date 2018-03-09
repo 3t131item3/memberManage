@@ -7,7 +7,7 @@ import java.util.Date;
 public class Role {
    private int id ;/*id*/
     private String  no;/*编号*/
-    private String name;/*名称*/
+    private String roleName;/*名称*/
     private int  stats ;/*状态：1启用,0禁用*/
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -32,12 +32,12 @@ public class Role {
         this.no = no;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public int getStats() {

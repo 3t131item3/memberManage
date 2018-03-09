@@ -26,5 +26,7 @@ public interface UsersDao {
     Users getUserName(@Param("userName") String userName);
     //删除
     int remove(@Param("id")int id);
+    //roleId查询
+    Users getUsersroleId(@Param("roleId") int roleId);
 }
 

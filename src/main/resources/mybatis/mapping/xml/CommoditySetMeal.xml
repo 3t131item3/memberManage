@@ -3,8 +3,52 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.CommoditySetMealDao">
-<select id="getList">
-    SELECT  * FROM  commoditySetMeal
-</select>
+    <resultMap id="mapcommoditySetMeal" type="CommoditySetMeal">
+        <id  property="id" column="id"/>
+        <result  property="name" column="name"/>
+        <result  property="no" column="no"/>
+        <result  property="id" column="id"/>
+        <result  property="type" column="type"/>
+        <result  property="price" column="price"/>
+        <result  property="discountPrice" column="discountPrice"/>
+        <result  property="state" column="state"/>
+        <result  property="illustrate" column="illustrate"/>
+    </resultMap>
+    <!--分页查询sql-->
+    <select id="getList" resultMap="mapcommoditySetMeal">
+        SELECT  * FROM  commoditySetMeal  LIMIT #{pagerNo},#{pagerSize}
+    </select>
+
+    <select id="getListId" resultMap="mapcommoditySetMeal">
+        SELECT  *  FROM  commoditySetMeal  where id=#{id}
+    </select>
+
+    <!--查询行sql-->
+    <select id="count" resultType="_int">
+        SELECT  count(1) FROM  commoditysetmeal
+    </select>
+    <!--添加-->
+    <insert id="add">
+        INSERT  INTO commoditySetMeal(id,name,no,type,price,discountPrice,state,illustrate)
+        VALUES(DEFAULT,#{name},#{no},#{type},#{price},#{discountPrice},#{state},#{illustrate})
+    </insert>
+    <!--修改-->
+    <update id="modify">
+        UPDATE  commoditySetMeal
+        <trim prefix="set" prefixOverrides="," suffix="where id=#{id}">
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="no!=null and no!=''">no=#{no},</if>
+            <if test="type!=null and type!=''">type=#{type},</if>
+            <if test="price!=null and price!=''">price=#{price},</if>
+            <if test="discountPrice!=null and discountPrice!=''">discountPrice=#{discountPrice},</if>
+            <if test="state!=null and state!=''">state=#{state},</if>
+            <if test="illustrate!=null and illustrate!=''">illustrate=#{illustrate},</if>
+        </trim>
+    </update>
+
+    <delete id="remove">
+        DELETE FROM  commoditySetMeal where id=#{id}
+    </delete>
+
 
 </mapper>

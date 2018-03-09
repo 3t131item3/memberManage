@@ -24,4 +24,7 @@ public interface UsersBiz {
     //名字查询
     boolean queryUserName(@Param("userName") String userName);
     boolean modify(Users users);
+    boolean deleteUsers(int id);
+    //roleId查询
+    Users queryUsersroleId(@Param("roleId") int roleId);
 }

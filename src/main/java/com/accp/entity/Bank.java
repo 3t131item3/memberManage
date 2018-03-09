@@ -2,7 +2,7 @@ package com.accp.entity;
 
 public class Bank {
     private int  id; /*主键 */
-    private String  name; /*银行名称*/
+    private String  bankName; /*银行名称*/
     private String  no ;/*银行卡号 唯一*/
     private String  pwd ;/*银行卡密码*/
     private double remainder;/*余额*/
@@ -15,7 +15,7 @@ public class Bank {
 
     public Bank(int id, String name, String no, String pwd, double remainder, String openUser, String telphon, String papersNo) {
         this.id = id;
-        this.name = name;
+        this.bankName = name;
         this.no = no;
         this.pwd = pwd;
         this.remainder = remainder;
@@ -32,12 +32,12 @@ public class Bank {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public String getNo() {
