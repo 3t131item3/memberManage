@@ -64,9 +64,9 @@ public class RootController {
             manageMap.put("title",item.getName());
             manageMap.put("icon","fa-cubes");
             if(a<1) {
-                manageMap.put("spread", "true");
+                manageMap.put("spread", true);
             }else{
-                manageMap.put("spread", "false");
+                manageMap.put("spread", false);
             }
             a++;
 
