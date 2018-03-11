@@ -63,4 +63,9 @@ public class LocationController {
     public String authoritymanagement() {
         return "/authoritymanagement";
     }
+
+    @RequestMapping("/nternaltransfer")
+    public String nternaltransfer(){
+        return "/nternaltransfer";
+    }
 }

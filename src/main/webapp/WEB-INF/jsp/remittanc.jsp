@@ -118,6 +118,7 @@
     var date = ""
     var orderNo = ""
     $(function () {
+
         //        初始化订单号
         date = new Date()
         orderNo = date.getYear() + "" + date.getMonth() + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds() + "" +${user.id};

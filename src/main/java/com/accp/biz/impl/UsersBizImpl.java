@@ -64,5 +64,7 @@ public class UsersBizImpl implements UsersBiz {
         return usersDao.getUsersroleId(roleId);
     }
 
-
+    public Users query(Users users){
+        return usersDao.query(users);
+    }
 }

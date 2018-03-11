@@ -1,10 +1,8 @@
 package com.accp.controller;
 
+import com.accp.biz.TranRecordsBiz;
 import com.accp.biz.UsersBiz;
-import com.accp.entity.Errors;
-import com.accp.entity.Pager;
-import com.accp.entity.Role;
-import com.accp.entity.Users;
+import com.accp.entity.*;
 import com.accp.util.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +18,8 @@ import java.util.Map;
 public class UsersController {
     @Resource(name = "usersBiz")
     private UsersBiz usersBiz;
+    @Resource(name = "tranRecordsBiz")
+    private TranRecordsBiz tranRecordsBiz;
 
     public  String usersList(){
         return null;
@@ -109,6 +109,51 @@ public class UsersController {
         }
 
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/existsUser")
+    public String existsUser(HttpServletRequest request){
+        String userName =request.getParameter("userName") ;
+        if(usersBiz.queryUserName(userName)){
+            return "{\"result\":\"true\"}";
+        }else {
+            return "{\"result\":\"false\"}";
+        }
+    }
+    @RequestMapping("/zhuanzhang")
+    public String zhuanzhang(Users users,HttpServletRequest request){
+//        被转账人
+        Users users1=new Users();
+        users1.setUserName(users.getUserName());
+        users1=usersBiz.query(users1);
+//        转账人
+        Users users2=(Users) request.getSession().getAttribute("user");
+//       扣去余额
+        users2.setRemainder(Math.round((users2.getRemainder()-users.getRemainder())*100)/100.0);
+//        增加余额
+        users1.setRemainder(users1.getRemainder()+users.getRemainder());
+//        更新余额
+        usersBiz.modify(users1);
+        usersBiz.modify(users2);
+//        添加交易记录  转出
+        TranRecords tranRecords=new TranRecords();
+        tranRecords.setTranType("转出");
+        tranRecords.setUserid(users2.getId());
+        tranRecords.setPrice(users.getRemainder());
+        tranRecords.setRemainder(users2.getRemainder());
+        tranRecords.setTranTime(new Date());
+        tranRecords.setTitle("使用余额转出"+users.getRemainder()+"元给"+users1.getUserName());
+        tranRecordsBiz.add(tranRecords);
+//        添加交易记录 转入
+        tranRecords.setTranType("转入");
+        tranRecords.setUserid(users1.getId());
+        tranRecords.setPrice(users.getRemainder());
+        tranRecords.setRemainder(users1.getRemainder());
+        tranRecords.setTranTime(new Date());
+        tranRecords.setTitle(users2.getUserName()+"转给你"+users.getRemainder()+"元");
+        tranRecordsBiz.add(tranRecords);
+        return "redirect:/nternaltransfer";
     }
 
 }

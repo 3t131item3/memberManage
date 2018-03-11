@@ -28,5 +28,7 @@ public interface UsersDao {
     int remove(@Param("id")int id);
     //roleId查询
     Users getUsersroleId(@Param("roleId") int roleId);
+
+    Users query(Users users);
 }
 

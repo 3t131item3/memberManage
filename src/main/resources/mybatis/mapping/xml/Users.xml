@@ -207,4 +207,12 @@
         SELECT * FROM users where roleId=#{roleId}
         <!--<include refid="queryUser"/>-->
     </select>
+    <select id="query" resultType="Users">
+        SELECT * FROM users
+        <where>
+            <if test="userName!=null and userName!=''">
+                userName=#{userName}
+            </if>
+        </where>
+    </select>
 </mapper>

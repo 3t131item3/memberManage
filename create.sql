@@ -7,7 +7,7 @@ USE memberManagement;
  /*银行*/ 
  CREATE TABLE bank(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	`name` VARCHAR(20) ,/*银行名称*/
+	bankName VARCHAR(20) ,/*银行名称*/
 	`no` VARCHAR(20)  UNIQUE,/*银行卡号*/
 	pwd VARCHAR(500) ,/*银行卡密码*/
 	remainder DECIMAL(15,2),/*余额*/
@@ -112,7 +112,7 @@ CREATE TABLE manageItem(
 
 /*数据插入~管理表项*/
 INSERT INTO manageItem
-VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,NULL),
+VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,'/usermanagement'),
       (DEFAULT,'角色管理',1,'角色管理',NULL,NULL),
       (DEFAULT,'权限管理',1,'权限管理',NULL,NULL),
       (DEFAULT,'商品管理',1,'商品管理',NULL,NULL),
@@ -123,10 +123,10 @@ VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,NULL),
       (DEFAULT,'新会员管理',2,'新会员管理',NULL,NULL),
       (DEFAULT,'修改本人资料',2,'修改本人资料',NULL,NULL),
       (DEFAULT,'修改本人密码',2,'修改本人密码',NULL,NULL),
-      (DEFAULT,'汇款充值',3,'汇款充值',NULL,NULL),
-      (DEFAULT,'基本账户',3,'基本账户',NULL,NULL),
+      (DEFAULT,'汇款充值',3,'汇款充值',NULL,'/remittanc'),
+      (DEFAULT,'基本账户',3,'基本账户',NULL,'/basicaccount'),
       (DEFAULT,'消费账户',3,'消费账户',NULL,NULL),
-      (DEFAULT,'内部转账',3,'内部转账',NULL,NULL),
+      (DEFAULT,'内部转账',3,'内部转账',NULL,'/nternaltransfer'),
       (DEFAULT,'申请提现',3,'申请提现',NULL,NULL),
       (DEFAULT,'提现明细',3,'提现明细',NULL,NULL),
       (DEFAULT,'报单购货',4,'报单购货',NULL,NULL),

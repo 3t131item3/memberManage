@@ -38,7 +38,7 @@ public class BankController {
         bank.setNo(user.getOpenNo());
         bank=bankBiz.bank(bank);
         double price=bank.getRemainder()-bankTranRecords.getPrice();
-        bank.setRemainder(Math.round(price* 100)/100.0);
+        bank.setRemainder(Math.round(price*100)/100.0);
         bankBiz.modify(bank);
 
 //        修改当前用户的余额
@@ -57,7 +57,7 @@ public class BankController {
         tranRecords.setPrice(bankTranRecords.getPrice());
         tranRecords.setUserid(user.getId());
         tranRecordsBiz.add(tranRecords);
-        return "/remittanc";
+        return "/basicaccount";
     }
     @RequestMapping("/queryPrice")
     @ResponseBody

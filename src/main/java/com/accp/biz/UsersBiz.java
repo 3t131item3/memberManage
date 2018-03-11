@@ -27,4 +27,5 @@ public interface UsersBiz {
     boolean deleteUsers(int id);
     //roleId查询
     Users queryUsersroleId(@Param("roleId") int roleId);
+    Users query(Users users);
 }
