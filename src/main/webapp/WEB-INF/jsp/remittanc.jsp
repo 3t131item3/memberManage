@@ -124,7 +124,7 @@
         orderNo = date.getYear() + "" + date.getMonth() + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds() + "" +${user.id};
         $("#orderNo").val(orderNo)
         //        初始化转账充值日期为当前日期
-        date = date.getFullYear() + "-" + (date.getMonth() > 10 ? date.getMonth() : '0' + date.getMonth()) + "-" + (date.getMonth() > 10 ? date.getDate() : '0' + date.getDate())
+        date = date.getFullYear() + "-" + (date.getMonth() > 10 ? date.getMonth()+1 : '0' + (date.getMonth()+1)) + "-" + (date.getDate() > 10 ? date.getDate() : '0' + date.getDate())
         $("#date").val(date)
 //        鼠标失去焦点获取余额
 //        $("#price").on("blur", function () {
