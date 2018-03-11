@@ -68,4 +68,9 @@ public class LocationController {
     public String nternaltransfer(){
         return "/nternaltransfer";
     }
+    @RequestMapping("/destoon_finance_cash")
+    public String destoon_finance_cash(){
+        return "destoon_finance_cash";
+    }
+
 }

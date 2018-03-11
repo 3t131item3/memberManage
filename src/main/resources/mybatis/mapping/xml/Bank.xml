@@ -24,8 +24,8 @@
            <if test="openUser!=null and openUser!=''">
               AND openUser=#{openUser}
            </if>
-           <if test="telphon!=null and telphon!=''">
-              AND telphon=#{telphon}
+           <if test="telphone!=null and telphone!=''">
+              AND telphon=#{telphone}
            </if>
            <if test="papersNo!=null and papersNo!=''">
               AND papersNo=#{papersNo}
@@ -50,8 +50,8 @@
         <if test="openUser!=null and openUser!=''">
              openUser=#{openUser},
         </if>
-        <if test="telphon!=null and telphon!=''">
-             telphon=#{telphon},
+        <if test="telphone!=null and telphone!=''">
+            telphone=#{telphone},
         </if>
         <if test="papersNo!=null and papersNo!=''">
              papersNo=#{papersNo}

@@ -24,6 +24,11 @@ public class Users {
     private String papersImgF;/*证件照反面图片路径*/
     private String bankCard;/*银行卡图片路径*/
     private String address;/*收货地址*/
+    private int state; /*0禁用,1启用*/
+    private int roleId;/*角色id*/
+    private double remainder;/*余额*/
+    private Role role;
+    private Bank bank;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;/*创建时间*/
@@ -31,11 +36,6 @@ public class Users {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date modifyTime;/*最后修改时间*/
 
-    private int state; /*0禁用,1启用*/
-    private int roleId;/*角色id*/
-    private double remainder;/*余额*/
-    private Role role;
-    private Bank bank;
 
     public int getRoleId() {
         return roleId;

@@ -1,5 +1,7 @@
 package com.accp.controller;
 
+import com.accp.biz.BankBiz;
+import com.accp.biz.BankTranRecordsBiz;
 import com.accp.biz.TranRecordsBiz;
 import com.accp.biz.UsersBiz;
 import com.accp.entity.*;
@@ -18,8 +20,15 @@ import java.util.Map;
 public class UsersController {
     @Resource(name = "usersBiz")
     private UsersBiz usersBiz;
+
     @Resource(name = "tranRecordsBiz")
     private TranRecordsBiz tranRecordsBiz;
+
+    @Resource(name = "bankBiz")
+    private BankBiz bankBiz;
+
+    @Resource(name = "bankTranRecordsBiz")
+    private BankTranRecordsBiz bankTranRecordsBiz;
 
     public  String usersList(){
         return null;
@@ -154,6 +163,45 @@ public class UsersController {
         tranRecords.setTitle(users2.getUserName()+"转给你"+users.getRemainder()+"元");
         tranRecordsBiz.add(tranRecords);
         return "redirect:/nternaltransfer";
+    }
+
+    @RequestMapping("/tixian")
+    public String tixian(HttpServletRequest request){
+        Date date=new Date();
+        Users users=(Users)request.getSession().getAttribute("user");
+        Bank bank=new Bank();
+        bank.setNo(users.getOpenNo());
+        bank=bankBiz.bank(bank);
+//        扣除余额
+        String remainder = request.getParameter("remainder");
+        if(remainder!=null){
+            users.setRemainder((Math.round((users.getRemainder()-Double.parseDouble(remainder))*100)/100.0));
+        }
+//        添加银行卡余额
+        bank.setRemainder(bank.getRemainder()+Double.parseDouble(remainder));
+//        更新
+        usersBiz.modify(users);
+        bankBiz.modify(bank);
+
+//        添加用户交易记录
+        TranRecords tranRecords=new TranRecords();
+        tranRecords.setTitle("提现"+remainder+"元到"+users.getOpenBank()+"银行卡尾号"+users.getOpenNo().substring(users.getOpenNo().length()-4,users.getOpenNo().length()));
+        tranRecords.setTranTime(date);
+        tranRecords.setRemainder(users.getRemainder());
+        tranRecords.setPrice(Double.parseDouble(remainder));
+        tranRecords.setUserid(users.getId());
+        tranRecords.setTranType("提现");
+        tranRecordsBiz.add(tranRecords);
+//        添加银行卡交易记录
+        BankTranRecords bankTranRecords=new BankTranRecords();
+        bankTranRecords.setType("入账");
+        bankTranRecords.setTitle("会员商城转入"+remainder+"元");
+        bankTranRecords.setTranTime(date);
+        bankTranRecords.setNo(users.getOpenNo());
+        bankTranRecords.setPrice(Double.parseDouble(remainder));
+        bankTranRecords.setOrderNo(date.getYear() + "" + date.getMonth() + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds() + "" + users.getId());
+        bankTranRecordsBiz.add(bankTranRecords);
+        return "/destoon_finance_cash";
     }
 
 }

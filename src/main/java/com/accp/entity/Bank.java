@@ -7,22 +7,8 @@ public class Bank {
     private String  pwd ;/*银行卡密码*/
     private double remainder;/*余额*/
     private String  openUser;/*开户人*/
-    private String  telphon;/*开户电话号码号码*/
+    private String  telphone;/*开户电话号码号码*/
     private String  papersNo;/*身份证*/
-
-    public Bank() {
-    }
-
-    public Bank(int id, String name, String no, String pwd, double remainder, String openUser, String telphon, String papersNo) {
-        this.id = id;
-        this.bankName = name;
-        this.no = no;
-        this.pwd = pwd;
-        this.remainder = remainder;
-        this.openUser = openUser;
-        this.telphon = telphon;
-        this.papersNo = papersNo;
-    }
 
     public int getId() {
         return id;
@@ -72,12 +58,12 @@ public class Bank {
         this.openUser = openUser;
     }
 
-    public String getTelphon() {
-        return telphon;
+    public String getTelphone() {
+        return telphone;
     }
 
-    public void setTelphon(String telphon) {
-        this.telphon = telphon;
+    public void setTelphone(String telphone) {
+        this.telphone = telphone;
     }
 
     public String getPapersNo() {

@@ -28,7 +28,22 @@
         <result property="state" column="state"/>
         <result property="roleId" column="roleId"/>
         <result property="remainder" column="remainder"/>
-
+        <association property="bank" javaType="Bank">
+            <id property="id" column="id"/>
+            <result property="bankName" column="bankName"/>
+            <result property="no" column="no"/>
+            <result property="pwd" column="pwd"/>
+            <result property="remainder" column="remainder"/>
+            <result property="openUser" column="openUser"/>
+            <result property="papersNo" column="papersNo"/>
+            <result property="telphone" column="telphone"/>
+        </association>
+        <association property="role" javaType="Role">
+            <id property="id" column="id"/>
+            <result property="no" column="no"/>
+            <result property="roleName" column="name"/>
+            <result property="stats" column="stats"/>
+        </association>
     </resultMap>
 
     <resultMap id="UsersMap" type="Users">
@@ -49,30 +64,12 @@
         <result property="openNo" column="openNo"/>
         <result property="papersImgZ" column="papersImgZ"/>
         <result property="papersImgF" column="papersImgF"/>
-        <result property="bankCard" column="bankCard"/>
         <result property="address" column="address"/>
         <result property="createTime" column="createTime"/>
         <result property="modifyTime" column="modifyTime"/>
         <result property="state" column="state"/>
         <result property="roleId" column="roleId"/>
-        <result property="remainder" column="remainder"/>
-        <association property="bank" javaType="Bank">
-            <result column="id" property="id"/>
-            <result property="bankName" column="bankName"/>
-            <result property="no" column="no"/>
-            <result property="pwd" column="pwd"/>
-            <result property="remainder" column="remainder"/>
-            <result property="openUser" column="openUser"/>
-            <result property="telphon" column="telphon"/>
-            <result property="papersNo" column="papersNo"/>
-        </association>
-        <association property="role" javaType="Role">
-            <result column="id" property="id"/>
-            <result column="no" property="no"/>
-            <result column="roleName" property="roleName"/>
-            <result column="stats" property="stats"/>
-            <result column="modifyTime" property="modifyTime"/>
-        </association>
+
     </resultMap>
 
     <sql id="queryUser">
@@ -81,7 +78,7 @@
                 and users.userName like concat('%',#{userName},'%')
             </if>
             <!--<if test="id>0">-->
-<!--&#45;&#45;                 and users.id=#{id}-->
+            <!--&#45;&#45;                 and users.id=#{id}-->
             <!--</if>-->
         </where>
     </sql>
@@ -98,8 +95,9 @@
         <include refid="queryUser"/>
     </select>
     <!--登录sql-->
-    <select id="login" resultMap="UsersMap">
-        SELECT * FROM users where userName=#{userName} and pwd=#{password}
+    <select id="login" resultMap="UserMap">
+        SELECT * FROM users u JOIN role r ON u.roleId=r.id JOIN bank b ON u.openNo=b.no where u.userName=#{userName} and u.pwd=#{password}
+
       </select>
     <!--添加sql-->
     <insert id="add">
