@@ -25,7 +25,10 @@ public class TranRecordsController {
     @RequestMapping("/queryPageTranRecords")
     @ResponseBody
     public Pager<TranRecords> queryPageTranRecords(TranRecords tranRecords, HttpServletRequest request, Model model){
-
+        String type=request.getParameter("type");
+        if(type!=null){
+            tranRecords.setTranType(type);
+        }
         Users user = (Users) request.getSession().getAttribute("user");
         tranRecords.setUserid(user.getId());
 //        获取开始时间

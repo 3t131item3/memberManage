@@ -89,7 +89,7 @@
                 id=#{TranRecords.id}
             </if>
             <if test="TranRecords.tranType!=null and TranRecords.tranType!=''">
-                tranType=#{TranRecords.tranType},
+                tranType=#{TranRecords.tranType}
             </if>
             <if test="TranRecords.title!=null and TranRecords.title!=''">
                 AND title=#{TranRecords.title}

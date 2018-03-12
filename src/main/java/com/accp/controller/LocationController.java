@@ -76,4 +76,8 @@ public class LocationController {
     public String shopping_again(){
         return "/shopping_again";
     }
+    @RequestMapping("/tixianmingxi")
+    public String tixianmingxi(){
+        return "/withdraw_deposit_detail";
+    }
 }
