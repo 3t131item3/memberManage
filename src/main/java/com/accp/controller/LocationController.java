@@ -72,5 +72,8 @@ public class LocationController {
     public String destoon_finance_cash(){
         return "destoon_finance_cash";
     }
-
+    @RequestMapping("/shopping_again")
+    public String shopping_again(){
+        return "/shopping_again";
+    }
 }
