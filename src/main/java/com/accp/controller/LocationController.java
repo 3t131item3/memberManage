@@ -63,7 +63,6 @@ public class LocationController {
     public String authoritymanagement() {
         return "/authoritymanagement";
     }
-
     @RequestMapping("/nternaltransfer")
     public String nternaltransfer(){
         return "/nternaltransfer";
@@ -79,5 +78,10 @@ public class LocationController {
     @RequestMapping("/tixianmingxi")
     public String tixianmingxi(){
         return "/withdraw_deposit_detail";
+    }
+
+    @RequestMapping("/addcommodity")
+    public String addcommodity(){
+        return "/addcommodity";
     }
 }

@@ -65,25 +65,25 @@
 </div>
 <!--模板-->
 <script type="text/html" id="tpl">
-{{# layui.each(d.list, function(index, item){ }}
-<tr>
-<%--<td><input type="checkbox" lay-skin="primary"></td>--%>
-    <input type="hidden" value={{d.count}} class="count"/>
-    <td>{{ item.id }}</td>
-<td>{{ item.name }}</td>
-<td>{{ item.price }}</td>
-<td>{{ item.discountPrice }}</td>
-<td>{{ item.stock }}</td>
-<td><input type="checkbox" {{# if (item.state!=0 ) { }}
-           checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" ></td>
-<td>{{item.modifyTime}}</td>
-<td>
-<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-<a href="javascript:;" data-name="{{ item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-</td>
-</tr>
-{{# }); }}
+    {{# layui.each(d.list, function(index, item){ }}
+    <tr>
+        <%--<td><input type="checkbox" lay-skin="primary"></td>--%>
+        <input type="hidden" value={{d.count}} class="count"/>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.discountPrice }}</td>
+        <td>{{ item.stock }}</td>
+        <td><input type="checkbox" {{# if (item.state!=0 ) { }}
+                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" ></td>
+        <td>{{item.modifyTime}}</td>
+        <td>
+            <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+            <a href="javascript:;" data-name="{{ item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+            <a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+        </td>
+    </tr>
+    {{# }); }}
 </script>
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
 <script>
@@ -168,12 +168,12 @@
             if(addBoxIndex !== -1)
                 return;
             //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-            $.get('temp/edit-form.html', null, function(form) {
+            $.get('/addcommodity', null, function(form) {
                 addBoxIndex = layer.open({
-                    type: 1,
+                    type: 2,
                     title: '添加表单',
-                    content: form,
-                    btn: ['保存', '取消'],
+                    content: "/addcommodity",
+//                    btn: ['保存', '取消'],
                     shade: false,
                     offset: ['100px', '30%'],
                     area: ['600px', '400px'],

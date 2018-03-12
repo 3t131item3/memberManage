@@ -41,7 +41,7 @@
     <!--添加-->
     <insert id="add">
         INSERT  INTO commodity  (id,name,commodityNo,price,discountPrice,stock,unit,state,spec,illustrate)VALUES
-        (DELETE，#{name},#{commodityNo},#{price},#{discountPrice},#{stock},#{state},#{spec},#{illustrate})
+        (DEFAULT ,#{name},#{commodityNo},#{price},#{discountPrice},#{stock},#{unit},#{state},#{spec},#{illustrate})
     </insert>
     <!--修改-->
     <update id="modify">
