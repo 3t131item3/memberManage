@@ -96,7 +96,7 @@
                         '            <div class="layui-inline">' +
                         '                <label class="layui-form-label">二级密码：</label>' +
                         '                <div class="layui-input-inline">' +
-                        '                    <input type="text" id="pwd2" autocomplete="off" class="layui-input">' +
+                        '                    <input type="password" id="pwd2" autocomplete="off" class="layui-input">' +
                         '                    <input type="hidden" id="pwd" value="${user.pwd2}">' +
                         '                </div>' +
                         '            </div>' +
