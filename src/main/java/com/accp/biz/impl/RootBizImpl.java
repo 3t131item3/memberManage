@@ -22,4 +22,8 @@ public class RootBizImpl implements RootBiz {
 
         return rootDao.roots(root);
     }
+
+    public boolean modifyRoot(Root root) {
+        return rootDao.modifyRoot(root)>0;
+    }
 }

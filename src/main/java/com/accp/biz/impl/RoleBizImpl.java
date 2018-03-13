@@ -8,6 +8,8 @@ import com.accp.entity.Role;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+
 @Service("roleBiz")
 public class RoleBizImpl implements RoleBiz {
     @Resource
@@ -36,5 +38,9 @@ public class RoleBizImpl implements RoleBiz {
 
     public boolean addRole(Role role) {
         return roleDao.add(role)>0;
+    }
+
+    public List<Role> queryrole() {
+        return roleDao.queryrole();
     }
 }

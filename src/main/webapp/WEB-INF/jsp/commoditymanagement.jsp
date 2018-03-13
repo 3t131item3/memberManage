@@ -78,9 +78,9 @@
                    checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" ></td>
         <td>{{item.modifyTime}}</td>
         <td>
-            <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+            <a href="javascript:;"  data-name="{{ item.id}}" data-opt="show" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
             <a href="javascript:;" data-name="{{ item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-            <a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+            <a href="javascript:;" data-name="{{ item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
         </td>
     </tr>
     {{# }); }}
@@ -134,15 +134,32 @@
                     });
                 });
 
-                //绑定所有编辑按钮事件
+                //列里按钮
                 $('#content').children('tr').each(function() {
                     var $that = $(this);
+                    //绑定所有编辑按钮事件
                     $that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
                         layer.msg($(this).data('name'));
                     });
+                    //绑定所有预览按钮事件;
+                    $that.children('td:last-child').children('a[data-opt=show]').on('click', function() {
+                        var id=$(this).data('name');
+                        location.href="/commodity/getId/"+id
+                    });
+                    //绑定所有删除按钮事件
+                    $that.children('td:last-child').children('a[data-opt=del]').on('click',function () {
+                        var id=$(this).data('name');
+                        layer.open({
+                            title: '商品删除'
+                            ,content: '你确定要删除此商品？',
+                            yes: function (index) {
 
+                                delcomm(id)
+                            }
+                        });
+
+                    })
                 });
-
             },
         });
         //获取所有选择的列
@@ -233,6 +250,22 @@
             var index = layer.tips('只想提示地精准些', that, { tips: [1, 'white'] });
             $('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
         });
+
+        //商品删除按钮查询外键表
+        function  delcomm(id) {
+            $.get("/commodity/delete/"+id, null, function (form){
+                var  msg=null;
+                if(form.msg=="noNull"){
+                    msg='商品套餐表包含此商品，请先删除此商品套餐!'
+                }else  if(form.msg=="true"){
+                    msg='删除成功！'
+                }else if(form.msg=="fales"){
+                    msg='删除失败！'
+                }
+                alert(msg)
+                location.reload();
+            })
+        }
     });
 </script>
 </body>

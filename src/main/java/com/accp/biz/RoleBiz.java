@@ -17,4 +17,6 @@ public interface RoleBiz {
     boolean deleteRole( int id);
     //新增
     boolean addRole(Role role);
+
+    List<Role>queryrole();
 }

@@ -3,31 +3,40 @@ package com.accp.entity;
 import java.util.List;
 
 public class Manage {
-    private int id ;/*编号*/
-    private String name  ;/*名称*/
-    private String icon;/*小图标*/
+    private int mId ;/*编号*/
+    private String mName  ;/*名称*/
+    private String mIcon;/*小图标*/
+    private List<ManageItem>manageItems;/**/
 
-    public int getId() {
-        return id;
+    public int getmId() {
+        return mId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getmIcon() {
+        return mIcon;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setmIcon(String mIcon) {
+        this.mIcon = mIcon;
+    }
+
+    public List<ManageItem> getManageItems() {
+        return manageItems;
+    }
+
+    public void setManageItems(List<ManageItem> manageItems) {
+        this.manageItems = manageItems;
     }
 }

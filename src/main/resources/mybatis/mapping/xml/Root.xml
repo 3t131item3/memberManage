@@ -3,11 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.dao.RootDao">
-    <!--3表联查-->
+    <!--2表联查-->
     <resultMap id="rmm" type="Root">
         <id property="id" column="id"/>
         <result property="manageItemId" column="manageItemId"/>
         <result property="roleId" column="roleId"/>
+        <result property="rootState" column="rootState"/>
         <association property="manageItem" javaType="ManageItem">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
@@ -22,10 +23,50 @@
     <select id="roots" resultMap="rmm">
         SELECT * FROM root r JOIN manageitem mi ON r.manageItemId=mi.id
         <where>
-            r.roleId=#{roleId}
+            <if test="id>0">
+                 id=#{id}
+            </if>
+            <if test="manageItemId>0">
+                AND manageItemId=#{manageItemId}
+            </if>
+            <if test="roleId>0">
+                AND roleId=#{roleId}
+            </if>
+            <if test="rootState>0">
+                AND rootState=#{rootState}
+            </if>
         </where>
     </select>
 
+    <update id="modifyRoot">
+        UPDATE root
+        <set>
+            <if test="id>0">
+                id=#{id},
+            </if>
+            <if test="manageItemId>0">
+                 manageItemId=#{manageItemId},
+            </if>
+            <if test="roleId>0">
+                 roleId=#{roleId},
+            </if>
+            <if test="rootState>0">
+                 rootState=#{rootState},
+            </if>
+        </set>
+        <where>
+            <if test="id>0">
+                id=#{id}
+            </if>
+            <if test="roleId>0">
+                AND roleId=#{roleId}
+            </if>
+            <if test="manageItemId>0">
+                AND manageItemId=#{manageItemId}
+            </if>
+        </where>
+
+    </update>
 
 
 

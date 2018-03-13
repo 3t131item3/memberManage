@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ManageDao {
    Manage getManage(Manage manage);
-
+   List<Manage>queryManages();
 }

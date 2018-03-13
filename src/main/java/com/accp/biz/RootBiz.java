@@ -11,4 +11,6 @@ public interface RootBiz {
      * @return
      */
     List<Root> roots(Root root);
+    boolean modifyRoot(Root root);
+
 }

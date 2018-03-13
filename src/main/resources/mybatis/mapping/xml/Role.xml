@@ -6,7 +6,7 @@
     <resultMap id="mapRole" type="Role">
         <id column="id" property="id"/>
         <result column="no" property="no"/>
-        <result column="roleName" property="roleName"/>
+        <result column="name" property="roleName"/>
         <result column="stats" property="stats"/>
         <result column="modifyTime" property="modifyTime"/>
     </resultMap>
@@ -19,6 +19,11 @@
     <select id="getRoleId" resultMap="mapRole">
         SELECT * FROM role WHERE id=#{id}
     </select>
+
+    <select id="queryrole" resultMap="mapRole">
+        select * from role;
+    </select>
+
     <!--修改-->
     <update id="modify">
       UPDATE  role

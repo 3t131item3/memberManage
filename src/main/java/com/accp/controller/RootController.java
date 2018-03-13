@@ -43,6 +43,7 @@ public class RootController {
 //        查询当前用户角色的权限
         Root root=new Root();
         root.setRoleId(user.getRoleId());
+        root.setRootState(1);
         List<Root> roots = rootBiz.roots(root);
 //       循环排除冗余获取管理表的id
         for (Root item:roots) {
@@ -51,7 +52,7 @@ public class RootController {
 //        获取管理表的集合
         Manage manage=new Manage();
         for (Integer item:set) {
-            manage.setId(item);
+            manage.setmId(item);
             list.add(manageBiz.getManage(manage));
         }
         Map<String,Object>manageMap;
@@ -61,7 +62,7 @@ public class RootController {
         for (Manage item :list) {
             manageMap=new HashMap<String, Object>();
 
-            manageMap.put("title",item.getName());
+            manageMap.put("title",item.getmName());
             manageMap.put("icon","fa-cubes");
             if(a<1) {
                 manageMap.put("spread", true);
@@ -73,7 +74,7 @@ public class RootController {
             manageItemList=new ArrayList<Map<String, String>>();
 //            添加子菜单
             for (Root item2:roots) {
-                if(item2.getManageItem().getManageId()==item.getId()){
+                if(item2.getManageItem().getManageId()==item.getmId()){
                     manageItemMap=new HashMap<String, String>();
                     manageItemMap.put("title",item2.getManageItem().getTitle());
                     manageItemMap.put("icon","&#xe63c");
@@ -87,6 +88,39 @@ public class RootController {
         }
         map.put("navs",manageList);
         return map;
+    }
+    @ResponseBody
+    @RequestMapping("/roots")
+    public String roots(HttpServletRequest request){
+        Root root=new Root();
+        String roleId = request.getParameter("roleId");
+        int rid=1;
+        if(roleId!=null){
+            rid=Integer.parseInt(roleId);
+        }
+        root.setRoleId(rid);
+        root.setRootState(1);
+        return JSON.toJSONString(rootBiz.roots(root));
+    }
+
+    @RequestMapping("/modifyRoot")
+    public String modifyRoot(int [] manageItemsId,int roleId){
+//        先把该角色所有权限取消
+        Root root=new Root();
+        root.setRootState(2);
+        root.setRoleId(roleId);
+        rootBiz.modifyRoot(root);
+
+//        在一个一个的添加权限
+        for (int manageId :manageItemsId) {
+            root=new Root();
+            root.setManageItemId(manageId);
+            root.setRoleId(roleId);
+            root.setRootState(1);
+            rootBiz.modifyRoot(root);
+        }
+
+        return "redirect:/queryManages";
     }
 
 }

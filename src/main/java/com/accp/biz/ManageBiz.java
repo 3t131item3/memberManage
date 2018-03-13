@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ManageBiz {
     Manage getManage(Manage manage);
+    List<Manage>queryManages();
 
 }

@@ -16,4 +16,8 @@ public class ManageBizImpl implements ManageBiz {
 
         return manageDao.getManage(manage);
     }
+
+    public List<Manage> queryManages() {
+        return manageDao.queryManages();
+    }
 }

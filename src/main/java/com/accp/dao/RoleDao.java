@@ -18,4 +18,6 @@ public interface RoleDao {
     int add(Role role);
     //查询分页总行数
     int count();
+
+    List<Role>queryrole();
 }

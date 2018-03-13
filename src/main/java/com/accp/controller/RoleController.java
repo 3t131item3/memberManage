@@ -5,6 +5,7 @@ import com.accp.biz.UsersBiz;
 import com.accp.entity.Pager;
 import com.accp.entity.Role;
 import com.accp.entity.Users;
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,5 +98,10 @@ public class RoleController{
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping("/queryrole")
+    public String queryrole(){
+        return JSON.toJSONString(roleBiz.queryrole());
+    }
 
 }

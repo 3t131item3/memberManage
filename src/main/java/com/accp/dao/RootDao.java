@@ -14,5 +14,5 @@ public interface RootDao {
      * @return
      */
     List<Root>roots(Root root);
-
+    int modifyRoot(Root root);
 }
