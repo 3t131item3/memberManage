@@ -45,7 +45,23 @@
 
     </style>
 </head>
-
+<%--获取cookie 记住密码--%>
+<%
+    String user="";
+    String userName="";
+    String pwd="";
+    Cookie [] cookies=request.getCookies();
+    if(cookies!=null){
+        for (Cookie cookie:cookies) {
+            if("user".equals(cookie.getName())){
+                user=cookie.getValue();
+                String [] users=user.split("/");
+                userName=users[0];
+                pwd=users[1];
+            }
+        }
+    }
+%>
 <body class="beg-login-bg">
 <div class="beg-login-box">
     <header>
@@ -61,15 +77,15 @@
                 <label class="beg-login-icon">
                     <i celass="layui-icon">&#xe612;</i>
                 </label>
-                <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off"
-                       placeholder="这里输入用户名" class="layui-input" value="VIP1" required/>
+                <input id="username" type="text" name="userName" lay-verify="required" autocomplete="off"
+                       placeholder="这里输入用户名" class="layui-input" value="<%=userName%>" />
             </div>
             <div id="pwdDiv" class="layui-form-item" style="display: flex;flex-direction: row;align-items: center;">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
-                       placeholder="这里输入密码" class="layui-input" value="111111" required>
+                <input id="password" type="password" name="password" lay-verify="required"autocomplete="off"
+                       placeholder="这里输入密码" class="layui-input" value="<%=pwd%>" />
 
                 <img  class="showpwd" src="/images/password4.png" alt="" width="50px;" >
             </div>
@@ -90,6 +106,7 @@
         <form class="sub" method="post" action="/login.do">
             <input type="hidden" class="userName" name="userName" />
             <input type="hidden" class="password" name="password" />
+            <input type="hidden" name="rememberPwd" value="true"/>
             <button class="layui-btn layui-btn-primary tologin" lay-submit lay-filter="login2" style="display: none">
             </button>
         </form>
@@ -135,7 +152,6 @@
 <script>
     var username = "";
     var password = "";
-
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
@@ -144,6 +160,8 @@
         form.on('submit(login)', function (data) {
             username = $("#username").val()
             password = $("#password").val()
+
+
             if (username == "" || username == null || password == "" || password == null) {
                 $("#submit").trigger("click")
                 return false
@@ -169,6 +187,11 @@
 //                location.href = 'login.do?userName=' + username + '&password=' + password + '';
                 $(".userName").val(username)
                 $(".password").val(password)
+                if($(":input[name=rememberMe]").prop("checked")==true){
+                    $(":input[name=rememberPwd]").val("true")
+                }else{
+                    $(":input[name=rememberPwd]").val("false")
+                }
                 $(".tologin").trigger("click")
             }
         }
@@ -184,6 +207,28 @@
             $("#slider2").css("display", "none")
         })
     })
+</script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form(),
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
+
+        form.verify({
+//            title: function (value) {
+//                if (value.length < 5) {
+//                    return '用户名至少得5个字符';
+//                }
+//            },
+//            pass: [/(.+){6,12}$/, '密码必须6到12位'],
+//            content: function (value) {
+//                layedit.sync(editIndex);
+//            }
+        });
+
+    });
 </script>
 
 </body>
