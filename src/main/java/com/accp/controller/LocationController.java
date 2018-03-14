@@ -84,4 +84,9 @@ public class LocationController {
     public String addcommodity(){
         return "/addcommodity";
     }
+//    公告管理
+    @RequestMapping("/notice_managerment")
+    public String notice_managerment(){
+        return "/notice_managerment";
+    }
 }

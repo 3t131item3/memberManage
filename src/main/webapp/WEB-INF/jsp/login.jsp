@@ -27,11 +27,14 @@
             z-index: 2;
         }
         #slider2 {
-            top: 0.95rem;
-            left: 1.5rem;
             z-index: 3;
             position: absolute;
             display: none;
+            top:50%;
+            left: 50%;
+            margin-top: -17px;
+            margin-left: -150px;
+
         }
         /*.showpwd{*/
             /*cursor: pointer;*/
@@ -39,17 +42,7 @@
             /*right: 1.4rem;*/
             /*top: 0.7rem*/
         /*}*/
-        @media screen and (max-width: 1366px) and (max-height: 768px){
-            #slider2 {
-                top: 1.05rem;
-                left: 1.45rem;
-            }
-            /*.showpwd{*/
-                /*right: 1.3rem;*/
-                /*top: 0.75rem*/
-            /*}*/
 
-        }
     </style>
 </head>
 
