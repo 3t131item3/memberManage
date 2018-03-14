@@ -26,6 +26,13 @@ layui.config({
             console.log(tab.getCurrentTabId())
         }
     });
+
+    $(function () {
+        if (sessionStorage.getItem("suoping") != null) {
+            lock($, layer);
+        }
+    })
+
     //iframe自适应
     $(window).on('resize', function () {
         var $content = $('.admin-nav-card .layui-tab-content');
@@ -41,8 +48,8 @@ layui.config({
         elem: '#admin-navbar-side',
         cached: true,
         data: navs
-		/*cached:true,
-		url: 'datas/nav.json'*/
+        /*cached:true,
+        url: 'datas/nav.json'*/
     });
     //渲染navbar
     navbar.render();
@@ -53,7 +60,7 @@ layui.config({
     //清除缓存
     $('#clearCached').on('click', function () {
         navbar.cleanCached();
-        layer.alert('清除完成!', { icon: 1, title: '系统提示' }, function () {
+        layer.alert('清除完成!', {icon: 1, title: '系统提示'}, function () {
             location.reload();//刷新
         });
     });
@@ -116,10 +123,16 @@ layui.config({
         var e = window.event;
         if (e.keyCode === 76 && e.altKey) {
             //alert("你按下了alt+l");
+            if (sessionStorage.getItem("suoping") == null) {
+                sessionStorage.setItem("suoping", "true")
+            }
             lock($, layer);
         }
     });
     $('#lock').on('click', function () {
+        if (sessionStorage.getItem("suoping") == null) {
+            sessionStorage.setItem("suoping", "true")
+        }
         lock($, layer);
     });
 
@@ -135,6 +148,7 @@ layui.config({
 });
 
 var isShowLock = false;
+
 function lock($, layer) {
     if (isShowLock)
         return;
@@ -187,22 +201,24 @@ function lock($, layer) {
                 }
                 unlock(userName, pwd);
             });
-			/**
-			 * 解锁操作方法
-			 * @param {String} 用户名
-			 * @param {String} 密码
-			 */
+            /**
+             * 解锁操作方法
+             * @param {String} 用户名
+             * @param {String} 密码
+             */
             var unlock = function (un, pwd) {
                 console.log(un, pwd);
                 //这里可以使用ajax方法解锁
-                $.post('/Users/unlock', { userName: un, password: pwd }, function (res) {
+                $.post('/Users/unlock', {userName: un, password: pwd}, function (res) {
                     //验证成功
-                    if (res.rel=="true") {
+                    if (res.rel == "true") {
+                        //清除session
+                        sessionStorage.removeItem("suoping")
                         //关闭锁屏层
                         layer.close(lockIndex);
                         isShowLock = false;
                     } else {
-                        layer.msg(res.rel, { icon: 2, time: 3000 });
+                        layer.msg(res.rel, {icon: 2, time: 3000});
                     }
                 }, 'json');
                 //isShowLock = false;
