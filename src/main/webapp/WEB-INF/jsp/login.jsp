@@ -33,21 +33,21 @@
             position: absolute;
             display: none;
         }
-        .showpwd{
-            cursor: pointer;
-            position: absolute;
-            right: 1.4rem;
-            top: 0.7rem
-        }
+        /*.showpwd{*/
+            /*cursor: pointer;*/
+            /*position: absolute;*/
+            /*right: 1.4rem;*/
+            /*top: 0.7rem*/
+        /*}*/
         @media screen and (max-width: 1366px) and (max-height: 768px){
             #slider2 {
                 top: 1.05rem;
                 left: 1.45rem;
             }
-            .showpwd{
-                right: 1.3rem;
-                top: 0.75rem
-            }
+            /*.showpwd{*/
+                /*right: 1.3rem;*/
+                /*top: 0.75rem*/
+            /*}*/
 
         }
     </style>
@@ -71,14 +71,15 @@
                 <input id="username" type="text" name="userName" lay-verify="userName" autocomplete="off"
                        placeholder="这里输入用户名" class="layui-input" value="VIP1" required/>
             </div>
-            <div class="layui-form-item">
+            <div id="pwdDiv" class="layui-form-item" style="display: flex;flex-direction: row;align-items: center;">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
                 <input id="password" type="password" name="password" lay-verify="password" autocomplete="off"
                        placeholder="这里输入密码" class="layui-input" value="111111" required>
+
+                <img  class="showpwd" src="/images/password4.png" alt="" width="50px;" >
             </div>
-            <img  class="showpwd" src="/images/password4.png" alt="" width="50" >
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
@@ -118,20 +119,22 @@
 <script type="text/javascript" src="/js/jquery.slider.min.js"></script>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
 <script type="text/javascript" src="/js/fontSize.js"></script>
-<script type="text/javascript" src="/js/disablekey.js"></script>
+<%--<script type="text/javascript" src="/js/disablekey.js"></script>--%>
 <script>
     $(function () {
-//        alert(screen.width+"/"+screen.height)
+        $("#pwdDiv").width($("#pwdDiv").width()+50)
         var passwordShow = false
         $(".showpwd").on("click", function () {
             if (passwordShow == true) {
                 passwordShow=false
                 $("#password").attr("type", "password")
                 $(this).attr("src","/images/password4.png")
+                $("#pwdDiv").width($("#pwdDiv").width()+2)
             } else {
                 passwordShow=true
                 $(this).attr("src","/images/password.png")
                 $("#password").attr("type", "text")
+                $("#pwdDiv").width($("#pwdDiv").width()-2)
             }
         })
     })

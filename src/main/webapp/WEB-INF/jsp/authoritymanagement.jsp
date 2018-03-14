@@ -86,7 +86,16 @@
     });
 
     $("form").submit(function(){
-        return confirm("确认要修改吗？")
+        layer.confirm('确认要修改吗？',
+            function () {
+
+            }, function () {
+                layer.msg({
+                    time: 2000
+                });
+            });
+        return false
+//        return confirm("确认要修改吗？")
     })
     layui.use(['paging', 'form'], function () {
         var $ = layui.jquery,

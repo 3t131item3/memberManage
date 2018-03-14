@@ -397,4 +397,4 @@ INSERT INTO tranRecords VALUES(DEFAULT,'提现','提现',NOW(),50,100,1),
 (DEFAULT,'提现','提现',NOW(),50,100,1),
 (DEFAULT,'提现','提现',NOW(),50,100,1),
 (DEFAULT,'提现','提现',NOW(),50,100,1),
-(DEFAULT,'提现','提现',NOW(),50,100,1); 
+(DEFAULT,'提现','提现',NOW(),50,100,1);
