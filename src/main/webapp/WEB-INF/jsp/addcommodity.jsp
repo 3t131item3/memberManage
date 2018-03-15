@@ -134,7 +134,7 @@
                     time:5000
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index);
-                    location="/commodity/list"
+                    location="/jsp/commodity/list"
                 }else {
                     alert(form.msg)
                 }

@@ -69,6 +69,7 @@
 <!--模板-->
 <script type="text/html" id="tpl">
     {{# layui.each(d.list, function(index, item){ }}
+    {{# if (item.id!=${user.id} ) { }}
     <tr>
         <input type="hidden" value={{d.count}} class="count"/>
         <%--<td><input type="checkbox" lay-skin="primary"></td>--%>
@@ -86,6 +87,7 @@
             <%--<a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">实名认证</a>--%>
         </td>
     </tr>
+    {{# } }}
     {{# }); }}
 </script>
 <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
