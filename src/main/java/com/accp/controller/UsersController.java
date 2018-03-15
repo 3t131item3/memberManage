@@ -76,7 +76,7 @@ public class UsersController {
     public String unlock(HttpServletRequest request){
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        if(usersBiz.queryUser(userName,password)!=null){
+        if(usersBiz.queryUser(userName,MD5.MD5Encode(password))!=null){
             return "{\"rel\":\"true\"}";
         }else {
             return "{\"rel\":\"密码错误！(ps:解锁密码为登录密码)\"}";

@@ -17,13 +17,14 @@ public class LoginController {
     private UsersBiz usersBiz;
     @RequestMapping(value = "/login.do")
     public  String login(String userName, String password, boolean rememberPwd, HttpServletRequest request, HttpServletResponse response){
-        String s = password;//MD5.MD5Encode(password);
+        String s = MD5.MD5Encode(password);
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
             if(users.getState()==0){
                 request.setAttribute("msg","该用户已冻结");
                 return "/login";
             }
+            users.setPwd(password);
             request.getSession().setAttribute("user",users);
             if(rememberPwd){
                 Cookie cookie=new Cookie("user",users.getUserName()+"/"+users.getPwd()) ;
