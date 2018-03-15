@@ -75,7 +75,7 @@
         <td>{{ item.discountPrice }}</td>
         <td>{{ item.stock }}</td>
         <td><input type="checkbox" {{# if (item.state!=0 ) { }}
-                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" ></td>
+                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="上架|下架" ></td>
         <td>{{item.modifyTime}}</td>
         <td>
             <a href="javascript:;"  data-name="{{ item.id}}" data-opt="show" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>

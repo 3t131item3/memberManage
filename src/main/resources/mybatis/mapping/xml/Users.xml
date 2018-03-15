@@ -178,7 +178,6 @@
             <if test="roleId>0">
                 roleId=#{roleId},
             </if>
-
             <if test="remainder>0">
                 remainder=#{remainder}
             </if>

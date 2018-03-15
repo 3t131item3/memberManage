@@ -204,4 +204,18 @@ public class UsersController {
         return "/destoon_finance_cash";
     }
 
+    @RequestMapping("/modifyStatus")
+    @ResponseBody
+    public String modifyStatus(HttpServletRequest request){
+        int id=Integer.parseInt(request.getParameter("id"));
+        int status=Integer.parseInt(request.getParameter("status"));
+        Users users=new Users();
+        users.setId(id);
+        users.setState(status);
+        if(usersBiz.modify(users)){
+            return "{\"result\":\"true\"}";
+        }else{
+            return "{\"result\":\"false\"}";
+        }
+    }
 }

@@ -53,7 +53,6 @@
                     <th>电子邮件</th>
                     <th>状态(启用/禁用)</th>
                     <th>操作</th>
-
                 </tr>
                 </thead>
                 <tbody id="content">
@@ -78,8 +77,7 @@
         <td>{{ item.modifyTime }}</td>
         <td>{{ item.telephoneNumber }}</td>
         <td>{{ item.email}}</td>
-        <td><input type="checkbox" {{# if (item.state!=0 ) { }}
-                   checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" >
+        <td><input type="checkbox" {{# if (item.state!=0 ) { }}  checked="checked" {{# } }}  lay-skin="switch" class="opens"  lay-filter="switchTest" value="{{item.id}}" lay-text="启用|禁用" >
         </td>
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
@@ -90,9 +88,15 @@
     </tr>
     {{# }); }}
 </script>
-<%--<script type="text/javascript" src="js/jquery-3.2.1.js"></script>--%>
+<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
 <script>
+$(function () {
+    $("#content").on("click",".layui-form-switch",function () {
+       var checkbox= $(this).parent().find(".opens")
+        modifyStatus( checkbox.val(),(checkbox.prop("checked")==true ? 1:0))
+    })
+})
     layui.config({
         base: 'js/'
     });
@@ -132,6 +136,7 @@
                 //重新渲染复选框
                 form.render('checkbox');
                 form.on('checkbox(allselector)', function (data) {
+
                     var elem = data.elem;
 
                     $('#content').children('tr').each(function () {
@@ -141,7 +146,6 @@
                         form.render('checkbox');
                     });
                 });
-
                 //绑定所有编辑按钮事件
                 $('#content').children('tr').each(function () {
                     var $that = $(this);
@@ -334,6 +338,19 @@
 
     });
 
+    function modifyStatus(id,status) {
+        $.ajax({
+            url:"/Users/modifyStatus",
+            type:"post",
+            dataType:"json",
+            data:{id:id,status:status},
+            success:function (data) {
+                if(data=="fale"){
+                    alert("修改失败")
+                }
+            }
+        })
+    }
 </script>
 </body>
 

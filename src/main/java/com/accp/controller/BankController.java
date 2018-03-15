@@ -8,6 +8,7 @@ import com.accp.entity.Bank;
 import com.accp.entity.BankTranRecords;
 import com.accp.entity.TranRecords;
 import com.accp.entity.Users;
+import com.accp.util.HtmlInjection;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,7 +52,7 @@ public class BankController {
 //        添加交易记录
         TranRecords tranRecords=new TranRecords();
         tranRecords.setTranTime(new Date());
-        tranRecords.setTitle(bankTranRecords.getTitle());
+        tranRecords.setTitle(HtmlInjection.htmlToString(bankTranRecords.getTitle()));
         tranRecords.setTranType("充值");
         tranRecords.setRemainder(user.getRemainder());
         tranRecords.setPrice(bankTranRecords.getPrice());
