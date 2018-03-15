@@ -26,7 +26,7 @@
 
             </ul>
             <input type="hidden" name="roleId" id="roleId" value="1"/>
-            <button type="submit" class="layui-btn layui-btn-primary">保存</button>
+            <button type="button" id="baocun" class="layui-btn layui-btn-primary">保存</button>
         </blockquote>
         <div id="count">
             <c:forEach var="manage" items="${manages}">
@@ -84,17 +84,18 @@
     layui.config({
         base: 'js/'
     });
-
-    $("form").submit(function(){
+    $("#baocun").on("click",function () {
         layer.confirm('确认要修改吗？',
             function () {
-
+                $("form").submit()
             }, function () {
                 layer.msg({
                     time: 2000
                 });
             });
-        return false
+    })
+    $("form").submit(function(){
+
 //        return confirm("确认要修改吗？")
     })
     layui.use(['paging', 'form'], function () {
