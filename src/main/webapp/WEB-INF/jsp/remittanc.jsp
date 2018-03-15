@@ -67,7 +67,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">摘要</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" class="layui-textarea" style="width: 50%" name="title"></textarea>
+                <textarea placeholder="请输入内容" class="layui-textarea" style="width: 50%" name="title" maxlength="35"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
