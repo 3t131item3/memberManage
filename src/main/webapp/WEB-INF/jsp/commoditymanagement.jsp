@@ -48,7 +48,7 @@
                     <th>市场价￥</th>
                     <th>优惠价￥</th>
                     <th>库存</th>
-                    <th>状态(启用/禁用)</th>
+                    <th>状态(上架/下架)</th>
                     <th>最后修改时间</th>
                     <th>操作</th>
                 </tr>
@@ -100,7 +100,7 @@
 
         paging.init({
             openWait: true,
-            url: '/commodity/list?v=' + new Date().getTime(), //地址
+            url: '/jsp/commodity/list?v=' + new Date().getTime(), //地址
             elem: '#content', //内容容器
 
             params: { //发送到服务端的参数

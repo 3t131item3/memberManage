@@ -83,7 +83,7 @@
         </where>
     </sql>
     <!--分页查询SQL-->
-    <select id="getlist" resultMap="UsersMap">
+    <select id="getlist" resultMap="UserMap">
         SELECT  * FROM users  JOIN role ON role.id=users.roleId JOIN bank ON bank.no=users.openNo
         <include refid="queryUser"/>
         ORDER BY users.createTime DESC

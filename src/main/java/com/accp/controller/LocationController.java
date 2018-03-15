@@ -89,4 +89,10 @@ public class LocationController {
     public String notice_managerment(){
         return "/notice_managerment";
     }
+
+
+    @RequestMapping("/Clearing")
+    public String Clearing(){
+        return "/Clearing";
+    }
 }

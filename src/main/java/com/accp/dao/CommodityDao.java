@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface CommodityDao {
     //分页查询
-    List<Commodity> getList(@Param("name") String name,@Param("pagerNo") int pagerNo,@Param("pagerSize") int pagerSize);
+    List<Commodity> getList(@Param("commodityNo") String commodityNo,@Param("name") String name,@Param("pagerNo") int pagerNo,@Param("pagerSize") int pagerSize);
     //查询总行数
-    int count(@Param("name") String name);
+    int count(Commodity commodity);
     //id查询
     Commodity getCommodityId(@Param("id") int  id);
     //添加

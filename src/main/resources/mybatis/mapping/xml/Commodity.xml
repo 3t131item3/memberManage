@@ -17,9 +17,15 @@
         <result column="modifyTime" property="modifyTime"/>
     </resultMap>
     <sql id="queryCommodity">
+        <where>
+            <if test="commodityNo!=null and commodityNo!=''">
+                and commodityNo like concat('%',#{commodityNo},'%')
+            </if>
         <if test="name!=null and name!=''">
             and name like concat('%',#{name},'%')
         </if>
+
+        </where>
     </sql>
     <!--分页查询-->
     <select id="getList" resultMap="mapCommodity">

@@ -1,6 +1,8 @@
 package com.accp.biz.impl;
 
+import com.accp.biz.CommodityBiz;
 import com.accp.biz.CommoditySetMealBiz;
+import com.accp.biz.UsersBiz;
 import com.accp.dao.CommoditySetMealDao;
 import com.accp.entity.CommoditySetMeal;
 import com.accp.entity.Pager;
@@ -12,7 +14,10 @@ import javax.annotation.Resource;
 public class CommoditySetMealBizImpl implements CommoditySetMealBiz {
     @Resource
     private CommoditySetMealDao commoditySetMealDao;
-
+    @Resource
+    private UsersBiz usersBiz;
+    @Resource
+    private CommodityBiz commodityBiz;
 
     public Pager<CommoditySetMeal> getList(String name, int pagerNo, int pagerSize) {
         Pager<CommoditySetMeal> pager=new Pager<CommoditySetMeal>();

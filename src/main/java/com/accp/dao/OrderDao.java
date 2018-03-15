@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface OrderDao {
     List<Order> getList();
+
+        int add(Order order);
+
 }

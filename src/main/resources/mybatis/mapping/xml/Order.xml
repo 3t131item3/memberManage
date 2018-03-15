@@ -6,4 +6,10 @@
     <select id="getList">
         SELECT  * FROM  order
     </select>
+
+
+    <insert id="add">
+        INSERT INTO `order`
+        VALUES (DEFAULT,#{userid},#{commodityId},#{orderNo},#{userName},#{consignee},#{ordertime},#{type},#{price})
+    </insert>
 </mapper>

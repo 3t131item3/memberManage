@@ -6,6 +6,7 @@ import com.accp.entity.Commodity;
 import com.accp.entity.CommoditySetMeal;
 import com.accp.entity.Errors;
 import com.accp.entity.Pager;
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/commodity")
+@RequestMapping("/jsp/commodity")
 public class CommodityController {
     @Resource(name = "commodityBiz")
     private CommodityBiz commodityBiz;
@@ -30,26 +31,29 @@ public class CommodityController {
     @ResponseBody
     public Map<String, Object> getList(HttpServletRequest request) {
         int pagerNo = 1;
-        if (request.getParameter("pageIndex") != null) {
+        Commodity commodity=new Commodity();
+        if (request.getParameter("pageIndex") != null &&request.getParameter("pageIndex")!="") {
             pagerNo = Integer.parseInt(request.getParameter("pageIndex"));
         }
-        String userName = null;
-        if (request.getParameter("name") != null && request.getParameter("name") != "") {
-            userName = request.getParameter("name");
+        if(request.getParameter("price_min")!=null&& request.getParameter("price_min")!=""){
+            commodity.setCommodityNo(request.getParameter("price_min"));
         }
-        int pageSize = 3;
-        if (request.getParameter("pageSize") != null && request.getParameter("pageSize") != "") {
-            pageSize = Integer.parseInt(request.getParameter("pageSize"));
+        if(request.getParameter("tx")!=null && request.getParameter("tx")!=""){
+            commodity.setName(request.getParameter("tx"));
         }
-        Pager<Commodity> list = commodityBiz.getList(null, pagerNo, pageSize);
+        int   pageSize=3;
+        if(request.getParameter("pageSize")!=null && request.getParameter("pageSize")!="" ){
+            pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        }
+        Pager<Commodity> list = commodityBiz.getList(commodity, pagerNo, pageSize);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("rel", true);
         map.put("msg", "获取成功");
         map.put("list", list.getData());
-        map.put("count", list.getTotalCount());
+        map.put("count", list.getTotalPageCount());
+        map.put("pagerNo", list.getPagerNo());
         return map;
     }
-
     //新增
     @ResponseBody
     @RequestMapping(value = "/add/{mycars}", method = RequestMethod.GET)
@@ -102,4 +106,18 @@ public class CommodityController {
         request.setAttribute("commodity",commodity);
         return "showCommodity";
     }
+    @ResponseBody
+    @RequestMapping(value = "/iscount/{iscount}/{count2}")
+    private String iscount(@PathVariable String iscount,@PathVariable String count2){
+
+        Commodity commodity = commodityBiz.queryCommodityId(Integer.parseInt(iscount));
+        if(Integer.parseInt(count2)>commodity.getStock()){
+            String  err=null;
+            err="库存不足";
+            return JSON.toJSONString(err);
+        }
+        return null;
+    }
+
+
 }

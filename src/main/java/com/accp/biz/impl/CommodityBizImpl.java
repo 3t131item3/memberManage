@@ -2,7 +2,9 @@ package com.accp.biz.impl;
 
 import com.accp.biz.CommodityBiz;
 import com.accp.dao.CommodityDao;
+import com.accp.dao.OrderDao;
 import com.accp.entity.Commodity;
+import com.accp.entity.Order;
 import com.accp.entity.Pager;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,15 @@ import java.util.List;
 public class CommodityBizImpl implements CommodityBiz {
     @Resource
     private CommodityDao commodityDao;
-    public Pager<Commodity> getList(String name, int pagerNo, int pagerSize) {
+    @Resource
+    private OrderDao orderDao;
+    public Pager<Commodity> getList(Commodity commodity, int pagerNo, int pagerSize) {
         Pager<Commodity> pager=new Pager<Commodity>();
         pager.setPagerSize(pagerSize);
         pager.setPagerNo(pagerNo);
-        pager.setTotalCount(commodityDao.count(name));
+        pager.setTotalCount(commodityDao.count(commodity));
         pager.setTotalPageCount((pager.getTotalCount()+pagerSize-1)/pagerSize);
-        pager.setData(commodityDao.getList(name,(pagerNo-1)*pagerSize,pagerSize));
+        pager.setData(commodityDao.getList(commodity.getCommodityNo(),commodity.getName(),(pagerNo-1)*pagerSize,pagerSize));
         return pager;
     }
 
@@ -36,5 +40,9 @@ public class CommodityBizImpl implements CommodityBiz {
 
     public boolean deleteCommodity(Commodity commodity) {
         return commodityDao.remove(commodity)>0;
+    }
+
+    public boolean addOrder(Order order) {
+        return orderDao.add(order)>0;
     }
 }

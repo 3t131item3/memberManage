@@ -20,6 +20,10 @@ public class LoginController {
         String s = password;//MD5.MD5Encode(password);
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
+            if(users.getState()==0){
+                request.setAttribute("msg","该用户已冻结");
+                return "/login";
+            }
             request.getSession().setAttribute("user",users);
             if(rememberPwd){
                 Cookie cookie=new Cookie("user",users.getUserName()+"/"+users.getPwd()) ;
