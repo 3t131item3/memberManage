@@ -67,4 +67,8 @@ public class UsersBizImpl implements UsersBiz {
     public Users query(Users users){
         return usersDao.query(users);
     }
+    public Users queryOneUser(Users users){
+        return usersDao.queryOneUser(users);
+    }
+
 }

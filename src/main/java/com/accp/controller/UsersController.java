@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -218,4 +219,20 @@ public class UsersController {
             return "{\"result\":\"false\"}";
         }
     }
+    @RequestMapping("/getId/{id}")
+    public String getId(@PathVariable String id,HttpServletRequest request){
+       request.getSession().setAttribute("userId",id);
+        return "redirect:/adduser";
+    }
+
+    @RequestMapping("/updatememberdate")
+    public String modifyUser(Users users, HttpSession session){
+        Users user=(Users) session.getAttribute("user");
+        users.setModifyTime(new Date());
+        users.setState(user.getState());
+        usersBiz.modify(users);
+        user=usersBiz.queryOneUser(user);
+        return "/updatememberdate";
+    }
+
 }

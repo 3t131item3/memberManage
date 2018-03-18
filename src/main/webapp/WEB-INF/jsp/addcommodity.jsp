@@ -128,7 +128,7 @@
             mycars[5]=data.field.unit
             mycars[6]=data.field.stats
             mycars[7]=data.field.illustrate
-            $.get("/commodity/add/"+mycars, null, function (form){
+            $.get("/jsp/commodity/add/"+mycars, null, function (form){
                 alert(form.msg)
                 if(form.msg=="成功"){
                     time:5000

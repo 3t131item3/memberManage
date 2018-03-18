@@ -28,4 +28,6 @@ public interface UsersBiz {
     //roleId查询
     Users queryUsersroleId(@Param("roleId") int roleId);
     Users query(Users users);
+    Users queryOneUser(Users users);
+
 }

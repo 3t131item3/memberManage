@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -25,20 +26,21 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色编号<span style="color: red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="no"  lay-verify="title" width="100px" autocomplete="off" class="layui-input" >
+                <input type="text" name="no"  lay-verify="title" width="100px" autocomplete="off" class="layui-input" value="${role.no}"/>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">角色名称<span style="color: red">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="roleName" lay-verify="title"  autocomplete="off" class="layui-input" >
+                <input type="text" name="roleName" lay-verify="title"  autocomplete="off" class="layui-input" value="${role.roleName}"/>
             </div>
+            <input type="hidden" name="id" value="${role.id}">
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">角色状态</label>
             <div class="layui-input-block">
-                <input type="radio" name="stats" value="1" title="启用" checked="">
-                <input type="radio" name="stats" value="0" title="禁用">
+                <input type="radio" name="stats" value="1" title="启用" <c:if test="${role.stats==1}">checked="checked"</c:if>/>
+                <input type="radio" name="stats" value="0" title="禁用" <c:if test="${role.stats==0}">checked="checked"</c:if>/>
             </div>
         </div>
 
@@ -49,9 +51,6 @@
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
-
-        <%--//style="display: none;"--%>
-        <%--<button lay-filter="dusss" lay-submit style="display: none;" id="ssss"></button>--%>
     </form>
 </div>
 <script type="text/javascript" src="/js/jquery-3.2.1.js"></script>
@@ -68,7 +67,7 @@
         //自定义验证规则
         form.verify({
             title: function(value) {
-                if(value.length < 5) {
+                if(value.length < 2) {
                     return '标题至少得5个字符啊';
                 }
             },
@@ -84,22 +83,34 @@
 //            layer.alert(JSON.stringify(data.field), {
 //                title: '最终的提交信息'
 //            })
-            var mycars=new Array()
-            mycars[0]=data.field.no
-            mycars[1]=data.field.roleName
-            mycars[2]=data.field.stats
-            $.get("/role/add/"+mycars, null, function (form){
-                alert(form.msg)
-                if(form.msg=="成功"){
+            var mycars=new Array();
+            mycars[0]=data.field.no;
+            mycars[1]=data.field.roleName;
+            mycars[2]=data.field.stats;
+            mycars[3]=data.field.id;
+            mycars[7]=$("#countPice").text();
+            $.ajax({
+                url: '/role/add/',
+                data: {'mycars': mycars},
+                traditional: true,
+                async: false,  //同步执行
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    alert(data.msg)
+                if(data.msg=="成功"){
                     time:5000
                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index);
                     location="/role/list"
-                }else {
-                    alert(form.msg)
                 }
+                }
+            });
 
-            })
+//            $.get("/role/add/"+mycars, null, function (form){
+//
+//
+//            })
             return false;
         });
     });

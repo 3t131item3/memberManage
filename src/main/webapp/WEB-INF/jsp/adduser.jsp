@@ -25,7 +25,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户名<span style="color: red">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" width="100px" autocomplete="off" placeholder="请输入登录账号" class="layui-input">
+                <input type="text" name="title"  lay-verify="title" width="100px" autocomplete="off" placeholder="请输入登录账号" class="layui-input" value="${users.name}">
             </div>
         </div>
         <div class="layui-form-item">
@@ -57,7 +57,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-inline">
-                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                <input type="text" name="email" lay-verify="email" id="dd" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -81,42 +81,42 @@
                 <%--<button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
             <%--</div>--%>
         <%--</div>--%>
-        <button lay-filter="edits" lay-submit  style="display: none;">sss</button>
+        <button lay-filter="edits" lay-submit  style="display: none;"lay-filter="demo1">sss</button>
     </form>
 </div>
 <script type="text/javascript" src="/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
-<%--<script>--%>
-    <%--layui.use(['form', 'layedit', 'laydate'], function() {--%>
-        <%--var form = layui.form(),--%>
-            <%--layer = layui.layer,--%>
-            <%--layedit = layui.layedit,--%>
-            <%--laydate = layui.laydate;--%>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form(),
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
 
-        <%--//创建一个编辑器--%>
-        <%--var editIndex = layedit.build('LAY_demo_editor');--%>
-        <%--//自定义验证规则--%>
-        <%--form.verify({--%>
-            <%--title: function(value) {--%>
-                <%--if(value.length < 5) {--%>
-                    <%--return '标题至少得5个字符啊';--%>
-                <%--}--%>
-            <%--},--%>
-            <%--pass: [/(.+){6,12}$/, '密码必须6到12位'],--%>
-            <%--content: function(value) {--%>
-                <%--layedit.sync(editIndex);--%>
-            <%--}--%>
-        <%--});--%>
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+        //自定义验证规则
+        form.verify({
+            title: function(value) {
+                if(value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            },
+            pass: [/(.+){6,12}$/, '密码必须6到12位'],
+            content: function(value) {
+                layedit.sync(editIndex);
+            }
+        });
 
-        <%--//监听提交--%>
-        <%--form.on('submit(demo1)', function(data) {--%>
-            <%--layer.alert(JSON.stringify(data.field), {--%>
-                <%--title: '最终的提交信息'--%>
-            <%--})--%>
-            <%--return false;--%>
-        <%--});--%>
-    <%--});--%>
-<%--</script>--%>
+        //监听提交
+        form.on('submit(demo1)', function(data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+    });
+</script>
 </body>
 
 </html>

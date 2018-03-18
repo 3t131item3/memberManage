@@ -82,7 +82,7 @@
         </td>
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-            <a href="javascript:;" data-name="{{item.name }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+            <a href="javascript:;" data-name="{{item.id}}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
             <a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
             <%--<a href="javascript:;" data-name="{{item.id}}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">实名认证</a>--%>
         </td>
@@ -122,7 +122,7 @@ $(function () {
             tempElem: '#tpl', //模块容器
             pageConfig: { //分页参数配置
                 elem: '#paged', //分页容器
-                pageSize:5,//分页大小
+                pageSize:4,//分页大小
                 pageIndex:1,
                 count:$(".count").val()
             },
@@ -152,72 +152,9 @@ $(function () {
                 $('#content').children('tr').each(function () {
                     var $that = $(this);
                     $that.children('td:last-child').children('a[data-opt=edit]').on('click', function () {
-//                            layer.msg($(this).data('name'));
-                        $.post('/addUsers', null, function (form) {
-//                                alert(form)
-                            addBoxIndex = layer.open({
-                                type:2,
-                                title: '修改表单',
-//                              content:form,
-                                content: "/addUsers",
-                                btn: ['保存', '取消'],
-                                shade: false,
-                                offset: ['100px', '30%'],
-                                area: ['600px', '400px'],
-                                zIndex: 19950924,
-                                maxmin: true,
-                                shadeClose:true,
-                                anim:1,
-                                yes: function (index) {
-                                    //触发表单的提交事件
-//                                        $('form.layui-form').find('button[lay-filter=dusss]').click();
-                                    $('#ssss').click();
-
-                                },
-                                full: function (elem) {
-                                    var win = window.top === window.self ? window : parent.window;
-                                    $(win).on('resize', function () {
-                                        var $this = $(this);
-                                        elem.width($this.width()).height($this.height()).css({
-                                            top: 0,
-                                            left: 0
-                                        });
-                                        elem.children('div.layui-layer-content').height($this.height() - 95);
-                                    });
-                                },
-
-                                success: function (layero, index) {
-                                    //弹出窗口成功后渲染表单
-                                    var form = layui.form();
-                                    form.render();
-                                    form.on('submit(dusss)',function (data) {
-                                        console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-                                        console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-                                        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-                                        //调用父窗口的layer对象
-                                        layerTips.open({
-                                            title: '这里面是表单的信息',
-                                            type: 1,
-                                            content: JSON.stringify(data.field),
-                                            area: ['500px', '300px'],
-                                            btn: ['关闭并刷新', '关闭'],
-                                            yes: function (index, layero) {
-                                                layerTips.msg('你点击了关闭并刷新');
-                                                layerTips.close(index);
-                                                location.reload(); //刷新
-                                            }
-
-                                        });
-                                        //这里可以写ajax方法提交表单
-                                        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-                                    });
-                                    console.log(layero, index);
-                                },
-                                end: function () {
-                                    addBoxIndex = -1;
-                                }
-                            });
-                        });
+                            var id=$(this).data('name');
+                            alert(id)
+                            location.href="/Users/getId/"+id;
                     });
                     $that.children('td:last-child').children('a[data-opt=del]').on('click',function () {
                         var id=$(this).data('name');

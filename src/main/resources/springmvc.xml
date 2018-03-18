@@ -80,11 +80,33 @@
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="maxUploadSize" value="5000000" />
     </bean>
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/jsp/*"/>-->
-            <!--<bean class="com.accp.interceptor.MyInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/jsp/*"/>
+            <mvc:mapping path="/commoditySetMeal/*"/>
+            <mvc:mapping path="/role/*"/>
+            <mvc:mapping path="/Users/*"/>
+            <mvc:mapping path="/index"/>
+            <mvc:mapping path="/usermanagement"/>
+            <mvc:mapping path="/remittanc"/>
+            <mvc:mapping path="/basicaccount"/>
+            <mvc:mapping path="/basicaccount"/>
+            <mvc:mapping path="/addRole"/>
+            <mvc:mapping path="/rolemanagement"/>
+            <mvc:mapping path="/commoditymanagement"/>
+            <mvc:mapping path="/sssList"/>
+            <mvc:mapping path="/authoritymanagement"/>
+            <mvc:mapping path="/nternaltransfer"/>
+            <mvc:mapping path="/destoon_finance_cash"/>
+            <mvc:mapping path="/shopping_again"/>
+            <mvc:mapping path="/tixianmingxi"/>
+            <mvc:mapping path="/addcommodity"/>
+            <mvc:mapping path="/notice_managerment"/>
+            <mvc:mapping path="/Clearing"/>
+            <mvc:mapping path="/adduser"/>
+            <mvc:mapping path="/toModifyUser"/>
+            <bean class="com.accp.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

@@ -5,11 +5,14 @@ import com.accp.entity.Users;
 import com.accp.util.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 public class LoginController {
@@ -20,6 +23,9 @@ public class LoginController {
         String s = MD5.MD5Encode(password);
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
+            if(null!=users.getOpenNo()){
+                users=usersBiz.queryOneUser(users);
+            }
             if(users.getState()==0){
                 request.setAttribute("msg","该用户已冻结");
                 return "/login";
@@ -45,5 +51,26 @@ public class LoginController {
         }
         request.setAttribute("msg","用户名或密码错误");
         return "/login";
+    }
+    @RequestMapping("/addUser")
+    public String addUser(Users users, HttpSession session,HttpServletRequest request){
+        users.setPwd(MD5.MD5Encode(users.getPwd()));
+        users.setRoleId(2);
+        users.setState(1);
+        users.setCreateTime(new Date());
+        usersBiz.addUsers(users);
+        session.setAttribute("user",usersBiz.query(users));
+        return "/index";
+    }
+    @RequestMapping("/userNameExists")
+    @ResponseBody
+    public String userNameExists(HttpServletRequest request){
+        Users users=new Users();
+        users.setUserName(request.getParameter("userName"));
+        if(usersBiz.query(users)!=null){
+            return "{\"result\":\"true\"}";
+        }else {
+            return "{\"result\":\"false\"}";
+        }
     }
 }

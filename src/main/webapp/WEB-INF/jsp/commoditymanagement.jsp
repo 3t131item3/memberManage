@@ -68,13 +68,13 @@
     {{# layui.each(d.list, function(index, item){ }}
     <tr>
         <%--<td><input type="checkbox" lay-skin="primary"></td>--%>
-        <input type="hidden" value={{d.count}} class="count"/>
+        <input type="hidden" value={{d.totalCount}} class="count"/>
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.price }}</td>
         <td>{{ item.discountPrice }}</td>
         <td>{{ item.stock }}</td>
-        <td><input type="checkbox" {{# if (item.state!=0 ) { }}
+        <td><input type="checkbox" {{# if (item.state!=0) { }}
                    checked="checked" {{# } }} name="open" lay-skin="switch" lay-filter="switchTest" lay-text="上架|下架" ></td>
         <td>{{item.modifyTime}}</td>
         <td>
@@ -102,18 +102,19 @@
             openWait: true,
             url: '/jsp/commodity/list?v=' + new Date().getTime(), //地址
             elem: '#content', //内容容器
-
             params: { //发送到服务端的参数
             },
             type: 'GET',
             tempElem: '#tpl', //模块容器
             pageConfig: { //分页参数配置
                 elem: '#paged', //分页容器
-                pageSize: 3, //分页大小
+                pageSize:1,//分页大小
                 pageIndex:1,
                 count:$(".count").val()
             },
+
             success: function() { //渲染成功的回调
+//                alert($(".count").val())
                 //alert('渲染成功');
             },
             fail: function(msg) { //获取数据失败的回调
@@ -122,17 +123,17 @@
             complate: function() { //完成的回调
                 //alert('处理完成');
                 //重新渲染复选框
-                form.render('checkbox');
-                form.on('checkbox(allselector)', function(data) {
-                    var elem = data.elem;
-
-                    $('#content').children('tr').each(function() {
-                        var $that = $(this);
-                        //全选或反选
-                        $that.children('td').eq(0).children('input[type=checkbox]')[0].checked = elem.checked;
-                        form.render('checkbox');
-                    });
-                });
+//                form.render('checkbox');
+//                form.on('checkbox(allselector)', function(data) {
+//                    var elem = data.elem;
+//
+//                    $('#content').children('tr').each(function() {
+//                        var $that = $(this);
+//                        //全选或反选
+//                        $that.children('td').eq(0).children('input[type=checkbox]')[0].checked = elem.checked;
+//                        form.render('checkbox');
+//                    });
+//                });
 
                 //列里按钮
                 $('#content').children('tr').each(function() {
@@ -144,7 +145,7 @@
                     //绑定所有预览按钮事件;
                     $that.children('td:last-child').children('a[data-opt=show]').on('click', function() {
                         var id=$(this).data('name');
-                        location.href="/commodity/getId/"+id
+                        location.href="/jsp/commodity/getId/"+id
                     });
                     //绑定所有删除按钮事件
                     $that.children('td:last-child').children('a[data-opt=del]').on('click',function () {
@@ -153,7 +154,6 @@
                             title: '商品删除'
                             ,content: '你确定要删除此商品？',
                             yes: function (index) {
-
                                 delcomm(id)
                             }
                         });
@@ -253,7 +253,7 @@
 
         //商品删除按钮查询外键表
         function  delcomm(id) {
-            $.get("/commodity/delete/"+id, null, function (form){
+            $.get("/jsp/commodity/delete/"+id, null, function (form){
                 var  msg=null;
                 if(form.msg=="noNull"){
                     msg='商品套餐表包含此商品，请先删除此商品套餐!'

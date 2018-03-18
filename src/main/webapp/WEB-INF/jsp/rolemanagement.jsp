@@ -141,16 +141,12 @@
                 $('#content').children('tr').each(function () {
                     var $that = $(this);
                     $that.children('td:last-child').children('a[data-opt=edit]').on('click', function () {
-//                            layer.msg($(this).data('name'));
                         var id=$(this).data('name')
                         $.get('/role/updateRole/'+id, null, function (form) {
-                                alert(form)
                             addBoxIndex = layer.open({
                                 type:2,
                                 title: '修改表单',
-//                                    content:form,
                                 content: "/role/updateRole/"+id,
-                                btn: ['保存', '取消'],
                                 shade: false,
                                 offset: ['100px', '30%'],
                                 area: ['600px', '400px'],
@@ -160,7 +156,7 @@
                                 anim:1,
                                 yes: function (index) {
                                     //触发表单的提交事件
-//                                        $('form.layui-form').find('button[lay-filter=demo1]').click();
+////                                        $('form.layui-form').find('button[lay-filter=demo1]').click();
                                     alert( $($('form.layui-form').find('input[name=title]')).val())
                                     $('#demo1').click();
 
@@ -235,7 +231,6 @@
                     title: '表添加单',
 //                        content:form,
                     content: "/addRole",
-                    btn: ['保存', '取消'],
                     shade: false,
                     offset: ['100px', '30%'],
                     area: ['600px', '400px'],

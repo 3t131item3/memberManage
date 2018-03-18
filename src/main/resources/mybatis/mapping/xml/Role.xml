@@ -27,10 +27,11 @@
     <!--修改-->
     <update id="modify">
       UPDATE  role
-        <trim prefix="set" prefixOverrides="," suffix="where id=#{id}">
-            <if test="name!=null and name!=''">name=#{name},</if>
-            <if test="stats!=null and stats!='stats'">stats=#{stats},</if>
-            <if test="modifyTime!=null and modifyTime!='stats'">modifyTime=#{modifyTime},</if>
+        <trim prefix="set" suffixOverrides=","  suffix="where id=#{id}">
+            <if test="roleName!=null and roleName!=''">name=#{roleName},</if>
+            <if test="stats!=null and stats!=''">stats=#{stats},</if>
+
+            <!--<if test="modifyTime!=null and modifyTime!=''">modifyTime=#{modifyTime},</if>-->
         </trim>
     </update>
     <!--删除-->
@@ -39,7 +40,7 @@
     </delete>
     <!--新增-->
     <insert id="add">
-     INSERT INTO role (id,no,roleName,stats,modifyTime) VALUES (DEFAULT,#{no},#{roleName},#{stats},#{modifyTime})
+     INSERT INTO role (id,no,name,stats) VALUES (DEFAULT,#{no},#{roleName},#{stats})
     </insert>
     <!--查询分页总行数-->
     <select id="count" resultType="_int">

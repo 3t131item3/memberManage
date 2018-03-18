@@ -133,14 +133,15 @@
             var count=$(this);
             var id=count.next().val();
             var count2=count.val();
+            if(count2<1){
+                layer.msg("请输入整数!");
+                count.val("1");
+            }
             $.get('/jsp/commodity/iscount/'+id+'/'+count2,null,function(ftom){
                 if(ftom!="" && ftom!=null){
                     layer.msg(ftom);
                     count.val("1");
                 }
-
-
-
 
             });
         })
@@ -228,7 +229,7 @@
                     datew+="<td>"+data.list[i].price+"</td>"
                     datew+="<td>"+data.list[i].discountPrice+"</td>"
                     datew+="<td>"+data.list[i].illustrate+"</td>"
-                    datew+="<td><input type='text' value='1' id='count' class='ssss' name='count'><input type='hidden' name='id' value='"+data.list[i].id+"'/>"
+                    datew+="<td><input type='number' value='1' id='count' class='ssss' name='count'  lay-verify='price'><input type='hidden' name='id' value='"+data.list[i].id+"'/>"
                     datew+="</td>"
                     datew+="</td>"
                     datew+="</tr>"

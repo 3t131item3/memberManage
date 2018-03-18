@@ -73,27 +73,42 @@ public class RoleController{
     //查询修改
     @RequestMapping(value ="/updateRole/{id}",method = RequestMethod.GET)
     private String updateRole(@PathVariable int id,HttpServletRequest request){
-        Map<String, Object> map=new HashMap<String, Object>();
         Role role = roleBiz.queryRoleId(id);
-        request.setAttribute("role",role);
-        return "/addRole";
+        request.getSession().setAttribute("role",role);
+        return "redirect:/addRole";
     }
     //添加
     @ResponseBody
-    @RequestMapping(value ="/add/{mycars}",method = RequestMethod.GET)
-    private  Map<String, Object>  add(@PathVariable String[] mycars){
+    @RequestMapping(value ="/add")
+    private  Map<String, Object>  add(HttpServletRequest request ){
         Map<String, Object> map=new HashMap<String, Object>();
         Map<String,String>map1=new HashMap<String,String>();
+        String[] mycars=new String[3];
+        if(request.getParameterValues("mycars")!=null){
+            mycars=request.getParameterValues("mycars");
+        }
         Role role=new Role();
+        if(mycars[3]!=null&&mycars[3]!=""){
+            role.setId(Integer.parseInt(mycars[3]));
+        }
         role.setNo(mycars[0]);
         role.setRoleName(mycars[1]);
         role.setStats(Integer.parseInt(mycars[2]));
-        role.setModifyTime(new Date());
-        if(roleBiz.addRole(role)){
-//        if(2<1){
-            map.put("msg","成功");
+//        role.setModifyTime(new Date());
+        if(role.getId()>0){
+                if(roleBiz.updateRole(role)){
+                    map.put("msg", "成功");
+                    request.getSession().removeAttribute("role");
+                }else {
+                    map.put("msg", "修改失败");
+                }
         }else {
-            map.put("msg","失败");
+            if (roleBiz.addRole(role)) {
+//        if(2<1){
+                map.put("msg", "成功");
+            } else {
+                map.put("msg", "失败");
+            }
         }
         return map;
     }
@@ -104,4 +119,4 @@ public class RoleController{
         return JSON.toJSONString(roleBiz.queryrole());
     }
 
-}
+    }

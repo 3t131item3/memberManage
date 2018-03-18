@@ -47,7 +47,7 @@
 				<li class="layui-nav-item">
 					<a href="javascript:;" class="admin-header-user">
 						<img src="/images/0.jpg"/>
-						<span>${user.name}</span>
+						<span>${user.userName}</span>
 					</a>
 					<dl class="layui-nav-child">
 						<dd>

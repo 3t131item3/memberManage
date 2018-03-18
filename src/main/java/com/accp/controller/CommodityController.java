@@ -51,6 +51,7 @@ public class CommodityController {
         map.put("msg", "获取成功");
         map.put("list", list.getData());
         map.put("count", list.getTotalPageCount());
+        map.put("totalCount", list.getTotalCount());
         map.put("pagerNo", list.getPagerNo());
         return map;
     }
@@ -113,7 +114,7 @@ public class CommodityController {
         Commodity commodity = commodityBiz.queryCommodityId(Integer.parseInt(iscount));
         if(Integer.parseInt(count2)>commodity.getStock()){
             String  err=null;
-            err="库存不足";
+            err="库存不足!请输入小于"+commodity.getStock()+"的数字";
             return JSON.toJSONString(err);
         }
         return null;

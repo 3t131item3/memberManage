@@ -90,6 +90,10 @@ public class LocationController {
         return "/notice_managerment";
     }
 
+    @RequestMapping("/toModifyUser")
+    public String toModifyUser(){
+        return "/updatememberdate";
+    }
 
     @RequestMapping("/Clearing")
     public String Clearing(){

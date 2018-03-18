@@ -77,36 +77,35 @@
             <if test="userName != null and userName != ''">
                 and users.userName like concat('%',#{userName},'%')
             </if>
-            <!--<if test="id>0">-->
-            <!--&#45;&#45;                 and users.id=#{id}-->
-            <!--</if>-->
         </where>
     </sql>
     <!--分页查询SQL-->
     <select id="getlist" resultMap="UserMap">
-        SELECT  * FROM users  JOIN role ON role.id=users.roleId JOIN bank ON bank.no=users.openNo
+        SELECT * FROM users JOIN role ON role.id=users.roleId JOIN bank ON bank.no=users.openNo
         <include refid="queryUser"/>
         ORDER BY users.createTime DESC
         LIMIT #{pagerNo},#{pagerSize}
     </select>
     <!--查询所有行-->
     <select id="count" resultType="_int">
-        SELECT  count(1) FROM users
+        SELECT count(1) FROM users
         <include refid="queryUser"/>
     </select>
     <!--登录sql-->
-    <select id="login" resultMap="UserMap">
-        SELECT * FROM users u JOIN role r ON u.roleId=r.id JOIN bank b ON u.openNo=b.no where u.userName=#{userName} and u.pwd=#{password}
+    <select id="queryOneUser" resultMap="UserMap">
+        SELECT * FROM users u JOIN role r ON u.roleId=r.id JOIN bank b ON u.openNo=b.no where u.id=#{id}
+    </select>
 
-      </select>
+    <select id="login" resultType="Users">
+        SELECT * FROM users WHERE userName=#{userName} AND pwd=#{password}
+    </select>
     <!--添加sql-->
     <insert id="add">
-        insert into users (id,userName,pwd) VALUES (DEFAULT,#{userName},#{pwd})
+        INSERT INTO users VALUES (DEFAULT,#{userName},#{pwd},#{pwd2},#{name},#{papersType},#{papersNo},#{telephoneNumber},#{email},#{postalcode},#{referee},#{nations},#{openBank},#{openUserName},#{openNo},#{papersImgZ},#{papersImgF},#{bankCard},#{address},#{createTime},#{modifyTime},#{state},#{roleId},#{remainder})
     </insert>
     <!--id查询sql-->
     <select id="getUsersId" resultMap="UsersMap">
-        SELECT * FROM users
-        <include refid="queryUser"/>
+        SELECT * FROM users where id=#{id}
     </select>
     <!--修改users sql-->
     <update id="modify">
@@ -209,6 +208,9 @@
         <where>
             <if test="userName!=null and userName!=''">
                 userName=#{userName}
+            </if>
+            <if test="pwd!=null and pwd!=''">
+                AND pwd=#{pwd}
             </if>
         </where>
     </select>

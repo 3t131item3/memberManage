@@ -30,5 +30,6 @@ public interface UsersDao {
     Users getUsersroleId(@Param("roleId") int roleId);
 
     Users query(Users users);
+    Users queryOneUser(Users users);
 }
 
