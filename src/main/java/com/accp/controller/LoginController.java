@@ -24,7 +24,10 @@ public class LoginController {
         Users users = usersBiz.queryUser(userName,s);
         if(users!=null){
             if(null!=users.getOpenNo()){
-                users=usersBiz.queryOneUser(users);
+               Users user=usersBiz.queryOneUser(users);
+               if(user!=null){
+                   users=user;
+               }
             }
             if(users.getState()==0){
                 request.setAttribute("msg","该用户已冻结");

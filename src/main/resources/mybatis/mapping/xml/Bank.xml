@@ -59,4 +59,7 @@
         </set>
         WHERE id=#{id}
     </update>
+    <insert id="add">
+        INSERT INTO bank VALUES (DEFAULT,#{bankName},#{no},#{pwd},#{remainder},#{openUser},#{telphone},#{papersNo})
+    </insert>
 </mapper>

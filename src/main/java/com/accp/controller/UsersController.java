@@ -226,13 +226,26 @@ public class UsersController {
     }
 
     @RequestMapping("/updatememberdate")
-    public String modifyUser(Users users, HttpSession session){
+    public String modifyUser(Users users, HttpSession session,Bank bank){
         Users user=(Users) session.getAttribute("user");
         users.setModifyTime(new Date());
         users.setState(user.getState());
+
+        bank.setId(0);
+        bank.setNo(users.getOpenNo());
+        if(bankBiz.bank(bank)==null) {
+            bank.setPwd(users.getPwd2());
+            bank.setRemainder(100);
+            bank.setTelphone(users.getTelephoneNumber());
+            bank.setOpenUser(users.getName());
+            bankBiz.add(bank);
+        }
         usersBiz.modify(users);
-        user=usersBiz.queryOneUser(user);
-        return "/updatememberdate";
+
+
+        user=usersBiz.queryOneUser(users);
+        session.setAttribute("user",user);
+        return "/login";
     }
 
 }

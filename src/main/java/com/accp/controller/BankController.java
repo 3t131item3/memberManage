@@ -74,4 +74,15 @@ public class BankController {
             return "{\"result\":\"true\"}";
         }
     }
+    @ResponseBody
+    @RequestMapping("/existsBank")
+    public String existsBank(HttpServletRequest request){
+        Bank bank=new Bank();
+        bank.setNo(request.getParameter("bankNo"));
+        if(bankBiz.bank(bank)==null){
+            return "{\"result\":\"false\"}";
+        }else {
+            return "{\"result\":\"true\"}";
+        }
+    }
 }

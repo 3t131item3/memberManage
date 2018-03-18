@@ -47,7 +47,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">真实姓名<span style="color: red">*</span><span>：</span></label>
             <div class="layui-input-inline">
-                <input lay-verify="name" type="text" name="name" autocomplete="off" value="${user.name}" class="layui-input"
+                <input lay-verify="name" type="text" name="name" autocomplete="off" value="${user.name}"
+                       class="layui-input"
                        <c:if test="${user.name!=null}">disabled</c:if> placeholder="请输入真实姓名">
             </div>
 
@@ -79,7 +80,8 @@
             <label class="layui-form-label">二级密码<span style="color: red">*</span><span>:</span></label>
             <div class="layui-input-block">
                 <input type="password" name="pwd2" lay-verify="pwd2" value="${user.telephoneNumber}"
-                       placeholder="请输入二级密码" autocomplete="off" class="layui-input" maxlength="11" minlength="6" title="请输入正确的二级密码">
+                       placeholder="请输入二级密码" autocomplete="off" class="layui-input" maxlength="11" minlength="6"
+                       title="请输入正确的二级密码">
             </div>
         </div>
 
@@ -95,7 +97,14 @@
             <label class="layui-form-label">银行卡卡号<span style="color: red">*</span><span>:</span></label>
             <div class="layui-input-block">
                 <input type="text" name="openNo" lay-verify="bankcard" placeholder="请输入18位银行卡号" autocomplete="off"
-                       value="${user.papersNo}" class="layui-input" placeholder="请输入银行卡号" maxlength="18">
+                       value="${user.papersNo}" class="layui-input" maxlength="18">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开户行<span style="color: red">*</span><span>:</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="bankName" lay-verify="bankName" placeholder="请输入开户行" autocomplete="off"
+                <c:if test="${user.bank!=null}"> value="${user.bank.bankName}" </c:if> class="layui-input" maxlength="10">
             </div>
         </div>
 
@@ -132,9 +141,14 @@
             bankcard: [/^([1-9]{1})(\d{14}|\d{17})$/, '银行卡填写有误'],
             idcard: [/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, '证件号填写有误'],
             name: [/^[\u4E00-\u9FA5A-Za-z]+$/, '真实姓名填写有误'],
-            address:function (value) {
-                if(value.length<=0){
+            address: function (value) {
+                if (value.length <= 0) {
                     return "请输入收获地址"
+                }
+            },
+            bankName:function (value) {
+                if(value.length<1){
+                    return "请输入开户行"
                 }
             }
         });
@@ -162,6 +176,25 @@
 //            return false;
 //        });
     });
+
+    function queryBank(bankNo) {
+        var exists = true
+        $.ajax({
+            type: "post",
+            async: false,
+            data: {bankNo: bankNo},
+            dataType: "json",
+            url: "",
+            success: function (data) {
+                if (data.result == "true") {
+                    exists = true
+                } else {
+                    exists = false
+                }
+            }
+        })
+        return exists
+    }
 
 </script>
 </body>
