@@ -15,4 +15,5 @@ public interface RootDao {
      */
     List<Root>roots(Root root);
     int modifyRoot(Root root);
+    int add(Root root);
 }

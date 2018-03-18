@@ -21,7 +21,7 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
             }
 
             Users users=(Users)user;
-            if(users.getOpenBank()==null){
+            if(users.getBank()==null){
                 if("/toModifyUser".equals(request.getRequestURI().toString())){
                     return true;
                 }

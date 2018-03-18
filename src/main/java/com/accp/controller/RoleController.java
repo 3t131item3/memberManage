@@ -1,10 +1,10 @@
 package com.accp.controller;
 
+import com.accp.biz.ManageItemBiz;
 import com.accp.biz.RoleBiz;
+import com.accp.biz.RootBiz;
 import com.accp.biz.UsersBiz;
-import com.accp.entity.Pager;
-import com.accp.entity.Role;
-import com.accp.entity.Users;
+import com.accp.entity.*;
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,6 +26,10 @@ public class RoleController{
     private RoleBiz roleBiz;
     @Resource(name = "usersBiz")
     private UsersBiz usersBiz;
+    @Resource(name ="manageItemBiz")
+    private ManageItemBiz manageItemBiz;
+    @Resource(name = "rootBiz")
+    private RootBiz rootBiz;
     @ResponseBody
     @RequestMapping("/list")
     private Map<String, Object> getList(HttpServletRequest request){
@@ -106,6 +111,15 @@ public class RoleController{
             if (roleBiz.addRole(role)) {
 //        if(2<1){
                 map.put("msg", "成功");
+                List<ManageItem> list = manageItemBiz.getList(new ManageItem());
+                for (ManageItem item:list) {
+                    Root root=new Root();
+                    root.setManageItemId(item.getId());
+                    root.setRootState(2);
+                    root.setRoleId(role.getId());
+                    rootBiz.add(root);
+                }
+
             } else {
                 map.put("msg", "失败");
             }

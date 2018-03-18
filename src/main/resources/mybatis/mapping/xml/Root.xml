@@ -67,6 +67,9 @@
         </where>
 
     </update>
+    <insert id="add">
+        INSERT INTO root values(DEFAULT ,#{manageItemId},#{roleId},#{rootState})
+    </insert>
 
 
 

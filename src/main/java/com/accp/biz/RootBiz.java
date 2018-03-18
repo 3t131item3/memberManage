@@ -12,5 +12,6 @@ public interface RootBiz {
      */
     List<Root> roots(Root root);
     boolean modifyRoot(Root root);
+    boolean add(Root root);
 
 }

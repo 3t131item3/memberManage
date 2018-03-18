@@ -111,7 +111,7 @@ CREATE TABLE manageItem(
 /*数据插入~管理表项*/
 INSERT INTO manageItem
 VALUES(DEFAULT,'用户管理',1,'用户管理',NULL,'/usermanagement'),
-      (DEFAULT,'角色管理',1,'角色管理',NULL,NULL),
+      (DEFAULT,'角色管理',1,'角色管理',NULL,'/rolemanagement'),
       (DEFAULT,'权限管理',1,'权限管理',NULL,'/queryManages'),
       (DEFAULT,'商品管理',1,'商品管理',NULL,'/commoditymanagement'),
       (DEFAULT,'商品套餐管理',1,'商品套餐管理',NULL,NULL),

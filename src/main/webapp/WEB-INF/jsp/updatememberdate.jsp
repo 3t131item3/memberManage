@@ -19,7 +19,7 @@
 <body>
 <div style="margin: 15px;">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>修改会员资料</legend>
+        <legend>请填写完整个人信息</legend>
     </fieldset>
 
     <form class="layui-form" action="/Users/updatememberdate" method="post">

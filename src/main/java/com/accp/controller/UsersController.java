@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -226,7 +228,7 @@ public class UsersController {
     }
 
     @RequestMapping("/updatememberdate")
-    public String modifyUser(Users users, HttpSession session,Bank bank){
+    public String modifyUser(Users users, HttpSession session, Bank bank, HttpServletResponse response){
         Users user=(Users) session.getAttribute("user");
         users.setModifyTime(new Date());
         users.setState(user.getState());
@@ -241,11 +243,9 @@ public class UsersController {
             bankBiz.add(bank);
         }
         usersBiz.modify(users);
-
-
         user=usersBiz.queryOneUser(users);
         session.setAttribute("user",user);
-        return "/login";
+        return "redirect:/login";
     }
 
 }
